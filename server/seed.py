@@ -316,6 +316,21 @@ with app.app_context():
     db.session.add_all(chineses)
     db.session.commit()
     print("Business successfully populated")
+
+    reviews= []  
+    for review in range(1000):
+        new_review = Review(
+                user_id = random.randint(1, 100),
+                business_id = random.randint(1, 10),
+                comment = fake.text(),
+                rating = round(random.uniform(1,5), 1)
+                
+            )
+        reviews.append(new_review)
+    db.session.add_all(reviews)
+    db.session.commit()
+            
+    print("Review seeded successfully.")
         
     
     
