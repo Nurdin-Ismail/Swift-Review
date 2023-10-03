@@ -16,7 +16,7 @@ function Login(){
     }
 
     return(
-        <div className="w-50 form_positioning">
+        <div className=" w-50 form_positioning">
             <form className="form">
                 <div class="form-floating mb-3">
                   <input onChange={handleChange} value={formInputs.username} type="text" class="form-control" id="floatingInput" placeholder="name@example.com"/>
