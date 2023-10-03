@@ -78,7 +78,6 @@ class Business(db.Model, SerializerMixin):
             return sub_category
   
 
-    
 class BusinessImg(db.Model, SerializerMixin):
     __tablename__ = 'businessimgs'
     
@@ -104,8 +103,13 @@ class Review(db.Model, SerializerMixin):
 
     # Relationship with Business (Many-to-Many)
     business = db.relationship('Business', back_populates='reviews')
-    
-    
+
+    @validates('comment')
+    def validate_comment(self, key, comment):
+        if comment == "":
+            raise ValueError("Comment is required")
+        return comment
+
 
 # Product Model
 class Product(db.Model, SerializerMixin):
@@ -124,13 +128,18 @@ class Product(db.Model, SerializerMixin):
 
     images = db.relationship('ProductImg', backref='product')
 
+    @validates('description')
+    def validate_description(self, key, description):
+        if description == "":
+            raise ValueError("Description is required")
+        return description
+    
+
     @validates('price')
     def validate_price(self, key, price):
         if price < 0:
             raise ValueError("Price cannot be negative")
         return price
-
- 
 
 
 
