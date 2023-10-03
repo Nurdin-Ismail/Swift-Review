@@ -235,8 +235,88 @@ with app.app_context():
     print("Users successfully populated")
     
     
+# business_names_for_restaurants_local #business model
+    business_category = ['Restaurants', 'Automotives']
+    subsRestaurant = ["Chinese", "Italian", "Local", "Indian"]
+    subAuto = ["Auto-repair", "Car Wash", "Car Dealers", "Parking"]
     
-    products
+    def check_category(categ):
+        subforRestaurants = ["Chinese", "Italian", "Local", "Indian"]
+        subforAuto = ["Auto-repair", "Car Wash", "Car Dealers", "Parking"]
+        if categ =='Restaurants':
+            
+            return random.choice(subforRestaurants)
+            
+        elif categ =='Automotives':
+            
+            return random.choice(subforAuto)
+            
+    locals = []   
+    for local_restaurant in business_names_for_restaurants_local:
+        local = Business(
+            name = local_restaurant,
+            category = "Restaurants", #business_category
+            sub_category = "Local",
+            owner_id = random.randint(1, 20),
+            # hours_open = faker.
+            contacts = fake.phone_number(),
+            location = fake.address(),
+            
+        )
+        locals.append(local)
+    db.session.add_all(locals)
+    db.session.commit()
+    
+    italians = []   
+    for italian_restaurant in business_names_for_restaurants_italian:
+        italian = Business(
+            name = local_restaurant,
+            category = "Restaurants", #business_category
+            sub_category = "Italian",
+            owner_id = random.randint(1, 20),
+            poster = 'url',
+            # hours_open = faker.
+            contacts = fake.phone_number(),
+            location = fake.address(),
+            
+        )
+        italians.append(italian)
+    db.session.add_all(italians)
+    db.session.commit()
+    
+    indians = []   
+    for indian_restaurant in business_names_for_restaurants_indian:
+        indian = Business(
+            name = indian_restaurant,
+            category = "Restaurants", #business_category
+            sub_category = "Indian",
+            owner_id = random.randint(1, 20),
+            # hours_open = faker.
+            contacts = fake.phone_number(),
+            location = fake.address(),
+            
+        )
+        indians.append(indian)
+    db.session.add_all(indians)
+    db.session.commit()
+    
+    chineses = []   
+    for chinese_restaurant in business_names_for_restaurants_chinese:
+        chinese = Business(
+            name = chinese_restaurant,
+            category = "Restaurants", #business_category
+            sub_category = "Chinese",
+            owner_id = random.randint(1, 20),
+            # hours_open = faker.
+            contacts = fake.phone_number(),
+            location = fake.address(),
+            
+        )
+        chineses.append(chinese)
+    db.session.add_all(chineses)
+    db.session.commit()
+    print("Business successfully populated")
+        
     
     
     
