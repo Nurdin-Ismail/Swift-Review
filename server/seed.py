@@ -317,6 +317,7 @@ with app.app_context():
     db.session.commit()
     print("Business successfully populated")
 
+
     reviews= []  
     for review in range(1000):
         new_review = Review(
@@ -329,8 +330,29 @@ with app.app_context():
         reviews.append(new_review)
     db.session.add_all(reviews)
     db.session.commit()
+
+
             
     print("Review seeded successfully.")
+
+
+#products 
+    products_names =["products1", "products2", "products3", "products4", "products5", ]
+    products = []
+    for name in products_names:
+        new_product = Product(
+        name=name,
+        description=fake.text(),
+        price= str(round(random.uniform(1,1000), 2)),
+        poster=fake.url(),
+        business_id = random.randint(0,5)
+                     
+    )
+        products.append(new_product)
+    db.session.add_all(products)
+    db.session.commit()
+
+    print("Products successfully populated")
         
     
     
