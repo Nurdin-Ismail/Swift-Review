@@ -151,5 +151,7 @@ class ProductImg(db.Model, SerializerMixin):
     product_id = db.Column(db.Integer, db.ForeignKey('businesses.id'), nullable=False)
     productimgurl = db.Column(db.String)
 
+    
+
 
     
