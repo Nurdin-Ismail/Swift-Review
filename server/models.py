@@ -74,11 +74,19 @@ class Business(db.Model, SerializerMixin):
         if category == "Automotives":
             
             if sub_category not in ["Auto-repair", "Car Wash", "Car Dealers", "Parking"]:
-                raise ValueError("Invalid sub-category for Automotives")
+                raise ValueError("Invalid sub-category for Automotiveys")
             return sub_category
   
 
     
+class BusinessImg(db.Model, SerializerMixin):
+    __tablename__ = 'businessimgs'
+    
+    id = db.Column(db.Integer, primary_key=True)
+    businessimgurl = db.Column(db.String, nullable=False)
+    business_id = db.Column(db.Integer, db.ForeignKey('businesses.id'), nullable=False)
+
+
 
 # Review Model
 class Review(db.Model, SerializerMixin):
