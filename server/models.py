@@ -7,30 +7,25 @@ from datetime import datetime
 db = SQLAlchemy()
 
 
-from datetime import datetime
-
 
 # User Model
 class User(db.Model):
+    __tablename__ = 'users'
+    
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(100), unique=True, nullable=False)
-    contacts = db.Column(db.String(100))
     email = db.Column(db.String(120), unique=True, nullable=False)
-    password_hash = db.Column(db.String(100), nullable=False)
-    location = db.Column(db.String(100))
+    password = db.Column(db.String(120), unique=True, nullable=False)
+    contacts = db.Column(db.String(100))
+    owner = db.Column(db.Boolean, nullable=False)
 
-    # Relationship with Business (One-to-Many)
-    businesses = db.relationship('Business', backref='owner', lazy=True)
+    # Relationship with Business(owner_id) to user (One-to-Many)
+    businesses = db.relationship('Business', backref='user', lazy=True)
 
     # Relationship with Review (One-to-Many)
     reviews = db.relationship('Review', backref='user', lazy=True)
 
-    def __init__(self, username, contacts, email, password, location):
-        self.username = username
-        self.contacts = contacts
-        self.email = email
-        self.set_password(password)
-        self.location = location
+    
 
     @validates('email')
     def validate_email(self, key, email):
@@ -40,65 +35,76 @@ class User(db.Model):
 
 # Business Model
 class Business(db.Model):
+    __tablename__ = 'businesses'
+
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    rating = db.Column(db.Float)
-    comments = db.Column(db.Text)
-    products = db.Column(db.String(200))
+    name = db.Column(db.String, unique=True)
+    owner_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    hours_open = db.Column(db.String)
+    contacts = db.Column(db.String)
+    
 
-    # Relationship with User (Many-to-One)
-    user = db.relationship('User', back_populates='businesses')
-
+    
     # Relationship with Review (One-to-Many)
     reviews = db.relationship('Review', backref='business', lazy=True)
 
-    def __init__(self, user_id, rating, comments, products):
-        self.user_id = user_id
-        self.rating = rating
-        self.comments = comments
-        self.products = products
+  
 
-    @validates('rating')
-    def validate_rating(self, key, rating):
-        if rating < 1 or rating > 5:
-            raise ValueError("Rating must be between 1 and 5")
-        return rating
+    
 
 # Review Model
 class Review(db.Model):
+    __tablename__ = 'reviews'
+    
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    business_id = db.Column(db.Integer, db.ForeignKey('business.id'), nullable=False)
-    review_date = db.Column(db.DateTime, default=datetime.utcnow)
-    review_text = db.Column(db.Text)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    business_id = db.Column(db.Integer, db.ForeignKey('businesses.id'), nullable=False)
+    comment = db.Column(db.string, nullable=False)
+    rating = db.Column(db.Float)
 
-    # Relationship with User (Many-to-One)
+    # Relationship with User (Many-to-Many)
     user = db.relationship('User', back_populates='reviews')
 
-    # Relationship with Business (Many-to-One)
+    # Relationship with Business (Many-to-Many)
     business = db.relationship('Business', back_populates='reviews')
 
-    def __init__(self, user_id, business_id, review_text):
-        self.user_id = user_id
-        self.business_id = business_id
-        self.review_text = review_text
+    
 
 # Product Model
 class Product(db.Model):
+    __tablename__ = 'products'
+
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(200), unique=True, nullable=False)
     description = db.Column(db.Text)
     price = db.Column(db.Float)
-    category = db.Column(db.String(50))
+    # Relationship with business (One-to-Many)
+    business_id = db.Column(db.Integer,  db.ForeignKey('businesses.id'))
 
-    def __init__(self, name, description, price, category):
-        self.name = name
-        self.description = description
-        self.price = price
-        self.category = category
+   
 
     @validates('price')
     def validate_price(self, key, price):
         if price < 0:
             raise ValueError("Price cannot be negative")
         return price
+
+class BusinessImg(db.Model):
+    __tablename__ = 'businessimgs'
+    
+    id = db.Column(db.Integer, primary_key=True)
+    businessimgurl = db.Column(db.String, nullable=False)
+    business_id = db.Column(db.Integer, db.ForeignKey('businesses.id'), nullable=False)
+
+
+
+class ProductImg(db.Model):
+    
+    __tablename__ = 'productimgs'
+
+    id = db.Column(db.Integer)
+    product_id = db.Column(db.Integer, db.ForeignKey('businesses.id'), nullable=False)
+    productimgurl = db.Column(db.String)
+
+
+    
