@@ -57,6 +57,25 @@ class Business(db.Model, SerializerMixin):
     image = db.relationship('BusinessImg', backref='business')
     # Relationship with Review (One-to-Many)
     reviews = db.relationship('Review', back_populates='game')
+    
+    @validates('category')
+    def validate_categ(self, key, category):
+        if category not in ["Restaurants", "Automotives"]:
+            raise ValueError("Invalid category")
+        return category
+    
+    
+    @validates('sub_category')
+    def validate_categ(self, key, sub_category, category):
+        if category == "Restaurants":
+            if sub_category not in ["Chinese", "Italian", "Local", "Indian"]:
+                raise ValueError("Invalid sub-category for Restaurants")
+            return sub_category 
+        if category == "Automotives":
+            
+            if sub_category not in ["Auto-repair", "Car Wash", "Car Dealers", "Parking"]:
+                raise ValueError("Invalid sub-category for Automotives")
+            return sub_category
   
 
     
@@ -86,7 +105,7 @@ class Product(db.Model, SerializerMixin):
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(200), unique=True, nullable=False)
-    description = db.Column(db.Text)
+    description = db.Column(db.String)
     price = db.Column(db.Float)
     poster = db.Column(db.String)
 
@@ -103,12 +122,7 @@ class Product(db.Model, SerializerMixin):
             raise ValueError("Price cannot be negative")
         return price
 
-class BusinessImg(db.Model, SerializerMixin):
-    __tablename__ = 'businessimgs'
-    
-    id = db.Column(db.Integer, primary_key=True)
-    businessimgurl = db.Column(db.String, nullable=False)
-    business_id = db.Column(db.Integer, db.ForeignKey('businesses.id'), nullable=False)
+ 
 
 
 
