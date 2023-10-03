@@ -11,3 +11,20 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* HOME-SECTION */
+.hme_crsl_img{
+  height: 95vh;
+  object-fit: cover;
+}
+
+.hme_crd{
+  height: 190px;
+  display: flex;
+  border-radius: 7px;
+  flex-direction: column;
+  width: 250px;
+  border: 1px solid hsl(0, 0%, 76%);
+  justify-content: center;
+  align-items: center;
+}
