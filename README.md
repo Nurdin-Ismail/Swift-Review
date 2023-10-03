@@ -42,3 +42,6 @@
      
 
 
+["Restaurants", "Automotives"]
+
+["Chinese", "Italian", "Local", "Indian", "Auto-repair", "Car Wash", "Car Dealers", "Parking" ]
