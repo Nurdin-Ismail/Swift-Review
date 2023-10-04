@@ -24,3 +24,7 @@ def check_category(categ, sub):
 sub = check_category("Restaurants", "Indian")
 
 print(sub)
+
+s = Business.query.first()
+
+print(s.poster)
