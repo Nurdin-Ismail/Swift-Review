@@ -3,6 +3,7 @@
 from flask import Flask, jsonify, request, make_response
 from flask_migrate import Migrate
 from flask_restful import Api, Resource, reqparse
+from flask_cors import CORS
 
 
 from models import db, Business, Review,Product,User, app
@@ -14,6 +15,13 @@ migrate = Migrate(app, db)
 
 db.init_app(app)
 api = Api(app)
+
+CORS(app)
+
+@app.route('/')
+def hello_world():
+    return 'Hello, World!'
+
 
 # Restaurant Resource
 class RestaurantResource(Resource):
