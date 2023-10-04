@@ -180,28 +180,7 @@ business_names_for_automotives_car_wash = [
     ]
     
     
-img_for_italian = [
-    
-    ]
-    
-img_for_local = [
-        
-    ]
-    
-img_for_chinese = [
-        
-    ]
-    
-img_for_indian = [
-        
-    ]
-    # (general/thumbnails) 
-img_for_Restaurants=[
-        
-    ]
-img_for_Automotives=[
-        
-    ]
+
 
 
 with app.app_context():
@@ -256,6 +235,7 @@ with app.app_context():
             category = "Restaurants", #business_category
             sub_category = "Local",
             owner_id = random.randint(1, 20),
+            poster = 'https://dummyimage.com/200x200',
             # hours_open = faker.
             contacts = fake.phone_number(),
             location = fake.address(),
@@ -290,6 +270,7 @@ with app.app_context():
             category = "Restaurants", #business_category
             sub_category = "Indian",
             owner_id = random.randint(1, 20),
+            poster = 'https://dummyimage.com/200x200',
             # hours_open = faker.
             contacts = fake.phone_number(),
             location = fake.address(),
@@ -306,6 +287,7 @@ with app.app_context():
             category = "Restaurants", #business_category
             sub_category = "Chinese",
             owner_id = random.randint(1, 20),
+            poster = 'https://dummyimage.com/200x200',
             # hours_open = faker.
             contacts = fake.phone_number(),
             location = fake.address(),
@@ -326,7 +308,7 @@ with app.app_context():
         name=name,
         description=fake.text(),
         price= str(round(random.uniform(1,1000), 2)),
-        poster=fake.url(),
+        poster='https://dummyimage.com/200x200',
         business_id = random.randint(0,5)
                      
     )
@@ -352,3 +334,80 @@ with app.app_context():
     db.session.commit()
             
     print("Review seeded successfully.")
+    
+    
+    auto_repair = []   
+    for autostore in business_names_for_automotives_repair_shops:
+        autostore = Business(
+            name = autostore,
+            category = "Automotives", #business_category
+            sub_category = "Auto Repair",
+            owner_id = random.randint(1, 100),
+            poster = 'https://dummyimage.com/200x200',
+            # hours_open = faker.
+            contacts = fake.phone_number(),
+            location = fake.address(),
+            
+        )
+        auto_repair.append(autostore)
+    db.session.add_all(auto_repair)
+    db.session.commit()
+    print("Auto_repair successfully populated")
+    
+    car_wash = []   
+    for autostore in business_names_for_automotives_car_wash:
+        autostore = Business(
+            name = autostore,
+            category = "Automotives", #business_category
+            sub_category = "Car Wash",
+            owner_id = random.randint(1, 100),
+            poster = 'https://dummyimage.com/200x200',
+            # hours_open = faker.
+            contacts = fake.phone_number(),
+            location = fake.address(),
+            
+        )
+        car_wash.append(autostore)
+    db.session.add_all(car_wash)
+    db.session.commit()
+    print("Car Wash successfully populated")
+    
+    car_dealers= []   
+    for autostore in business_names_for_automotives_car_dealers_:
+        autostore = Business(
+            name = autostore,
+            category = "Automotives", #business_category
+            sub_category = "Car Dealers",
+            owner_id = random.randint(1, 100),
+            poster = 'https://dummyimage.com/200x200',
+            # hours_open = faker.
+            contacts = fake.phone_number(),
+            location = fake.address(),
+            
+        )
+        car_dealers.append(autostore)
+    db.session.add_all(car_dealers)
+    db.session.commit()
+    print("Car Dealers successfully populated")
+    
+    parkings = []   
+    for autostore in business_names_for_automotives_parking:
+        autostore = Business(
+            name = autostore,
+            category = "Automotives", #business_category
+            sub_category = "Parking",
+            owner_id = random.randint(1, 100),
+            poster = 'https://dummyimage.com/200x200',
+            # hours_open = faker.
+            contacts = fake.phone_number(),
+            location = fake.address(),
+            
+        )
+        parkings.append(autostore)
+    db.session.add_all(parkings)
+    db.session.commit()
+    print("Parkings successfully populated")
+    
+    s = Business.query.first()
+
+    print(s.poster)
