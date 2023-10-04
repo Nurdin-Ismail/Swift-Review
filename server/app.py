@@ -2,7 +2,7 @@
 
 from flask import Flask, jsonify, request, make_response
 from flask_migrate import Migrate
-from flask_restful import Api, Resource
+from flask_restful import Api, Resource, reqparse
 
 
 from models import *
@@ -305,6 +305,111 @@ class ReviewById(Resource):
             return make_response(jsonify({"error": "Review not found"}), 404)
         
 
+class ProductListResource(Resource):
+    def __init__(self):
+        self.parser = reqparse.RequestParser()
+        self.parser.add_argument('name', type=str)
+        self.parser.add_argument('description', type=str)
+        self.parser.add_argument('price', type=float)
+
+
+    def get(self):
+        products = Product.query.all()
+        product_list = []
+        for product in products:
+            product_data = {
+                'id': product.id,
+                'name': product.name,
+                'description': product.description,
+                'poster': product.poster,
+                'price': product.price,
+            }
+            product_list.append(product_data)
+        return {'products': product_list}, 200
+
+    def post(self):
+        args = request.get_json()
+        new_product = Product(
+            name=args.get('name'),
+            description=args.get('description'),
+            poster=args.get('poster'),
+            business_id=args.get('business_id')
+        )
+        db.session.add(new_product)
+        db.session.commit()
+        product_data = {
+            'id': new_product.id,
+            'name': new_product.name,
+            'description': new_product.description,
+            'poster': new_product.poster,
+            
+        }
+        return product_data, 201
+    
+class ProductResource(Resource):
+    def __init__(self):
+        self.parser = reqparse.RequestParser()
+        self.parser.add_argument('name', type=str)
+        self.parser.add_argument('description', type=str)
+        self.parser.add_argument('price', type=float)
+        self.parser.add_argument('poster', type=str)
+
+
+    def get(self, product_id):
+        product = Product.query.get(product_id)
+        if product:
+            return {
+                'id': product.id,
+                'name': product.name,
+                'description': product.description,
+                'poster': product.poster,
+                'price': product.price,
+                'business_id': product.business_id
+            }, 200
+        else:
+            return {'message': 'Product not found'}, 404
+
+    def patch(self, product_id):
+        args = self.parser.parse_args()
+        product = Product.query.get(product_id)
+
+        if product:
+            # Update product fields if corresponding args are not None
+            if args['name'] is not None:
+                product.name = args['name']
+            if args['description'] is not None:
+                product.description = args['description']
+            if args['poster'] is not None:
+                product.poster = args['poster']
+            if args['price'] is not None:
+                product.price = args['price']
+
+            db.session.commit()
+
+            # Return the updated product details
+            return {
+                'id': product.id,
+                'name': product.name,
+                'description': product.description,
+                'poster': product.poster,
+                'price': product.price,
+                'business_id': product.business_id
+            }, 200
+        else:
+            return {'message': 'Product not found'}, 404
+
+    def delete(self, product_id):
+        product = Product.query.get(product_id)
+        if product:
+            db.session.delete(product)
+            db.session.commit()
+            return {'message': 'Product deleted successfully'}, 200
+        else:
+            return {'message': 'Product not found'}, 404        
+        
+    
+        
+
 # Add resources to the API
 api.add_resource(RestaurantResource, '/restaurants/<int:restaurant_id>')
 api.add_resource(RestaurantListResource, '/restaurants')
@@ -315,6 +420,9 @@ api.add_resource(Businesses, '/businesses')
 api.add_resource(BusinessById, '/business/<int:id>')
 api.add_resource(Reviews, '/reviews')
 api.add_resource(ReviewById, '/review/<int:id>')
+api.add_resource(ProductResource, '/products/<int:product_id>')
+api.add_resource(ProductListResource, '/products')
+
 
 
 
