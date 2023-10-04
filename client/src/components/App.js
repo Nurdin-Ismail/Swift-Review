@@ -9,6 +9,7 @@ import FilterSideBar from './FilterSideBar';
 import Businesslist from './Businesslist';
 
 import '../App.css'
+import RecentActivity from './RecentActivity';
 
 
 
@@ -32,9 +33,16 @@ function App() {
       
       <section className='section'>
 
+      <h1>Recent reviews card</h1>
+      <RecentActivity />
+      </section>
+
+       <section className='section'>
+
         <h1 className='title'>Category route/business card</h1>
         <Businesslist/>
         
+
 
 
 
