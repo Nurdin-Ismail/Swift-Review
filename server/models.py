@@ -1,12 +1,13 @@
 from flask_sqlalchemy import SQLAlchemy
+from flask import Flask
 from sqlalchemy.orm import validates
 from sqlalchemy_serializer import SerializerMixin
 from datetime import datetime
 from sqlalchemy.ext.hybrid import hybrid_property
-
-# from app import bcrypt
 from flask_bcrypt import Bcrypt
 
+
+app = Flask(__name__)
 
 db = SQLAlchemy()
 bcrypt = Bcrypt(app)
