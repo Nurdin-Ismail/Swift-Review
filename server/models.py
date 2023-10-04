@@ -2,6 +2,8 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import validates
 from sqlalchemy_serializer import SerializerMixin
 from datetime import datetime
+from sqlalchemy.ext.hybrid import hybrid_property
+from app import bcrypt
 
 
 db = SQLAlchemy()
@@ -34,6 +36,18 @@ class User(db.Model, SerializerMixin):
         if "@" not in email:
             raise ValueError("Invalid email address")
         return email
+    
+    @hybrid_property
+    def password_hash(self):
+        return self.password
+    
+    @password_hash.setter
+    def password_hash(self, password):
+        password_hash = bcrypt.generate_password_hash(password.encode('utf-8'))
+        self.password = password_hash.decode('utf-8')
+        
+    def authenticate(self, password):
+        return bcrypt.check_password_hash(self.password, password.encode('utf-8'))
 
 # Business Model
 class Business(db.Model, SerializerMixin):
