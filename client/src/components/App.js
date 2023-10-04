@@ -6,6 +6,7 @@ import ContactUs from './ContactUs';
 import Login from './Login'
 import SignUp from './SignUp'
 import FilterSideBar from './FilterSideBar';
+import Businesslist from './Businesslist';
 
 import '../App.css'
 
@@ -32,6 +33,7 @@ function App() {
       <section className='section'>
 
         <h1 className='title'>Category route/business card</h1>
+        <Businesslist/>
         
 
 
