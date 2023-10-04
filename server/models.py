@@ -7,7 +7,6 @@ from datetime import datetime
 db = SQLAlchemy()
 
 
-
 # User Model
 class User(db.Model, SerializerMixin):
     __tablename__ = 'users'
@@ -15,10 +14,10 @@ class User(db.Model, SerializerMixin):
     serialize_rules = ('-reviews.users',)
     
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(100), unique=True, nullable=False)
-    email = db.Column(db.String(120), unique=True, nullable=False)
-    password = db.Column(db.String(120), unique=True, nullable=False)
-    contacts = db.Column(db.String(100))
+    username = db.Column(db.String, unique=True, nullable=False)
+    email = db.Column(db.String, unique=True, nullable=False)
+    password = db.Column(db.String, unique=True, nullable=False)
+    contacts = db.Column(db.String)
     owner = db.Column(db.Boolean, nullable=False)
     created_at = db.Column(db.DateTime, server_default=db.func.now())
     updated_at = db.Column(db.DateTime, onupdate=db.func.now())
@@ -56,7 +55,7 @@ class Business(db.Model, SerializerMixin):
     products = db.relationship('Product', backref='business')
     image = db.relationship('BusinessImg', backref='business')
     # Relationship with Review (One-to-Many)
-    reviews = db.relationship('Review', back_populates='game')
+    reviews = db.relationship('Review', back_populates='business')
     
     @validates('category')
     def validate_categ(self, key, category):
@@ -78,7 +77,6 @@ class Business(db.Model, SerializerMixin):
             return sub_category
   
 
-    
 class BusinessImg(db.Model, SerializerMixin):
     __tablename__ = 'businessimgs'
     
@@ -104,15 +102,20 @@ class Review(db.Model, SerializerMixin):
 
     # Relationship with Business (Many-to-Many)
     business = db.relationship('Business', back_populates='reviews')
-    
-    
+
+    @validates('comment')
+    def validate_comment(self, key, comment):
+        if comment == "":
+            raise ValueError("Comment is required")
+        return comment
+
 
 # Product Model
 class Product(db.Model, SerializerMixin):
     __tablename__ = 'products'
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(200), unique=True, nullable=False)
+    name = db.Column(db.String(200), unique=True)
     description = db.Column(db.String)
     price = db.Column(db.Float)
     poster = db.Column(db.String)
@@ -124,13 +127,18 @@ class Product(db.Model, SerializerMixin):
 
     images = db.relationship('ProductImg', backref='product')
 
+    @validates('description')
+    def validate_description(self, key, description):
+        if description == "":
+            raise ValueError("Description is required")
+        return description
+    
+
     @validates('price')
     def validate_price(self, key, price):
         if price < 0:
             raise ValueError("Price cannot be negative")
         return price
-
- 
 
 
 
@@ -139,8 +147,10 @@ class ProductImg(db.Model, SerializerMixin):
     __tablename__ = 'productimgs'
 
     id = db.Column(db.Integer, primary_key=True)
-    product_id = db.Column(db.Integer, db.ForeignKey('businesses.id'), nullable=False)
+    product_id = db.Column(db.Integer, db.ForeignKey('products.id'), nullable=False)
     productimgurl = db.Column(db.String)
+
+    
 
 
     

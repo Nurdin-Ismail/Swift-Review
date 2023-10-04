@@ -12,6 +12,7 @@ code {
     monospace;
 }
 
+
 /* HOME-SECTION */
 .hme_crsl_img{
   height: 95vh;
@@ -28,3 +29,20 @@ code {
   justify-content: center;
   align-items: center;
 }
+
+#name{
+  margin-left: 30px;
+}
+
+.navmargin{
+  margin-left: 300px;
+}
+
+#search{
+  margin-left: 180px;
+}
+
+#user{
+  margin-right: 30px;
+}
+
