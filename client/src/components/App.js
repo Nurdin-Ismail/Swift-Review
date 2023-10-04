@@ -2,7 +2,7 @@ import React from 'react';
 import Footer from './Footer';
 import Home from './Home'
 import NavBar from './NavBar'
-
+import ContactUs from './ContactUs';
 
 
 
@@ -23,6 +23,7 @@ function App() {
       <Home />
       <NavBar />
       <Footer />
+      <ContactUs/>
     </div>
 
   );
