@@ -7,30 +7,27 @@ from datetime import datetime
 db = SQLAlchemy()
 
 
-from datetime import datetime
-
-
 # User Model
-class User(db.Model):
+class User(db.Model, SerializerMixin):
+    __tablename__ = 'users'
+    
+    serialize_rules = ('-reviews.users',)
+    
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(100), unique=True, nullable=False)
-    contacts = db.Column(db.String(100))
-    email = db.Column(db.String(120), unique=True, nullable=False)
-    password_hash = db.Column(db.String(100), nullable=False)
-    location = db.Column(db.String(100))
+    username = db.Column(db.String, unique=True, nullable=False)
+    email = db.Column(db.String, unique=True, nullable=False)
+    password = db.Column(db.String, unique=True, nullable=False)
+    contacts = db.Column(db.String)
+    owner = db.Column(db.Boolean, nullable=False)
+    created_at = db.Column(db.DateTime, server_default=db.func.now())
+    updated_at = db.Column(db.DateTime, onupdate=db.func.now())
 
-    # Relationship with Business (One-to-Many)
-    businesses = db.relationship('Business', backref='owner', lazy=True)
+    # Relationship with Business(owner_id) to user (One-to-Many)
+    businesses = db.relationship('Business', backref='user', lazy=True)
 
     # Relationship with Review (One-to-Many)
-    reviews = db.relationship('Review', backref='user', lazy=True)
-
-    def __init__(self, username, contacts, email, password, location):
-        self.username = username
-        self.contacts = contacts
-        self.email = email
-        self.set_password(password)
-        self.location = location
+    reviews = db.relationship('Review', back_populates='user')
+    
 
     @validates('email')
     def validate_email(self, key, email):
@@ -39,66 +36,121 @@ class User(db.Model):
         return email
 
 # Business Model
-class Business(db.Model):
+class Business(db.Model, SerializerMixin):
+    __tablename__ = 'businesses'
+    
+    serialize_rules = ('-reviews.business',)
+
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    rating = db.Column(db.Float)
-    comments = db.Column(db.Text)
-    products = db.Column(db.String(200))
+    name = db.Column(db.String, unique=True)
+    category = db.Column(db.String)
+    sub_category = db.Column(db.String)
+    owner_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    hours_open = db.Column(db.String)
+    contacts = db.Column(db.String)
+    poster = db.Column(db.String)
+    created_at = db.Column(db.DateTime, server_default=db.func.now())
+    updated_at = db.Column(db.DateTime, onupdate=db.func.now())
 
-    # Relationship with User (Many-to-One)
-    user = db.relationship('User', back_populates='businesses')
-
+    products = db.relationship('Product', backref='business')
+    image = db.relationship('BusinessImg', backref='business')
     # Relationship with Review (One-to-Many)
-    reviews = db.relationship('Review', backref='business', lazy=True)
+    reviews = db.relationship('Review', back_populates='business')
+    
+    @validates('category')
+    def validate_categ(self, key, category):
+        if category not in ["Restaurants", "Automotives"]:
+            raise ValueError("Invalid category")
+        return category
+    
+    
+    @validates('sub_category')
+    def validate_categ(self, key, sub_category, category):
+        if category == "Restaurants":
+            if sub_category not in ["Chinese", "Italian", "Local", "Indian"]:
+                raise ValueError("Invalid sub-category for Restaurants")
+            return sub_category 
+        if category == "Automotives":
+            
+            if sub_category not in ["Auto-repair", "Car Wash", "Car Dealers", "Parking"]:
+                raise ValueError("Invalid sub-category for Automotiveys")
+            return sub_category
+  
 
-    def __init__(self, user_id, rating, comments, products):
-        self.user_id = user_id
-        self.rating = rating
-        self.comments = comments
-        self.products = products
+class BusinessImg(db.Model, SerializerMixin):
+    __tablename__ = 'businessimgs'
+    
+    id = db.Column(db.Integer, primary_key=True)
+    businessimgurl = db.Column(db.String, nullable=False)
+    business_id = db.Column(db.Integer, db.ForeignKey('businesses.id'), nullable=False)
 
-    @validates('rating')
-    def validate_rating(self, key, rating):
-        if rating < 1 or rating > 5:
-            raise ValueError("Rating must be between 1 and 5")
-        return rating
+
 
 # Review Model
-class Review(db.Model):
+class Review(db.Model, SerializerMixin):
+    __tablename__ = 'reviews'
+    
+    serialize_rules = ('-business.reviews', '-user.reviews')
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    business_id = db.Column(db.Integer, db.ForeignKey('business.id'), nullable=False)
-    review_date = db.Column(db.DateTime, default=datetime.utcnow)
-    review_text = db.Column(db.Text)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    business_id = db.Column(db.Integer, db.ForeignKey('businesses.id'), nullable=False)
+    comment = db.Column(db.String, nullable=False)
+    rating = db.Column(db.Float)
 
-    # Relationship with User (Many-to-One)
+    # Relationship with User (Many-to-Many)
     user = db.relationship('User', back_populates='reviews')
 
-    # Relationship with Business (Many-to-One)
+    # Relationship with Business (Many-to-Many)
     business = db.relationship('Business', back_populates='reviews')
 
-    def __init__(self, user_id, business_id, review_text):
-        self.user_id = user_id
-        self.business_id = business_id
-        self.review_text = review_text
+    @validates('comment')
+    def validate_comment(self, key, comment):
+        if comment == "":
+            raise ValueError("Comment is required")
+        return comment
+
 
 # Product Model
-class Product(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(200), unique=True, nullable=False)
-    description = db.Column(db.Text)
-    price = db.Column(db.Float)
-    category = db.Column(db.String(50))
+class Product(db.Model, SerializerMixin):
+    __tablename__ = 'products'
 
-    def __init__(self, name, description, price, category):
-        self.name = name
-        self.description = description
-        self.price = price
-        self.category = category
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(200), unique=True)
+    description = db.Column(db.String)
+    price = db.Column(db.Float)
+    poster = db.Column(db.String)
+
+    # Relationship with business (One-to-Many)
+    business_id = db.Column(db.Integer,  db.ForeignKey('businesses.id'))
+    created_at = db.Column(db.DateTime, server_default=db.func.now())
+    updated_at = db.Column(db.DateTime, onupdate=db.func.now())
+
+    images = db.relationship('ProductImg', backref='product')
+
+    @validates('description')
+    def validate_description(self, key, description):
+        if description == "":
+            raise ValueError("Description is required")
+        return description
+    
 
     @validates('price')
     def validate_price(self, key, price):
         if price < 0:
             raise ValueError("Price cannot be negative")
         return price
+
+
+
+class ProductImg(db.Model, SerializerMixin):
+    
+    __tablename__ = 'productimgs'
+
+    id = db.Column(db.Integer, primary_key=True)
+    product_id = db.Column(db.Integer, db.ForeignKey('products.id'), nullable=False)
+    productimgurl = db.Column(db.String)
+
+    
+
+
+    

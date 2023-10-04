@@ -1,17 +1,29 @@
 import React from 'react';
 import Footer from './Footer';
+import Home from './Home'
+import NavBar from './NavBar'
 
 
 
 
 function App() {
   return (
+
          
-      <Footer />
+      
           
         
 
 
+
+
+    <div>
+
+      <h1>hello</h1>
+      <Home />
+      <NavBar />
+      <Footer />
+    </div>
 
   );
 }
