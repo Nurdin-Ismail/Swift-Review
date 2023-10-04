@@ -28,7 +28,7 @@ class User(db.Model, SerializerMixin):
     updated_at = db.Column(db.DateTime, onupdate=db.func.now())
 
     # Relationship with Business(owner_id) to user (One-to-Many)
-    businesseso = db.relationship('Business', backref='user')
+    # businesseso = db.relationship('Business', backref='user')
 
     # Relationship with Review (One-to-Many)
     reviews = db.relationship('Review', back_populates='user')
