@@ -17,6 +17,7 @@ sqlalchemy-serializer = "*"
 sqlalchemy = "*"
 honcho = "*"
 gunicorn = "*"
+flask-bcrypt = "*"
 
 [requires]
 python_full_version = "3.10.12"
