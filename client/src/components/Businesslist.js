@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import '../App.css'
 
 
@@ -12,16 +11,26 @@ function BusinessList() {
     const apiUrl = 'http://127.0.0.1:5555/businesses';
 
     // Fetch data from the API using Axios 
-    axios
-      .get(apiUrl)
-      .then((response) => {
-        setBusinesses(response.data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error('Error fetching data:', error);
-        setLoading(false);
-      });
+    
+    fetch(apiUrl)
+  .then(response => response.json())
+  .then(data => {
+    console.log(data)
+     setBusinesses(data);
+     setLoading(false);
+  }
+  
+  )
+  .catch(error => {
+
+    console.error(error)
+  setLoading(false)
+  }
+    
+    
+  );
+      
+      
   }, []);
 
   if (loading) {
