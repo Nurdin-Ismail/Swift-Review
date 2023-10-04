@@ -225,5 +225,6 @@ api.add_resource(UserById, '/user/<int:id>')
 api.add_resource(Businesses, '/businesses')
 api.add_resource(BusinessById, '/business/<int:id>')
 
+
 if __name__ == '__main__':
     app.run(debug=True)
