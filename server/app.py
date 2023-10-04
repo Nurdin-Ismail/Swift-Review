@@ -215,6 +215,95 @@ class BusinessById(Resource):
         else:
             return make_response(jsonify({"error": "Business not found"}), 404)
         
+class Reviews(Resource):
+    def get(self):
+        reviews_list = []
+        for review in Review.query.all():
+            review_dict = {
+                "id": review.id,
+                "user_id": review.user_id,
+                "business_id": review.business_id,
+                "comment": review.comment,
+                "rating": review.rating
+            }
+            reviews_list.append(review_dict)
+        return make_response(jsonify(reviews_list), 200)
+
+    def post(self):
+        data = request.get_json()
+        new_review = Review(
+            user_id=data.get('user_id'),
+            business_id=data.get('business_id'),
+            comment=data.get('comment'),
+            rating=data.get('rating')
+        )
+        db.session.add(new_review)
+        db.session.commit()
+
+        new_review_dict = {
+            "id": new_review.id,
+            "user_id": new_review.user_id,
+            "business_id": new_review.business_id,
+            "comment": new_review.comment,
+            "rating": new_review.rating
+        }
+        return make_response(jsonify(new_review_dict), 200)
+
+
+class ReviewById(Resource):
+    def get(self, id):
+        review = Review.query.filter(Review.id == id).first()
+
+        if review:
+            review_dict = {
+                "id": review.id,
+                "user_id": review.user_id,
+                "business_id": review.business_id,
+                "comment": review.comment,
+                "rating": review.rating
+            }
+
+            return make_response(jsonify(review_dict), 200)
+        else:
+            return make_response(jsonify({"error": "Review not found"}), 404)
+
+    def put(self, id):
+        review = Review.query.filter(Review.id == id).first()
+
+        if review:
+            data = request.get_json()
+
+            # Update review fields
+            review.user_id = data.get('user_id', review.user_id)
+            review.business_id = data.get('business_id', review.business_id)
+            review.comment = data.get('comment', review.comment)
+            review.rating = data.get('rating', review.rating)
+
+            db.session.commit()
+
+            updated_review_dict = {
+                "id": review.id,
+                "user_id": review.user_id,
+                "business_id": review.business_id,
+                "comment": review.comment,
+                "rating": review.rating
+            }
+
+            return make_response(jsonify(updated_review_dict), 200)
+        else:
+            return make_response(jsonify({"error": "Review not found"}), 404)
+
+    def delete(self, id):
+        review = Review.query.filter(Review.id == id).first()
+
+        if review:
+            db.session.delete(review)
+            db.session.commit()
+
+            return make_response(jsonify({'message': "Review deleted successfully"}), 200)
+        else:
+            return make_response(jsonify({"error": "Review not found"}), 404)
+        
 
 # Add resources to the API
 api.add_resource(RestaurantResource, '/restaurants/<int:restaurant_id>')
@@ -224,6 +313,9 @@ api.add_resource(Users, '/users')
 api.add_resource(UserById, '/user/<int:id>')
 api.add_resource(Businesses, '/businesses')
 api.add_resource(BusinessById, '/business/<int:id>')
+api.add_resource(Reviews, '/reviews')
+api.add_resource(ReviewById, '/review/<int:id>')
+
 
 
 if __name__ == '__main__':
