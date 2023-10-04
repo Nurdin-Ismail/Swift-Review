@@ -39,7 +39,7 @@ list_ofnames =[
     'Brenda Rocha', 'Bryan Harvey', 'Tracy Hayes'
                ]
 
-buiness_names_for_restaurants_local = [
+business_names_for_restaurants_local = [
          "Kwa Mathe",
          "Mama Nilishe",
          "Jikoni",
@@ -55,7 +55,7 @@ buiness_names_for_restaurants_local = [
          "Shanoz Cafe and Cafe",
          "305 Pacha Gardens",
     ]
-buiness_names_for_restaurants_chinese = [
+business_names_for_restaurants_chinese = [
          "Peking Peacock",
          "Silk Road Supper",
          "Oriental Orchid",
@@ -70,7 +70,7 @@ buiness_names_for_restaurants_chinese = [
          "Dragon Egg Palace"
     ]
    
-buiness_names_for_restaurants_italian = [
+business_names_for_restaurants_italian = [
          "Mambo Italian",
          "La Salumeria Restaurant",
          "La Terreza Italian",
@@ -90,7 +90,7 @@ buiness_names_for_restaurants_italian = [
 ]
         
         
-buiness_names_for_restaurants_Indian = [
+business_names_for_restaurants_indian = [
          "Kennedy's Indian Curry House & Irish Pub",
          "Raavi Foods",
          "Ocean Indian Cuisine",
@@ -177,13 +177,11 @@ business_names_for_automotives_car_wash = [
         "spash splash",
         "wet diaries",
         "hot point"
-    
-        
     ]
     
     
 img_for_italian = [
-        
+    
     ]
     
 img_for_local = [
@@ -211,10 +209,10 @@ with app.app_context():
 
     # print("🦸‍♀️ Deleting Data from Database...")
 
-    # Business.query.delete()
+    Business.query.delete()
     User.query.delete()
-    # Product.query.delete()
-    # Review.query.delete()
+    Product.query.delete()
+    Review.query.delete()
 
     # print("🦸‍♀️ Default names ...")
     
@@ -235,20 +233,140 @@ with app.app_context():
     print("Users successfully populated")
     
     
+# business_names_for_restaurants_local #business model
+    business_category = ['Restaurants', 'Automotives']
+    subsRestaurant = ["Chinese", "Italian", "Local", "Indian"]
+    subAuto = ["Auto-repair", "Car Wash", "Car Dealers", "Parking"]
     
-    products
+    def check_category(categ):
+        subforRestaurants = ["Chinese", "Italian", "Local", "Indian"]
+        subforAuto = ["Auto-repair", "Car Wash", "Car Dealers", "Parking"]
+        if categ =='Restaurants':
+            
+            return random.choice(subforRestaurants)
+            
+        elif categ =='Automotives':
+            
+            return random.choice(subforAuto)
+            
+    locals = []   
+    for local_restaurant in business_names_for_restaurants_local:
+        local = Business(
+            name = local_restaurant,
+            category = "Restaurants", #business_category
+            sub_category = "Local",
+            owner_id = random.randint(1, 20),
+            # hours_open = faker.
+            contacts = fake.phone_number(),
+            location = fake.address(),
+            
+        )
+        locals.append(local)
+    db.session.add_all(locals)
+    db.session.commit()
+    
+    italians = []   
+    for italian_restaurant in business_names_for_restaurants_italian:
+        italian = Business(
+            name = local_restaurant,
+            category = "Restaurants", #business_category
+            sub_category = "Italian",
+            owner_id = random.randint(1, 20),
+            poster = 'url',
+            # hours_open = faker.
+            contacts = fake.phone_number(),
+            location = fake.address(),
+            
+        )
+        italians.append(italian)
+    db.session.add_all(italians)
+    db.session.commit()
+    
+    indians = []   
+    for indian_restaurant in business_names_for_restaurants_indian:
+        indian = Business(
+            name = indian_restaurant,
+            category = "Restaurants", #business_category
+            sub_category = "Indian",
+            owner_id = random.randint(1, 20),
+            # hours_open = faker.
+            contacts = fake.phone_number(),
+            location = fake.address(),
+            
+        )
+        indians.append(indian)
+    db.session.add_all(indians)
+    db.session.commit()
+    
+    chineses = []   
+    for chinese_restaurant in business_names_for_restaurants_chinese:
+        chinese = Business(
+            name = chinese_restaurant,
+            category = "Restaurants", #business_category
+            sub_category = "Chinese",
+            owner_id = random.randint(1, 20),
+            # hours_open = faker.
+            contacts = fake.phone_number(),
+            location = fake.address(),
+            
+        )
+        chineses.append(chinese)
+    db.session.add_all(chineses)
+    db.session.commit()
+    print("Business successfully populated")
+        
+     
+
+#products 
+    products_names =["products1", "products2", "products3", "products4", "products5", ]
+    products = []
+    for name in products_names:
+        new_product = Product(
+        name=name,
+        description=fake.text(),
+        price= str(round(random.uniform(1,1000), 2)),
+        poster=fake.url(),
+        business_id = random.randint(0,5)
+                     
+    )
+        products.append(new_product)
+    db.session.add_all(products)
+    db.session.commit()
+
+    print("Products successfully populated")
     
     
     
+
+  
+  
+  
+  
+  
     
     
     
+
+
+
+            
         
 
+        
+        
     
     
-    
-
-    
-    
-    
+    reviews= []  
+    for review in range(1000):
+        new_review = Review(
+                user_id = random.randint(1, 100),
+                business_id = random.randint(1, 10),
+                comment = fake.text(),
+                rating = round(random.uniform(1,5), 1)
+                
+            )
+        reviews.append(new_review)
+    db.session.add_all(reviews)
+    db.session.commit()
+            
+    print("Review seeded successfully.")

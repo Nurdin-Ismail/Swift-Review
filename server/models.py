@@ -43,13 +43,14 @@ class Business(db.Model, SerializerMixin):
     serialize_rules = ('-reviews.business',)
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String, unique=True)
+    name = db.Column(db.String)
     category = db.Column(db.String)
     sub_category = db.Column(db.String)
     owner_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     hours_open = db.Column(db.String)
     contacts = db.Column(db.String)
     poster = db.Column(db.String)
+    location = db.Column(db.String)
     created_at = db.Column(db.DateTime, server_default=db.func.now())
     updated_at = db.Column(db.DateTime, onupdate=db.func.now())
 
@@ -62,20 +63,14 @@ class Business(db.Model, SerializerMixin):
     def validate_categ(self, key, category):
         if category not in ["Restaurants", "Automotives"]:
             raise ValueError("Invalid category")
+        
+        
         return category
     
     
-    @validates('sub_category')
-    def validate_categ(self, key, sub_category, category):
-        if category == "Restaurants":
-            if sub_category not in ["Chinese", "Italian", "Local", "Indian"]:
-                raise ValueError("Invalid sub-category for Restaurants")
-            return sub_category 
-        if category == "Automotives":
-            
-            if sub_category not in ["Auto-repair", "Car Wash", "Car Dealers", "Parking"]:
-                raise ValueError("Invalid sub-category for Automotiveys")
-            return sub_category
+   
+        
+        
   
 
 class BusinessImg(db.Model, SerializerMixin):
@@ -137,7 +132,7 @@ class Product(db.Model, SerializerMixin):
 
     @validates('price')
     def validate_price(self, key, price):
-        if price < 0:
+        if float(price) < 0:
             raise ValueError("Price cannot be negative")
         return price
 
