@@ -16,10 +16,6 @@ migrate = Migrate(app, db)
 db.init_app(app)
 api = Api(app)
 
-# Create tables
-with app.app_context():
-    db.create_all()
-
 # Restaurant Resource
 class RestaurantResource(Resource):
     def get(self, restaurant_id):
@@ -34,34 +30,31 @@ class RestaurantResource(Resource):
         else:
             return {'message': 'Restaurant not found'}, 404
 
-class RestaurantListResource(Resource):
+class Restaurants(Resource):
+    
+    
     def get(self):
         # Retrieve a list of all restaurants
-        restaurants = Business.query.all()
+        categ = "Restaurants"
         restaurant_list = []
-        for restaurant in restaurants:
-            restaurant_data = {
-                'name': restaurant.name,
-                'category': restaurant.category,
-                'sub_category': restaurant.sub_category
-            }
-            restaurant_list.append(restaurant_data)
-        return {'restaurants': restaurant_list}, 200
+        for restauranto in Business.query.filter_by(category = "Restaurants").all():
+            
+            restaurant_dict = restauranto.to_dict()
+            restaurant_list.append(restaurant_dict)
+        return make_response(jsonify(restaurant_list), 200)
+    
+api.add_resource(Restaurants, '/restaurants')
 
 # Sub-Category Resource
 class SubCategoryResource(Resource):
     def get(self, category):
         # Retrieve restaurants by category
-        restaurants = Business.query.filter_by(category=category).all()
+        restaurants = Business.query.filter_by(sub_category=category).all()
         restaurant_list = []
-        for restaurant in restaurants:
-            restaurant_data = {
-                'name': restaurant.name,
-                'category': restaurant.category,
-                'sub_category': restaurant.sub_category
-            }
-            restaurant_list.append(restaurant_data)
-        return {'restaurants': restaurant_list}, 200
+        for restauranto in Business.query.filter_by(sub_category=category).all():
+            restaurant_dict = restauranto.to_dict()
+            restaurant_list.append(restaurant_dict)
+        return make_response(jsonify(restaurant_list), 200)
     
 class Users(Resource):
     
@@ -412,7 +405,6 @@ class ProductResource(Resource):
 
 # Add resources to the API
 api.add_resource(RestaurantResource, '/restaurants/<int:restaurant_id>')
-api.add_resource(RestaurantListResource, '/restaurants')
 api.add_resource(SubCategoryResource, '/restaurants/category/<string:category>')
 api.add_resource(Users, '/users')
 api.add_resource(UserById, '/user/<int:id>')
@@ -427,4 +419,4 @@ api.add_resource(ProductListResource, '/products')
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(port=5555)

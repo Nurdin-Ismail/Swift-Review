@@ -11,19 +11,19 @@ db = SQLAlchemy()
 class User(db.Model, SerializerMixin):
     __tablename__ = 'users'
     
-    serialize_rules = ('-reviews.users',)
+    serialize_rules = ('-reviews.user', )
     
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String, unique=True, nullable=False)
     email = db.Column(db.String, unique=True, nullable=False)
-    password = db.Column(db.String, unique=True, nullable=False)
+    password = db.Column(db.String, nullable=False)
     contacts = db.Column(db.String)
     owner = db.Column(db.Boolean, nullable=False)
     created_at = db.Column(db.DateTime, server_default=db.func.now())
     updated_at = db.Column(db.DateTime, onupdate=db.func.now())
 
     # Relationship with Business(owner_id) to user (One-to-Many)
-    businesses = db.relationship('Business', backref='user', lazy=True)
+    businesseso = db.relationship('Business', backref='user')
 
     # Relationship with Review (One-to-Many)
     reviews = db.relationship('Review', back_populates='user')
@@ -35,11 +35,12 @@ class User(db.Model, SerializerMixin):
             raise ValueError("Invalid email address")
         return email
 
-# Business Model
+# Business Model    serialize_rules = ('-reviews.user',)
+
 class Business(db.Model, SerializerMixin):
     __tablename__ = 'businesses'
     
-    serialize_rules = ('-reviews.business',)
+    serialize_rules = ('-reviews.business', '-products.business', )
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
@@ -58,6 +59,8 @@ class Business(db.Model, SerializerMixin):
     # Relationship with Review (One-to-Many)
     reviews = db.relationship('Review', back_populates='business')
     
+    # owner = db.relationship('User', back_populates='businesseso')
+    
     @validates('category')
     def validate_categ(self, key, category):
         if category not in ["Restaurants", "Automotives"]:
@@ -74,7 +77,7 @@ class Business(db.Model, SerializerMixin):
 
 class BusinessImg(db.Model, SerializerMixin):
     __tablename__ = 'businessimgs'
-    
+    # serialize_rules = ('-business.image')
     id = db.Column(db.Integer, primary_key=True)
     businessimgurl = db.Column(db.String, nullable=False)
     business_id = db.Column(db.Integer, db.ForeignKey('businesses.id'), nullable=False)
@@ -85,7 +88,7 @@ class BusinessImg(db.Model, SerializerMixin):
 class Review(db.Model, SerializerMixin):
     __tablename__ = 'reviews'
     
-    serialize_rules = ('-business.reviews', '-user.reviews')
+    serialize_rules = ('-business.reviews', '-user.reviews',)
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     business_id = db.Column(db.Integer, db.ForeignKey('businesses.id'), nullable=False)
@@ -108,6 +111,7 @@ class Review(db.Model, SerializerMixin):
 # Product Model
 class Product(db.Model, SerializerMixin):
     __tablename__ = 'products'
+    
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(200), unique=True)
