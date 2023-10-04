@@ -4,6 +4,7 @@ import Home from './Home'
 import NavBar from './NavBar'
 import ContactUs from './ContactUs';
 import '../App.css'
+import RecentActivity from './RecentActivity';
 
 
 
@@ -24,7 +25,8 @@ function App() {
       <NavBar />
       <Home />
       <section className='section'>
-       <h1>Recent reviews card</h1>
+      <h1>Recent reviews card</h1>
+      <RecentActivity />
 
       </section>
       
