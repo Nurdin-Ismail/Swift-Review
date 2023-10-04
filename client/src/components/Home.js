@@ -4,6 +4,7 @@ import AutomotiveCard from './AutomotiveCard';
 import image1 from "../images/pexels-shotkit-5355642.jpg"
 import image2 from "../images/pexels-thirdman-5060979.jpg"
 import image3 from "../images/pexels-shotkit-5387714.jpg"
+import RecentActivity from './RecentActivity';
 
 
 function Home(){
@@ -58,11 +59,10 @@ function Home(){
                 </div>
             </div>
             <section className='section'>
-       <h1>Recent reviews card</h1>
-
+       <h1>Recents</h1>
+       <RecentActivity />
       </section>
             <div class="d-flex justify-content-evenly">
-
                 <RestaurantCard />
                 <AutomotiveCard />
             </div>

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Route, Routes, } from "react-router-dom";
 import Footer from './Footer';
 import Home from './Home'
 import NavBar from './NavBar'
@@ -15,65 +16,17 @@ import RecentActivity from './RecentActivity';
 
 function App() {
   return (
-
-         
-      
-          
-        
-
-
-
-
     <div>
-
-      
       <NavBar />
-      <Home />
-      
-      
-      <section className='section'>
-
-      <h1>Recent reviews card</h1>
-      <RecentActivity />
-      </section>
-
-       <section className='section'>
-
-        <h1 className='title'>Category route/business card</h1>
-        <Businesslist/>
-        
-
-
-
-
-      </section>
-
-      <section className='section'>
-        <h1 className='title'>filtering bar
-
-        </h1>
-
-        <NavBar/>
-        <FilterSideBar/>
-
-      </section>
-      <section className='section'>
-        <h1 className='title'>login
-
-        </h1>
-
-        <Login/>
-
-      </section>
-      <section className='section'>
-        <h1 className='title'>SignUp
-
-        </h1>
-
-        <SignUp/>
-
-      </section>
-      <ContactUs/>
+      <Routes>
+        <Route exact path='/' element= {<Home />} />
+        <Route path='/' element= {<RecentActivity />} />
+        <Route path='/businesses' element= {<Businesslist/>} />
+        <Route path='/' element= {<FilterSideBar/>} />
+        <Route path='/login' element= {<Login/>} />
+        <Route path='/signup' element= {<SignUp/>} />
+        <Route path='/contactus' element= {<ContactUs/>} />
+      </Routes>
       <Footer />
     </div>
 
