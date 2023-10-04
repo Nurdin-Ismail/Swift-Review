@@ -249,7 +249,7 @@ with app.app_context():
             
             return random.choice(subforAuto)
             
-    localso = []   
+    locals = []   
     for local_restaurant in business_names_for_restaurants_local:
         local = Business(
             name = local_restaurant,
@@ -262,7 +262,7 @@ with app.app_context():
             
         )
         locals.append(local)
-    db.session.add_all(localso)
+    db.session.add_all(locals)
     db.session.commit()
 
     
