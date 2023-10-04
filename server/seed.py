@@ -39,7 +39,7 @@ list_ofnames =[
     'Brenda Rocha', 'Bryan Harvey', 'Tracy Hayes'
                ]
 
-buiness_names_for_restaurants_local = [
+business_names_for_restaurants_local = [
          "Kwa Mathe",
          "Mama Nilishe",
          "Jikoni",
@@ -55,7 +55,7 @@ buiness_names_for_restaurants_local = [
          "Shanoz Cafe and Cafe",
          "305 Pacha Gardens",
     ]
-buiness_names_for_restaurants_chinese = [
+business_names_for_restaurants_chinese = [
          "Peking Peacock",
          "Silk Road Supper",
          "Oriental Orchid",
@@ -70,7 +70,7 @@ buiness_names_for_restaurants_chinese = [
          "Dragon Egg Palace"
     ]
    
-buiness_names_for_restaurants_italian = [
+business_names_for_restaurants_italian = [
          "Mambo Italian",
          "La Salumeria Restaurant",
          "La Terreza Italian",
@@ -90,7 +90,7 @@ buiness_names_for_restaurants_italian = [
 ]
         
         
-buiness_names_for_restaurants_Indian = [
+business_names_for_restaurants_indian = [
          "Kennedy's Indian Curry House & Irish Pub",
          "Raavi Foods",
          "Ocean Indian Cuisine",
@@ -177,13 +177,11 @@ business_names_for_automotives_car_wash = [
         "spash splash",
         "wet diaries",
         "hot point"
-    
-        
     ]
     
     
 img_for_italian = [
-        
+    
     ]
     
 img_for_local = [
@@ -211,10 +209,10 @@ with app.app_context():
 
     # print("🦸‍♀️ Deleting Data from Database...")
 
-    # Business.query.delete()
+    Business.query.delete()
     User.query.delete()
-    # Product.query.delete()
-    # Review.query.delete()
+    Product.query.delete()
+    Review.query.delete()
 
     # print("🦸‍♀️ Default names ...")
     
@@ -251,7 +249,7 @@ with app.app_context():
             
             return random.choice(subforAuto)
             
-    locals = []   
+    localso = []   
     for local_restaurant in business_names_for_restaurants_local:
         local = Business(
             name = local_restaurant,
@@ -264,8 +262,9 @@ with app.app_context():
             
         )
         locals.append(local)
-    db.session.add_all(locals)
+    db.session.add_all(localso)
     db.session.commit()
+
     
     italians = []   
     for italian_restaurant in business_names_for_restaurants_italian:
@@ -316,25 +315,8 @@ with app.app_context():
     db.session.add_all(chineses)
     db.session.commit()
     print("Business successfully populated")
-
-
-    reviews= []  
-    for review in range(1000):
-        new_review = Review(
-                user_id = random.randint(1, 100),
-                business_id = random.randint(1, 10),
-                comment = fake.text(),
-                rating = round(random.uniform(1,5), 1)
-                
-            )
-        reviews.append(new_review)
-    db.session.add_all(reviews)
-    db.session.commit()
-
-
-            
-    print("Review seeded successfully.")
-
+        
+     
 
 #products 
     products_names =["products1", "products2", "products3", "products4", "products5", ]
@@ -353,19 +335,20 @@ with app.app_context():
     db.session.commit()
 
     print("Products successfully populated")
-        
     
     
     
-    
-    
-    
-        
-
-    
-    
-    
-
-    
-    
-    
+    reviews= []  
+    for review in range(1000):
+        new_review = Review(
+                user_id = random.randint(1, 100),
+                business_id = random.randint(1, 10),
+                comment = fake.text(),
+                rating = round(random.uniform(1,5), 1)
+                
+            )
+        reviews.append(new_review)
+    db.session.add_all(reviews)
+    db.session.commit()
+            
+    print("Review seeded successfully.")
