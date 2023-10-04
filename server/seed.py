@@ -249,7 +249,7 @@ with app.app_context():
             
             return random.choice(subforAuto)
             
-    locals = []   
+    localso = []   
     for local_restaurant in business_names_for_restaurants_local:
         local = Business(
             name = local_restaurant,
@@ -262,8 +262,9 @@ with app.app_context():
             
         )
         locals.append(local)
-    db.session.add_all(locals)
+    db.session.add_all(localso)
     db.session.commit()
+
     
     italians = []   
     for italian_restaurant in business_names_for_restaurants_italian:
@@ -335,25 +336,6 @@ with app.app_context():
 
     print("Products successfully populated")
     
-    
-    
-
-  
-  
-  
-  
-  
-    
-    
-    
-
-
-
-            
-        
-
-        
-        
     
     
     reviews= []  
