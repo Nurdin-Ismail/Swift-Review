@@ -7,7 +7,6 @@ from datetime import datetime
 db = SQLAlchemy()
 
 
-
 # User Model
 class User(db.Model, SerializerMixin):
     __tablename__ = 'users'
