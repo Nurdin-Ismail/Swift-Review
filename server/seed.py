@@ -188,10 +188,10 @@ with app.app_context():
 
     # print("🦸‍♀️ Deleting Data from Database...")
 
-    Business.query.delete()
-    User.query.delete()
-    Product.query.delete()
-    Review.query.delete()
+    # Business.query.delete()
+    # User.query.delete()
+    # Product.query.delete()
+    # Review.query.delete()
 
     # print("🦸‍♀️ Default names ...")
     

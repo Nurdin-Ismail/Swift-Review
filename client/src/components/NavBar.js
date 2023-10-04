@@ -2,7 +2,10 @@ import React from 'react';
 
 function NavBar() {
     return (
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        
+        <div>
+
+<nav className="navbar navbar-expand-lg navbar-light bg-light">
             <div className="container-fluid">
                 <a className="navbar-brand" href="#" id='name'>SwiftReviews</a>
 
@@ -53,6 +56,10 @@ function NavBar() {
                 </div>
             </div>
         </nav>
+
+
+        </div>
+        
     )
 }
 

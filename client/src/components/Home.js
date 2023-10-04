@@ -57,7 +57,12 @@ function Home(){
                     <p>Take Swift Review with you wherever you go! Download our mobile app to access reviews, ratings, and recommendations on the fly. Whether you're exploring a new city or need quick information on the best local automotive store, our app has you covered.</p>
                 </div>
             </div>
+            <section className='section'>
+       <h1>Recent reviews card</h1>
+
+      </section>
             <div class="d-flex justify-content-evenly">
+
                 <RestaurantCard />
                 <AutomotiveCard />
             </div>
