@@ -200,17 +200,7 @@ class BusinessById(Resource):
         business = Business.query.filter(Business.id == id).first()
         
         if business:
-            business_dict = {
-                "id": business.id,
-                "name": business.name,
-                "category": business.category,
-                "sub_category": business.sub_category,
-                "owner_id": business.owner_id,
-                "hours_open": business.hours_open,
-                "contacts": business.contacts,
-                "poster": business.poster,
-                "created_at": business.created_at
-            }
+            business_dict = business.to_dict()
             return make_response(jsonify(business_dict), 200)
         else:
             return make_response(jsonify({"error": "Business not found"}), 404)
@@ -230,13 +220,7 @@ class Reviews(Resource):
     def get(self):
         reviews_list = []
         for review in Review.query.all():
-            review_dict = {
-                "id": review.id,
-                "user_id": review.user_id,
-                "business_id": review.business_id,
-                "comment": review.comment,
-                "rating": review.rating
-            }
+            review_dict = review.to_dict()
             reviews_list.append(review_dict)
         return make_response(jsonify(reviews_list), 200)
 
@@ -424,13 +408,15 @@ class RecentReview(Resource):
         reviews = Review.query.order_by(desc(Review.created_at)).limit(30)
         reviews_list = []
         for review in reviews:
-            review_dict = {
-                "id": review.id,
-                "user_id": review.user_id,
-                "business_id": review.business_id,
-                "comment": review.comment,
-                "rating": review.rating
-            }
+            review_dict = review.to_dict()
+            
+            # {
+            #     "id": review.id,
+            #     "user_id": review.user_id,
+            #     "business_id": review.business_id,
+            #     "comment": review.comment,
+            #     "rating": review.rating
+            # }
             reviews_list.append(review_dict)
         return make_response(jsonify(reviews_list), 200)
         
