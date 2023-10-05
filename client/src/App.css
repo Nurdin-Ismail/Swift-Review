@@ -1,6 +1,7 @@
 .nav1{
+  margin: 0%;
+  /* z-index: 1; */
   
-  z-index: 1;
 }
 
 .section{
@@ -20,21 +21,17 @@
 }
 
 .filtersidebar{
-    height: 60vh;
-    width: 15vw;
-    background-color: rgb(227, 162, 22);
-    margin: 20px 20px;
-    position: fixed;
+  height: fit-content;
+  background-color: rgb(7,10,53);
+  width: 15vw;
+  margin: 20px 20px;
+  position: fixed;
   right: 1;
-  top: 20%;
+  top: 33%;
   width: 16em;
   margin-top: -2.5em;
-
-}
-
-.page{
-  /* display: flex;
-  flex-direction: row; */
+  padding: 30px;
+  border-radius: 17px;
 }
 
 .subcateg{
@@ -42,58 +39,28 @@
   max-height: 30vh;
 }
 .subcateg button{
-      margin: 4px;
-      
+      margin: 4px;     
+}
+
+.main{
+  display: flex;
+  align-items: center;
 }
 
 
-.main{
-  background-color: #fbf6fff1;
-  border-radius: 10px;
-  margin: 10px 0px;
-  box-shadow: rgba(9, 10, 10, 0.37) 1px 0px 3px 1px;
-  display: flex;
-  flex-direction: column;
-  
-  align-content: center;
-  align-items: center;
-  
-  
-  float: right;
-
-  min-width: 2000px;flex-wrap: wrap;
-  border-radius: 10px;
-  margin: 10px 0px;
- 
-  
-  
-  
-  
-  
-
-  
-  
-  
-  padding: 20px;
-  
-
-  
-  
-  
-
-
-
+.filter{
+  color: #fff;
 }
 
 .separation{
-    background-color: aliceblue;
     height: 20vh;
     max-height: 20vh;
+    color: #fff;
 }
 /* Business card styles */
 .business-cards {
     display: flex;
-    flex-direction: column; /* Arrange cards vertically */
+    flex-direction: column; 
     gap: 20px;
     justify-content: center;
     display: flex;
@@ -104,14 +71,26 @@
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     padding: 20px;
-    width: 700px; /* Adjust the width to make the cards slightly longer */
+    width: 700px; 
     display: flex;
     background-color: #fff;
     text-align: left;
     transition: transform 0.2s ease-in-out;
-    
     display: flex;
   }
+
+  .bsns_sctn{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+
+  .bsns_crtl{
+    padding: 40px;
+  }
+
   .kanu{
     margin-right: 20px;
   }
@@ -159,19 +138,21 @@
   .recent-activity-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
+    width: 100%;
+    gap: 15px;
     justify-content: center;
-    background-color: rgb(255, 248, 235);
+    background-color: rgb(7,10,53);
+    padding: 60px;
     
   }
   
   .recent-activity-card {
     border: 1px solid rgb(222, 222, 222);
     border-radius: 5px;
-    box-shadow: 0 3px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 3px 4px rgba(1, 1, 33, 0.1);
     padding: 20px;
     width: 300px;
-    background-color: #fff;
+    background-color: rgb(255, 255, 255);
     text-align: left;
     transition: transform 0.2s ease-in-out;
     justify-content: space-evenly;
@@ -204,3 +185,9 @@
 
   }
 
+.review_form{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}

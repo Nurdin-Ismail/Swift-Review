@@ -99,7 +99,7 @@ function AutomotiveArea(){
     return(
         <div className="page">
             <div>
-                <FilterSideBar buttonclick = {handlebuttonclick} categoryofroute={categoryofroute}/>
+                <FilterSideBar buttonclick = {handlebuttonclick} categoryofroute= {categoryofroute}/>
             </div>
 
             <main className="main">
