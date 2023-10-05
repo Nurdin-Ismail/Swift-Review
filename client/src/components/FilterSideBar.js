@@ -3,24 +3,60 @@ import React from "react";
 function FilterSideBar({buttonclick, categoryofroute}){
     
     
-    function handle_buttons(){
-        if (categoryofroute == 'Restaurant'){
-            let data = ["Indian", "Italian",];
-            let list = document.getElementById("UnList");
-            var fragList = document.createDocumentFragment();
-            for (i = 0; i < data.length; ++i) {
-               var li = document.createElement('li');
-               li.textContent = data[i];
-               fragList.appendChild(li);
+   let subcategory 
+
+        if (categoryofroute == 'Restaurants'){
+
+            const categs= ["Indian", "Italian", "Local", "Chinese"]
+ 
+             subcategory = categs.map((categ)=>{
+                   return <button className="sort" onClick={(e) => buttonclick(e.target.innerText)}>{categ}</button>
+                 });
+ 
+               
+               
+        }else if (categoryofroute == "Automotives"){
+            const categs= ["Auto-repair", "Car Wash", "Car Dealers", "Parking"]
+ 
+            subcategory = categs.map((categ)=>{
+                  return <button className="sort" onClick={(e) => buttonclick(e.target.innerText)}>{categ}</button>
+                }); 
         }
-    }
+
+        let check
+
+        if (categoryofroute == "Restaurants"){
+            const checkmarks = ["Open Now","Offers Takeout","Reservations","Hot and New"]
+            check = checkmarks.map((check)=>{
+                return <label class="container">{check}
+
+                <input type="checkbox"/>
+                <span class="checkmark"></span>
+        </label>
+              });
+
+        }else if(categoryofroute == "Automotives"){
+            const checkmarks = ["Open Now","Offering a Deal",]
+
+            check = checkmarks.map((check)=>{
+                return <label class="container">{check}
+
+                <input type="checkbox"/>
+                <span class="checkmark"></span>
+        </label>
+              });
+
+
+        }
+
+   
     
     return (
         <div >
 
             <div className="filtersidebar">
                 <div className="separation">
-                   <h5>Restaurants</h5>
+                   <h5>{categoryofroute}</h5>
                     <h6>Filters:</h6>
 
                 </div>
@@ -29,18 +65,9 @@ function FilterSideBar({buttonclick, categoryofroute}){
 
                     <div className="subcateg">
 
-                        <button className="sort" onClick={(e) => buttonclick(e.target.innerText)}>
-                           Indian
-                        </button >
-                        <button className="sort" onClick={(e) => buttonclick(e.target.innerText)}>
-                           Chinese
-                        </button>
-                        <button className="sort" onClick={(e) => buttonclick(e.target.innerText)}>
-                           Local
-                        </button>
-                        <button className="sort" onClick={(e) => buttonclick(e.target.innerText)}>
-                           Italian
-                        </button>
+                    <button className="sort" onClick={(e) => buttonclick(e.target.innerText)}>{categoryofroute}</button>
+
+                        {subcategory}
                     </div>
 
                     
@@ -48,30 +75,9 @@ function FilterSideBar({buttonclick, categoryofroute}){
 
                 <div className="separation">
 
-                     <label class="container">Open Now   
-                      <input type="checkbox" />
-                     <span class="checkmark"></span>
-                    </label>
+                    <h6>Features</h6>
 
-                    <label class="container">Offers Takeout
-                       <input type="checkbox"/>
-                        <span class="checkmark"></span>
-                     </label>
-
-                     <label class="container">Reservations 
-
-                            <input type="checkbox"/>
-                            <span class="checkmark"></span>
-                    </label>
-
-                    <label class="container"> Hot and New
-                         <input type="checkbox"/>
-                          <span class="checkmark"></span>
-                    </label>
-
-                    
-
-                             
+                    {check}
                 
 
                 </div>
@@ -83,6 +89,6 @@ function FilterSideBar({buttonclick, categoryofroute}){
         </div>
     )
 }
-}
+
 
 export default FilterSideBar;
