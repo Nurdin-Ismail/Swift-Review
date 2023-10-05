@@ -45,7 +45,7 @@ function App() {
         <Route path='/filter' element={<FilterSideBar />} />
         <Route path="/business/:id" element={<BusinessDetail/>} />
 
-        <Route path='/user/2' element={<UserProfile />} />
+        <Route path='/user/:id' element={<UserProfile />} />
 
       </Routes>
       {/* <Footer /> */}
