@@ -128,6 +128,7 @@
   }
   
 
+
 .sort  {
     border: 1px solid #162953;
     outline: none;
@@ -153,3 +154,30 @@
     background-color: #ff5c35;
 
 }
+  .recent-activity-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+  }
+  
+  .recent-activity-card {
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 300px;
+    background-color: #fff;
+    text-align: left;
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .recent-activity-card:hover {
+    transform: scale(1.05);
+  }
+  
+  .recent-activity-card p {
+    margin: 5px 0;
+  }
+  
+

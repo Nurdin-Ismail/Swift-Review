@@ -11,15 +11,17 @@ function RecentActivity(){
         .then (data => setAllRecentActivity(data))
     }, [])
 
+    let newo = allRecentActivity.filter(() => {})
+
     // if(!image) {
     //     return <h2>Loading...</h2>
     // }
 
     return(
-        <div>
+        <div className="recent-activity-container">
             {allRecentActivity.map((activity) => {
                 return( 
-                    <div key={activity.id}>
+                    <div className="recent-activity-card" key={activity.id}>
                         <div>{activity.user_id}</div>
                         <div>{activity.img}</div>
                         <div>{activity.business_id}</div>
