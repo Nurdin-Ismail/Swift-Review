@@ -10,7 +10,6 @@ import FilterSideBar from './FilterSideBar';
 import Businesslist from './Businesslist';
 import RestaurantArea from './RestaurantPage';
 import AutomotiveArea from './AutomotivePage';
-
 import BusinessDetail from './BusinessDetail';
 
 
@@ -42,10 +41,17 @@ function App() {
         <Route path='/add-business' element= {<RestaurantForm/>} />
         <Route path='/reviewform' element= {<ReviewForm/>} />
 
-        <Route path='/business' element={<BusinessDetail />} />
-        <Route path='/filter' element={<FilterSideBar />} />
 
-        <Route path='/user' element={<UserProfile />} />
+
+        
+
+        <Route path='/filter' element={<FilterSideBar />} />
+        <Route path="/business/:id" element={<BusinessDetail/>} />
+
+
+
+        <Route path='/user/:id' element={<UserProfile />} />
+
 
       </Routes>
       <Footer />

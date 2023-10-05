@@ -1,40 +1,57 @@
+import React, { useEffect, useState } from 'react';
+import '../App.css'
+import { useParams } from 'react-router-dom';
 
-import React, { useEffect, useState, Fragment } from 'react';
-import { Link } from 'react-router-dom';
-    
-const UserProfile = () => {
-  const [userData, setUserData] = useState({});
+function UserProfile({ userId }) {
+  const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const params = useParams()
+  console.log(params)
+  
+  
+
+  // Define the handleReviewClick function to handle the review action
+  // function handleReviewClick(userId){
+  //   // Implement your logic for handling reviews here
+  //   alert(`Review for business with ID ${userId}`);
+  // };
 
   useEffect(() => {
-    // Fetch user profile data from the API
-    fetch('http://127.0.0.1:5555/user/id')
+    // Fetch data for the specific business using the businessId
+    const apiUrl = `http://127.0.0.1:5555/user/${params.id}`; // Replace with the actual URL
+
+    fetch(apiUrl)
       .then((response) => response.json())
       .then((data) => {
-        setUserData(data);
+        setUser(data);
         setLoading(false);
       })
       .catch((error) => {
-        console.error('Error fetching user profile:', error);
+        console.error('Error fetching data:', error);
         setLoading(false);
       });
-  }, []);
+  }, [params]);
 
   if (loading) {
-    return <p>Loading user profile...</p>;
+    return <div>Loading...</div>;
+  }
+
+  if (!user) {
+    return <div>User not found.</div>;
   }
 
   return (
     <div>
-      <h2>User Profile</h2>
-      <p>Name: {userData.username}</p>
-      <p>Email: {userData.email}</p>
-      <p>Contacts: {userData.contacts}</p>
-      
+      <h1>{user.name}</h1>
+      <p>Category: {user.email}</p>
+      <p>Contact: {user.contacts}</p>
+
+      {/* Display Ratings and Reviews */}
+
+      {/* Display Business Description */}
+  
     </div>
   );
-};
-
+}
 
 export default UserProfile;
-
