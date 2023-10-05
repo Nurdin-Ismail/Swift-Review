@@ -8,7 +8,8 @@ import Login from './Login'
 import SignUp from './SignUp'
 import FilterSideBar from './FilterSideBar';
 import Businesslist from './Businesslist';
-import CategoryArea from './CategoryPage';
+import RestaurantArea from './RestaurantPage';
+import AutomotiveArea from './AutomotivePage';
 
 import '../App.css'
 import RecentActivity from './RecentActivity';
@@ -22,7 +23,10 @@ function App() {
       <Routes>
         <Route exact path='/' element= {<Home />} />
         
-        <Route exact path='/categ' element= {<CategoryArea/>} />
+        <Route exact path='/restaurants' element= {<RestaurantArea/>} />
+        <Route exact path='/automotives' element= {<AutomotiveArea/>} />
+
+
         <Route path='/login' element= {<Login/>} />
         <Route path='/signup' element= {<SignUp/>} />
         <Route path='/contactus' element= {<ContactUs/>} />
