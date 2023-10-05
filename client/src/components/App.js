@@ -9,6 +9,7 @@ import SignUp from './SignUp'
 import FilterSideBar from './FilterSideBar';
 import Businesslist from './Businesslist';
 import CategoryArea from './CategoryPage';
+import RestaurantForm from './RestaurantForm';
 
 import '../App.css'
 import RecentActivity from './RecentActivity';
@@ -20,6 +21,7 @@ function App() {
     <div>
       <NavBar />
       <Routes>
+      
         <Route exact path='/' element= {<Home />} />
         
         <Route exact path='/categ' element= {<CategoryArea/>} />
@@ -28,6 +30,8 @@ function App() {
         <Route path='/contactus' element= {<ContactUs/>} />
       </Routes>
       {/* <Footer /> */}
+      <RestaurantForm/>
+    
     </div>
 
   );
