@@ -11,31 +11,28 @@ function RecentActivity(){
         .then (data => setAllRecentActivity(data))
     }, [])
 
-    // let newo = allRecentActivity.filter(() => {})
-
-    // if(!image) {
-    //     return <h2>Loading...</h2>
-    // }
-
     return( 
         <>
-            <div className="recent-heading"><h2>Recent Activity</h2></div>
+            <div>
+                <h2 className="text-center text-uppercase fw-bold">Recent Activity</h2>
+            </div>
             <div className="recent-activity-container">
                 {allRecentActivity.map((activity) => {
-                    return( 
-                        <div className="recent-activity-card" key={activity.id}>
-                            <div className="recent-user-name"><i class="fa-solid fa-user"></i> <span>{activity.user.username}</span></div>
-                            <div className="recent-bus-name">{activity.business.name}</div>
-                            <div>{activity.businessposter}</div>
-                            <div>{activity.rating}</div>
-                            <p>{activity.comment}</p>
-                            <a href="#">Read More</a>
-                        </div>
+
+                return( 
+                    <div className="recent-activity-card" key={activity.id}>
+                        <div className="recent-user-name"><i class="fa-solid fa-user"></i>{activity.user.username}</div>
+                        <div className="recent-bus-name">{activity.business.name}</div>
+                        <div>{activity.businessposter}</div>
+                        <div>Rated: {activity.rating}</div>
+                        <p>{activity.comment}</p>
+                    </div>
+
                         
             )})}
                 
-                </div>
-                </>
+            </div>
+        </>
         )
      
 }

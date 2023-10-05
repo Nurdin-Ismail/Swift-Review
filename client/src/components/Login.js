@@ -16,7 +16,8 @@ function Login(){
     }
 
     return(
-        <div className=" w-50 form_positioning">
+        <div className="review_form">
+            <h3 className="text-center text-uppercase">login</h3>
             <form className="form">
                 <div class="form-floating mb-3">
                   <input onChange={handleChange} value={formInputs.username} type="text" class="form-control" id="floatingInput" placeholder="name@example.com"/>
@@ -26,7 +27,7 @@ function Login(){
                   <input onChange={handleChange} value={formInputs.Password} type="password" class="form-control" id="floatingPassword" placeholder="Password"/>
                   <label for="floatingPassword">Password</label>
                 </div>
-                <button className="btn btn-primary frm_btn" onClick={handleClick} type="submit">LOGIN</button>
+                <button className="btn btn-primary sgn_btn" onClick={handleClick} type="submit">LOGIN</button>
             </form>
         </div>
     )

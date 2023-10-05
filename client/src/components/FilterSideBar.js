@@ -11,9 +11,7 @@ function FilterSideBar({buttonclick, categoryofroute}){
  
              subcategory = categs.map((categ)=>{
                    return <button className="sort" onClick={(e) => buttonclick(e.target.innerText)}>{categ}</button>
-                 });
- 
-               
+                 });  
                
         }else if (categoryofroute == "Automotives"){
             const categs= ["Auto-repair", "Car Wash", "Car Dealers", "Parking"]
@@ -46,22 +44,17 @@ function FilterSideBar({buttonclick, categoryofroute}){
         </label>
               });
 
-
         }
 
-   
-    
     return (
-        <div >
-
+        <div className="bach">
             <div className="filtersidebar">
-                <div className="separation">
+                <div className="filter">
                    <h5>{categoryofroute}</h5>
                     <h6>Filters:</h6>
-
                 </div>
 
-                <div className="separation">
+                <div className="">
 
                     <div className="subcateg">
 
@@ -73,19 +66,12 @@ function FilterSideBar({buttonclick, categoryofroute}){
                     
                 </div>
 
-                <div className="separation">
+                <div className="filter">
 
                     <h6>Features</h6>
-
                     {check}
-                
-
                 </div>
-
-                
-
             </div>
-
         </div>
     )
 }

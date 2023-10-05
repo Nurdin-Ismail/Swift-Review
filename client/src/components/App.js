@@ -38,18 +38,21 @@ function App() {
         <Route path='/signup' element= {<SignUp/>} />
         <Route path='/contactus' element= {<ContactUs/>} />
 
-        <Route path='/restaurantform' element= {<RestaurantForm/>} />
+        <Route path='/add-business' element= {<RestaurantForm/>} />
         <Route path='/reviewform' element= {<ReviewForm/>} />
-        <Route path='/Review/2' element={<ReviewDetail/>} /> 
         
+
         <Route path='/filter' element={<FilterSideBar />} />
         <Route path="/business/:id" element={<BusinessDetail/>} />
        
 
-        <Route path='/user/2' element={<UserProfile />} />
+
+
+        <Route path='/user/:id' element={<UserProfile />} />
+
 
       </Routes>
-      {/* <Footer /> */}
+      <Footer />
       {/*<RestaurantForm/>
       <ReviewForm/>*/}
     </div>

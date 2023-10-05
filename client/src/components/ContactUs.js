@@ -4,7 +4,7 @@ function ContactUs(){
     return (
 
     <div className="container">
-      <h2 className="mt-5 mb-4">Contact Us</h2>
+      <h2 className="mt-5 mb-4 text-center text-uppercase">Contact Us</h2>
       <form>
         <div className="mb-3">
           <label htmlFor="firstName" className="form-label">
@@ -66,7 +66,7 @@ function ContactUs(){
             required
           />
         </div>
-        <button type="submit" className="btn btn-primary">
+        <button type="submit" className="btn btn-primary sgn_btn">
           Submit
         </button>
       </form>

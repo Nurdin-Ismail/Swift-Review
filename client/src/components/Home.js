@@ -19,23 +19,23 @@ function Home(){
                 <div class="carousel-inner">
                     <div class="carousel-item active">
                     <img src={image1} class="d-block w-100 hme_crsl_img" alt="..."/>
-                    <div class="carousel-caption d-none d-md-block">
-                        <h5>Empowering Decisions Through Reviews</h5>
-                        <p>In a world filled with choices, reviews are your compass. They empower you to make informed decisions, ensuring your time and money are invested wisely.</p>
+                    <div class="carousel-caption d-none d-md-block crsl_scnt">
+                        <h5 className="text-uppercase hme_txt">Empowering Decisions Through Reviews</h5>
+                        <p className="text-uppercase hme_txt">In a world filled with choices, reviews are your compass. They empower you to make informed decisions, ensuring your time and money are invested wisely.</p>
                     </div>
                     </div>
                     <div class="carousel-item">
                     <img src={image2} class="d-block w-100 hme_crsl_img" alt="..."/>
-                    <div class="carousel-caption d-none d-md-block">
-                        <h5>Saving You Time, One Review at a Time</h5>
-                        <p>In a fast-paced world, reviews become your time-saving allies. They distill countless experiences into a few clicks, helping you find what you need quickly and efficiently.</p>
+                    <div class="carousel-caption d-none d-md-block crsl_scnt">
+                        <h5 className="text-uppercase hme_txt">Saving You Time, One Review at a Time</h5>
+                        <p className="text-uppercase hme_txt">In a fast-paced world, reviews become your time-saving allies. They distill countless experiences into a few clicks, helping you find what you need quickly and efficiently.</p>
                     </div>
                     </div>
                     <div class="carousel-item">
                     <img src={image3} class="d-block w-100 hme_crsl_img" alt="..."/>
-                    <div class="carousel-caption d-none d-md-block">
-                        <h5>Shaping Tomorrow's Choices Today</h5>
-                        <p>Reviews aren't just about the present; they're a glimpse into the future. By reading and sharing reviews, you're helping shape the choices of tomorrow, creating a better world for all.</p>
+                    <div class="carousel-caption d-none d-md-block crsl_scnt">
+                        <h5 className="text-uppercase hme_txt">Shaping Tomorrow's Choices Today</h5>
+                        <p className="text-uppercase hme_txt">Reviews aren't just about the present; they're a glimpse into the future. By reading and sharing reviews, you're helping shape the choices of tomorrow, creating a better world for all.</p>
                     </div>
                     </div>
                 </div>
@@ -49,20 +49,18 @@ function Home(){
                 </button>
             </div>
             <div>
-                <div>
-                    <h3>Your Destination for Honest Reviews</h3>
+                <div className='hme_divs'>
+                    <h3 className="text-center text-uppercase fw-bold">Your Destination for Honest Reviews</h3>
                     <p>Are you tired of relying on unreliable reviews when choosing where to dine or where to get your vehicle serviced? Look no further! Swift Review is here to revolutionize the way you make decisions about restaurants and automotive stores. We're your trusted source for genuine, unbiased, and up-to-date reviews from real customers. Join our community of passionate reviewers and discover the best places to eat and service your vehicle.</p>
                 </div>
-                <div>
-                    <h3>Swift Review Mobile App - Your Reviews at Your Fingertips</h3>
+                <div className='hme_divs'>
+                    <h3 className="text-center text-uppercase fw-bold">Swift Review Mobile App - Your Reviews at Your Fingertips</h3>
                     <p>Take Swift Review with you wherever you go! Download our mobile app to access reviews, ratings, and recommendations on the fly. Whether you're exploring a new city or need quick information on the best local automotive store, our app has you covered.</p>
                 </div>
             </div>
             <section className='section'>
-       <h1>Recents</h1>
-       <RecentActivity/>
-       
-      </section>
+                <RecentActivity/>
+            </section>
             <div class="d-flex justify-content-evenly hme_cntr">
                 <RestaurantCard />
                 <AutomotiveCard />

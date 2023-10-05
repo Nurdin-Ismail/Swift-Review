@@ -8,7 +8,7 @@ function RestaurantCard(){
     return(
         <div className="hme_crd" onClick={() =>navigate('/restaurants')}>
             <div>
-                <i class="fa-solid fa-utensils"></i>
+                <i class="fa-solid fa-utensils hme_icn"></i>
             </div>
             <h4>Restaurants</h4>
         </div>
