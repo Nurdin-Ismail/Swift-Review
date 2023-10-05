@@ -19,6 +19,7 @@ import ReviewForm from './ReviewForm';
 
 import '../App.css'
 import RecentActivity from './RecentActivity';
+import UserProfile from './UserProfile';
 
 
 
@@ -44,7 +45,7 @@ function App() {
         <Route path='/business/2' element={<BusinessDetail />} />
         <Route path='/filter' element={<FilterSideBar />} />
 
-
+        <Route path='/user/2' element={<UserProfile />} />
 
       </Routes>
       {/* <Footer /> */}

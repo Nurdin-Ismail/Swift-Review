@@ -24,7 +24,7 @@ function RecentActivity(){
                 {allRecentActivity.map((activity) => {
                     return( 
                         <div className="recent-activity-card" key={activity.id}>
-                            <div className="recent-user-name">{activity.user.username}</div>
+                            <div className="recent-user-name"><i class="fa-solid fa-user"></i>{activity.user.username}</div>
                             <div className="recent-bus-name">{activity.business.name}</div>
                             <div>{activity.businessposter}</div>
                             <div>{activity.rating}</div>
