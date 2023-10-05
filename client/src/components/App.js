@@ -39,16 +39,16 @@ function App() {
         <Route path='/signup' element= {<SignUp/>} />
         <Route path='/contactus' element= {<ContactUs/>} />
 
-        <Route path='/restaurantform' element= {<RestaurantForm/>} />
+        <Route path='/add-business' element= {<RestaurantForm/>} />
         <Route path='/reviewform' element= {<ReviewForm/>} />
 
-        <Route path='/business/2' element={<BusinessDetail />} />
+        <Route path='/business' element={<BusinessDetail />} />
         <Route path='/filter' element={<FilterSideBar />} />
 
-        <Route path='/user/2' element={<UserProfile />} />
+        <Route path='/user' element={<UserProfile />} />
 
       </Routes>
-      {/* <Footer /> */}
+      <Footer />
       {/*<RestaurantForm/>
       <ReviewForm/>*/}
     </div>

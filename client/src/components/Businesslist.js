@@ -16,23 +16,25 @@ function BusinessList({categ, businesses, loading, categoryofroute}) {
   
 
   return (
-    <div>
-      <h1>List of {categoryofroute}</h1>
-      <div className="business-cards">
-        {businesses.map((business) => (
-          <BusinessCard
-          business={business}
-          key = {business.id}
-          name={business.name}
-          category={business.category}
-          sub_category={business.sub_category}
-          contact={business.contacts}
-          location={business.location}
-          poster={business.poster}
-          
-          />
-        ))}
-      </div>
+    <div className='bsns_sctn d-flex justify-content-center'>
+        <div className='bsns_crtl'>
+          <h1 className='text-center text-uppercase'>List of {categoryofroute}</h1>
+          <div className="business-cards">
+            {businesses.map((business) => (
+              <BusinessCard
+              business={business}
+              key = {business.id}
+              name={business.name}
+              category={business.category}
+              sub_category={business.sub_category}
+              contact={business.contacts}
+              location={business.location}
+              poster={business.poster}
+              
+              />
+            ))}
+          </div>
+        </div>
     </div>
   );
 }

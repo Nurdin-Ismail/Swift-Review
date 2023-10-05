@@ -29,15 +29,20 @@ function ReviewCommentForm() {
   };
 
   return (
-    <div>
-      <h2>Add a Review</h2>
-      <form onSubmit={handleSubmit}>
-        <textarea
-          placeholder="Write your review comment here..."
-          value={comment}
-          onChange={handleCommentChange}
-          required
-        ></textarea>
+    <div className='review_form'>
+      <h2 className='text-center text-uppercase'>Add a Review</h2>
+      <form onSubmit={handleSubmit} className='w-50'>
+        <div className='form-floating mb-3'>
+          <textarea
+            className='form-control'
+            id="floatingInput"
+            placeholder="Write your review comment here..."
+            value={comment}
+            onChange={handleCommentChange}
+            required
+          ></textarea>
+          <label for="floatingInput">Comment</label>
+        </div>
         <div>
           <label>Rating:</label>
           <div>
@@ -55,7 +60,7 @@ function ReviewCommentForm() {
             ))}
           </div>
         </div>
-        <button type="submit">Submit</button>
+        <button className="btn btn-primary sgn_btn" type="submit">Submit</button>
       </form>
       <ul>
         {comments.map((comment, index) => (
