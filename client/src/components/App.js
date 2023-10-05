@@ -21,7 +21,6 @@ function App() {
       <NavBar />
       <Routes>
         <Route exact path='/' element= {<Home />} />
-        
         <Route exact path='/categ' element= {<CategoryArea/>} />
         <Route path='/login' element= {<Login/>} />
         <Route path='/signup' element= {<SignUp/>} />

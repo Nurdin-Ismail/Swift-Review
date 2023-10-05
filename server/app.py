@@ -5,11 +5,16 @@ from flask_migrate import Migrate
 from flask_restful import Api, Resource, reqparse
 from flask_cors import CORS
 from sqlalchemy import desc, asc
-
+import jwt
+from functools import wraps
+from  werkzeug.security import generate_password_hash, check_password_hash
+from datetime import datetime, timedelta
+import traceback
 
 
 from models import db, Business, Review,Product,User, app
 
+app.config['SECRET_KEY'] = 'mt9X8IpJIXKj5B80'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
@@ -19,12 +24,36 @@ db.init_app(app)
 api = Api(app)
 CORS(app)
 
+def token_required(f):
+    @wraps(f)
+    def decorated(*args, **kwargs):
+        token = None
+        if 'x-access-token' in request.headers:
+            token = request.headers['x-access-token']
+        if not token:
+            return jsonify({'message': 'Login first. Token is missing !!'}), 401
+  
+        try:
+            data = jwt.decode(token, app.config['SECRET_KEY'])
+            user_id = data.get('id')
+            current_user = User.query.filter(User.id == user_id).first()
+            if not current_user:
+                raise Exception("User not found")  # Raise an exception if the user is not found
+        except Exception as e:
+            traceback.print_exc()  # Log the exception traceback
+            return jsonify({'message': 'Token is invalid !!'}), 401
+        return f(current_user, *args, **kwargs)
+    return decorated
+
+
 @app.route('/')
 def hello_world():
     return 'Hello, World!'
 
 # Restaurant Resource
 class RestaurantResource(Resource):
+    
+    @token_required
     def get(self, restaurant_id):
          # Retrieve restaurant by ID 
         restaurant = Business.query.get(restaurant_id)
@@ -39,7 +68,7 @@ class RestaurantResource(Resource):
 
 class Restaurants(Resource):
     
-    
+    @token_required
     def get(self):
         # Retrieve a list of all restaurants
         categ = "Restaurants"
@@ -65,6 +94,8 @@ api.add_resource(Restaurants, '/restaurants')
 
 # Sub-Category Resource
 class SubCategoryResource(Resource):
+    
+    @token_required
     def get(self, category):
         # Retrieve restaurants by category
         restaurants = Business.query.filter_by(sub_category=category).all()
@@ -76,6 +107,7 @@ class SubCategoryResource(Resource):
     
 class Users(Resource):
     
+    @token_required
     def get(self):
         list = []
         for user in User.query.all():
@@ -89,33 +121,11 @@ class Users(Resource):
             }
             list.append(user_dict)
             
-        return make_response(jsonify(list), 200)
-    
-    def post(self):
-        data = request.get_json()
-        new_user = User(
-            username = data.get('username'),
-            email = data.get('email'),
-            contacts = data.get('contacts'),
-            created_at = data.get('created_at'),
-            password = data.get('password')
-        )
-        db.session.add(new_user)
-        db.session.commit()
-        
-        new_user_dict = {
-            "id": new_user.id,
-            "username": new_user.username,
-            "email": new_user.email,
-            "contacts": new_user.contacts,
-            "created_at": new_user.created_at,
-            "password": new_user.password
-        }
-        return make_response(jsonify(new_user_dict), 200)
-        
+        return make_response(jsonify(list), 200)    
 
 class UserById(Resource):
     
+    @token_required
     def get(self, id):
         user = User.query.filter(User.id == id).first()
         
@@ -133,7 +143,7 @@ class UserById(Resource):
         else:
             return make_response(jsonify({"error": "User not found"}), 404)
         
-        
+    @token_required  
     def delete(self, id):
         user = User.query.filter(User.id == id).first()
         
@@ -148,6 +158,7 @@ class UserById(Resource):
         
 class Businesses(Resource):
     
+    @token_required
     def get(self):
         list = []
         
@@ -166,6 +177,7 @@ class Businesses(Resource):
             list.append(business_dict)
         return make_response(jsonify(list), 200)
     
+    @token_required
     def post(self):
         data = request.get_json()
         new_business = Business(
@@ -196,6 +208,7 @@ class Businesses(Resource):
     
 class BusinessById(Resource):
     
+    @token_required
     def get(self, id):
         business = Business.query.filter(Business.id == id).first()
         
@@ -214,7 +227,8 @@ class BusinessById(Resource):
             return make_response(jsonify(business_dict), 200)
         else:
             return make_response(jsonify({"error": "Business not found"}), 404)
-        
+     
+    @token_required   
     def delete(self, id):
         business = Business.query.filter(Business.id == id).first()
         
@@ -227,6 +241,8 @@ class BusinessById(Resource):
             return make_response(jsonify({"error": "Business not found"}), 404)
         
 class Reviews(Resource):
+    
+    @token_required
     def get(self):
         reviews_list = []
         for review in Review.query.all():
@@ -239,7 +255,8 @@ class Reviews(Resource):
             }
             reviews_list.append(review_dict)
         return make_response(jsonify(reviews_list), 200)
-
+    
+    @token_required
     def post(self):
         data = request.get_json()
         new_review = Review(
@@ -262,6 +279,8 @@ class Reviews(Resource):
 
 
 class ReviewById(Resource):
+    
+    @token_required
     def get(self, id):
         review = Review.query.filter(Review.id == id).first()
 
@@ -277,7 +296,8 @@ class ReviewById(Resource):
             return make_response(jsonify(review_dict), 200)
         else:
             return make_response(jsonify({"error": "Review not found"}), 404)
-
+        
+    @token_required
     def put(self, id):
         review = Review.query.filter(Review.id == id).first()
 
@@ -303,7 +323,8 @@ class ReviewById(Resource):
             return make_response(jsonify(updated_review_dict), 200)
         else:
             return make_response(jsonify({"error": "Review not found"}), 404)
-
+        
+    @token_required
     def delete(self, id):
         review = Review.query.filter(Review.id == id).first()
 
@@ -337,7 +358,8 @@ class ProductListResource(Resource):
             }
             product_list.append(product_data)
         return {'products': product_list}, 200
-
+    
+    @token_required
     def post(self):
         args = request.get_json()
         new_product = Product(
@@ -364,8 +386,8 @@ class ProductResource(Resource):
         self.parser.add_argument('description', type=str)
         self.parser.add_argument('price', type=float)
         self.parser.add_argument('poster', type=str)
-
-
+        
+    @token_required
     def get(self, product_id):
         product = Product.query.get(product_id)
         if product:
@@ -379,7 +401,8 @@ class ProductResource(Resource):
             }, 200
         else:
             return {'message': 'Product not found'}, 404
-
+        
+    @token_required
     def patch(self, product_id):
         args = self.parser.parse_args()
         product = Product.query.get(product_id)
@@ -408,7 +431,8 @@ class ProductResource(Resource):
             }, 200
         else:
             return {'message': 'Product not found'}, 404
-
+        
+    @token_required
     def delete(self, product_id):
         product = Product.query.get(product_id)
         if product:
@@ -433,7 +457,82 @@ class RecentReview(Resource):
             }
             reviews_list.append(review_dict)
         return make_response(jsonify(reviews_list), 200)
+
+  
+class Login(Resource):
+    
+    def post(self):
         
+        auth = request.form
+
+        if not auth or not auth.get('username') or not auth.get('password'):
+            return make_response(
+                'Could not verify',
+                401,
+                {'WWW-Authenticate' : 'Basic realm ="Login required !!"'}
+            )
+            
+        user = User.query.filter(User.username == auth.get('username')).first()
+        
+        if not user:
+            return make_response(
+                'Could not verify',
+                401,
+                {'WWW-Authenticate' : 'Basic realm ="User does not exist !!"'}
+            )
+        
+        if check_password_hash(user.password, auth.get('password')):
+            token = jwt.encode({
+                'id': user.id,
+                'exp' : datetime.utcnow() + timedelta(minutes = 30)
+            }, app.config['SECRET_KEY'])
+    
+            return make_response(jsonify({'token' : token.decode('UTF-8')}), 201)
+        # returns 403 if password is wrong
+        return make_response(
+            'Could not verify',
+            403,
+            {'WWW-Authenticate' : 'Basic realm ="Wrong Password !!"'}
+        )
+
+
+
+class SignUp(Resource):
+    
+    def post(self):
+        
+        data = request.get_json()
+        new_user = User(
+            username = data.get('username'),
+            email = data.get('email'),
+            contacts = data.get('contacts'),
+            created_at = data.get('created_at'),
+            password = generate_password_hash(data.get('password'))
+        )
+        db.session.add(new_user)
+        db.session.commit()
+        
+        new_user_dict = {
+            "id": new_user.id,
+            "username": new_user.username,
+            "email": new_user.email,
+            "contacts": new_user.contacts,
+            "created_at": new_user.created_at,
+            "password": new_user.password
+        }
+        return make_response(jsonify(new_user_dict), 200)
+        
+class Logout(Resource):
+    
+    @token_required
+    def delete(self, token):
+        token = None
+        return token
+    
+class CheckSession(Resource):
+    
+    def get(self):
+        return make_response(jsonify({'message': 'Session is active'}), 200)
 
 # Add resources to the API
 api.add_resource(RestaurantResource, '/restaurants/<int:restaurant_id>')
@@ -447,6 +546,11 @@ api.add_resource(ReviewById, '/review/<int:id>')
 api.add_resource(ProductResource, '/products/<int:product_id>')
 api.add_resource(ProductListResource, '/products')
 api.add_resource(RecentReview, '/reviews/recent_reviews')
+api.add_resource(Login, '/login')
+api.add_resource(SignUp, '/signup')
+api.add_resource(Logout, '/logout')
+api.add_resource(CheckSession, '/check_session')
+
 
 
 
