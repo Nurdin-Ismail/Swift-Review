@@ -433,6 +433,51 @@ class RecentReview(Resource):
             }
             reviews_list.append(review_dict)
         return make_response(jsonify(reviews_list), 200)
+    
+class AutomotiveBusinesses(Resource):
+    def get(self):
+        automotive_list = []
+        for business in Business.query.filter_by(category="Automotives").all():
+            business_dict = {
+                "id": business.id,
+                "name": business.name,
+                "sub_category": business.sub_category,
+                "owner_id": business.owner_id,
+                "contacts": business.contacts,
+                "poster": business.poster,
+                "location": business.location,
+                "created_at": business.created_at
+            }
+            automotive_list.append(business_dict)
+        return make_response(jsonify(automotive_list), 200)
+
+    def post(self):
+        data = request.get_json()
+        new_business = Business(
+            name=data.get('name'),
+            category="Automotives",
+            sub_category=data.get('sub_category'),
+            owner_id=data.get('owner_id'),
+            contacts=data.get('contacts'),
+            poster=data.get('poster'),
+            location=data.get('location')
+        )
+        db.session.add(new_business)
+        db.session.commit()
+
+        new_business_dict = {
+            "id": new_business.id,
+            "name": new_business.name,
+            "sub_category": new_business.sub_category,
+            "owner_id": new_business.owner_id,
+            "contacts": new_business.contacts,
+            "poster": new_business.poster,
+            "location": new_business.location,
+            "created_at": new_business.created_at
+        }
+        return make_response(jsonify(new_business_dict), 200)
+
+
         
 
 # Add resources to the API
@@ -447,6 +492,7 @@ api.add_resource(ReviewById, '/review/<int:id>')
 api.add_resource(ProductResource, '/products/<int:product_id>')
 api.add_resource(ProductListResource, '/products')
 api.add_resource(RecentReview, '/reviews/recent_reviews')
+api.add_resource(AutomotiveBusinesses, '/automotives')
 
 
 
