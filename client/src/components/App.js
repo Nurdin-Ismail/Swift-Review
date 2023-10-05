@@ -10,7 +10,7 @@ import FilterSideBar from './FilterSideBar';
 import Businesslist from './Businesslist';
 import CategoryArea from './CategoryPage';
 import RestaurantForm from './RestaurantForm';
-
+import ReviewForm from './ReviewForm';
 import '../App.css'
 import RecentActivity from './RecentActivity';
 
@@ -31,7 +31,7 @@ function App() {
       </Routes>
       {/* <Footer /> */}
       <RestaurantForm/>
-    
+      <ReviewForm/>
     </div>
 
   );
