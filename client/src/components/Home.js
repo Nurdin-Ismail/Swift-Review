@@ -60,7 +60,7 @@ function Home(){
             </div>
             <section className='section'>
        <h1>Recents</h1>
-       <RecentActivity />
+       
       </section>
             <div class="d-flex justify-content-evenly">
                 <RestaurantCard />

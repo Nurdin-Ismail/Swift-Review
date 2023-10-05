@@ -8,6 +8,7 @@ import Login from './Login'
 import SignUp from './SignUp'
 import FilterSideBar from './FilterSideBar';
 import Businesslist from './Businesslist';
+import CategoryArea from './CategoryPage';
 
 import '../App.css'
 import RecentActivity from './RecentActivity';
@@ -20,14 +21,13 @@ function App() {
       <NavBar />
       <Routes>
         <Route exact path='/' element= {<Home />} />
-        <Route path='/' element= {<RecentActivity />} />
-        <Route path='/businesses' element= {<Businesslist/>} />
-        <Route path='/' element= {<FilterSideBar/>} />
+        
+        <Route exact path='/categ' element= {<CategoryArea/>} />
         <Route path='/login' element= {<Login/>} />
         <Route path='/signup' element= {<SignUp/>} />
         <Route path='/contactus' element= {<ContactUs/>} />
       </Routes>
-      <Footer />
+      {/* <Footer /> */}
     </div>
 
   );

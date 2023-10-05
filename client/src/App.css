@@ -1,9 +1,15 @@
+.nav1{
+  
+  z-index: 1;
+}
+
 .section{
 
     min-height: 100vh;
     min-width: 100vw;
 
 }
+
 
 .title{
     text-align: center;
@@ -14,7 +20,7 @@
 .filtersidebar{
     height: 60vh;
     width: 15vw;
-    background-color: rgba(62, 212, 212, 0.336);
+    background-color: rgb(253, 240, 212);
     margin: 20px 20px;
     position: fixed;
   right: 1;
@@ -24,15 +30,71 @@
 
 }
 
+.page{
+  display: flex;
+  flex-direction: row;
+}
+
+.subcateg{
+  max-width: 20vw;
+  max-height: 30vh;
+}
+.subcateg button{
+      margin: 4px;
+      
+}
+
+
+.main{
+  background-color: #fbf6fff1;
+  border-radius: 10px;
+  margin: 10px 0px;
+  box-shadow: rgba(9, 10, 10, 0.37) 1px 0px 3px 1px;
+  display: flex;
+  flex-direction: column;
+  
+  align-content: center;
+  align-items: center;
+  
+  
+  float: right;
+
+  min-width: 2000px;flex-wrap: wrap;
+  border-radius: 10px;
+  margin: 10px 0px;
+ 
+  
+  
+  
+  
+  
+
+  
+  
+  
+  padding: 20px;
+  
+
+  
+  
+  
+
+
+
+}
+
 .separation{
     background-color: aliceblue;
-    height: 10vh;
+    height: 20vh;
+    max-height: 20vh;
 }
+/* Business card styles */
 .business-cards {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column; /* Arrange cards vertically */
     gap: 20px;
     justify-content: center;
+    display: flex;
   }
   
   .business-card {
@@ -40,10 +102,16 @@
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     padding: 20px;
-    width: 300px;
+    width: 700px; /* Adjust the width to make the cards slightly longer */
+    display: flex;
     background-color: #fff;
     text-align: left;
     transition: transform 0.2s ease-in-out;
+    
+    display: flex;
+  }
+  .kanu{
+    margin-right: 20px;
   }
   
   .business-card:hover {
@@ -59,3 +127,29 @@
     margin: 5px 0;
   }
   
+
+.sort  {
+    border: 1px solid #162953;
+    outline: none;
+    border-radius: 64px;
+    padding: 8px 14px;
+    background: #fff;
+    color: black;
+
+}
+.sort select{ 
+    border: 1px solid #14213d;
+    outline: none;
+    border-radius: 64px;
+    padding: 8px 24px;
+    background: #fff;
+    color: black;
+
+}
+.sort:hover{
+    
+    border: 1px solid #ff5c35;
+    color: #fff;
+    background-color: #ff5c35;
+
+}

@@ -4,6 +4,8 @@ from flask import Flask, jsonify, request, make_response
 from flask_migrate import Migrate
 from flask_restful import Api, Resource, reqparse
 from flask_cors import CORS
+from sqlalchemy import desc, asc
+
 
 
 from models import db, Business, Review,Product,User, app
@@ -42,9 +44,20 @@ class Restaurants(Resource):
         # Retrieve a list of all restaurants
         categ = "Restaurants"
         restaurant_list = []
-        for restauranto in Business.query.filter_by(category = "Restaurants").all():
+        for business in Business.query.filter_by(category = "Restaurants").all():
             
-            restaurant_dict = restauranto.to_dict()
+            restaurant_dict = {
+                "id": business.id,
+                "name": business.name,
+                "category": business.category,
+                "sub_category": business.sub_category,
+                "owner_id": business.owner_id,
+                "hours_open": business.hours_open,
+                "contacts": business.contacts,
+                "poster": business.poster,
+                "location": business.location,
+                "created_at": business.created_at
+            }
             restaurant_list.append(restaurant_dict)
         return make_response(jsonify(restaurant_list), 200)
     
@@ -406,6 +419,20 @@ class ProductResource(Resource):
             return {'message': 'Product not found'}, 404        
         
     
+class RecentReview(Resource):
+    def get(self):
+        reviews = Review.query.order_by(asc(Review.created_at))
+        reviews_list = []
+        for review in reviews:
+            review_dict = {
+                "id": review.id,
+                "user_id": review.user_id,
+                "business_id": review.business_id,
+                "comment": review.comment,
+                "rating": review.rating
+            }
+            reviews_list.append(review_dict)
+        return make_response(jsonify(reviews_list), 200)
         
 
 # Add resources to the API
@@ -419,6 +446,8 @@ api.add_resource(Reviews, '/reviews')
 api.add_resource(ReviewById, '/review/<int:id>')
 api.add_resource(ProductResource, '/products/<int:product_id>')
 api.add_resource(ProductListResource, '/products')
+api.add_resource(RecentReview, '/reviews/recent_reviews')
+
 
 
 
