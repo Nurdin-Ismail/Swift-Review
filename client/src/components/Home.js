@@ -63,7 +63,7 @@ function Home(){
        <RecentActivity/>
        
       </section>
-            <div class="d-flex justify-content-evenly">
+            <div class="d-flex justify-content-evenly hme_cntr">
                 <RestaurantCard />
                 <AutomotiveCard />
             </div>

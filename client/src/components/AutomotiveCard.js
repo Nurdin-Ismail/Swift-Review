@@ -1,8 +1,12 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 function AutomotiveCard(){
+
+    const navigate = useNavigate()
+
     return(
-        <div className="hme_crd">
+        <div className="hme_crd" onClick={() => navigate("/automotives")}>
             <div>
                 <i class="fa-solid fa-car"></i>
             </div>
