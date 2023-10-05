@@ -3,7 +3,7 @@ import '../App.css'
 import BusinessCard from './BusinessCard';
 
 
-function BusinessList({categ, businesses, loading}) {
+function BusinessList({categ, businesses, loading, categoryofroute}) {
   
 
   // const filtered = businesses.filter((x) => x.sub_category == categ )
@@ -17,7 +17,7 @@ function BusinessList({categ, businesses, loading}) {
 
   return (
     <div>
-      <h1>List of Restaurants</h1>
+      <h1>List of {categoryofroute}</h1>
       <div className="business-cards">
         {businesses.map((business) => (
           <BusinessCard

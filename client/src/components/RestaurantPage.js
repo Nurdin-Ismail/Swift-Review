@@ -9,7 +9,7 @@ function RestaurantArea(){
     const [clicked, setclicked] = useState(false)
     const [businesses, setBusinesses] = useState([]);
     const [loading, setLoading] = useState(true);
-    const categoryofroute = 'Restaurant'
+    const categoryofroute = 'Restaurants'
 
   useEffect(() => {
     
@@ -95,7 +95,7 @@ function RestaurantArea(){
             </div>
 
             <main className="main">
-                <BusinessList  categ={categ} businesses={businesses} loading= {loading} />
+                <BusinessList  categ={categ} businesses={businesses} loading= {loading} categoryofroute ={categoryofroute} />
 
             </main>
             

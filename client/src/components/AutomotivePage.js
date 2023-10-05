@@ -12,7 +12,8 @@ function AutomotiveArea(){
     const [clicked, setclicked] = useState(false)
     const [businesses, setBusinesses] = useState([]);
     const [loading, setLoading] = useState(true);
-    
+    const categoryofroute = 'Automotives'
+    const [backup, setbackup] = useState([])
 
   useEffect(() => {
     
@@ -25,6 +26,8 @@ function AutomotiveArea(){
   .then(data => {
     console.log(data)
      setBusinesses(data);
+     setbackup(data)
+
      setLoading(false);
   }
   
@@ -44,8 +47,8 @@ function AutomotiveArea(){
 
 
     function handlebuttonclick(sub_category){
-        if (sub_category == 'Indian'){
-            setcateg('Indian')
+        if (sub_category == 'Auto-Repair'){
+            setcateg('Auto-Repair')
             console.log(categ)
             let filtered = businesses.filter((x) => x.sub_category == categ )
             console.log(filtered)
@@ -53,8 +56,8 @@ function AutomotiveArea(){
             
 
 
-        }else if(sub_category == 'Italian'){
-            setcateg('Italian')
+        }else if(sub_category == 'Car Dealers'){
+            setcateg('Car Dealers')
             console.log(categ)
             let filtered = businesses.filter((x) => x.sub_category == categ )
             console.log(filtered)
@@ -63,16 +66,16 @@ function AutomotiveArea(){
             
 
 
-        }else if(sub_category == 'Chinese'){
-            setcateg('Chinese')
+        }else if(sub_category == 'Parking'){
+            setcateg('Parking')
             console.log(categ)
             let filtered = businesses.filter((x) => x.sub_category == categ )
             console.log(filtered)
             setBusinesses(filtered)
             
 
-        }else if(sub_category == 'Local'){
-            setcateg('Local')
+        }else if(sub_category == 'Car Wash'){
+            setcateg('Car Wash')
             console.log(categ)
             let filtered = businesses.filter((x) => x.sub_category == categ )
             console.log(filtered)
@@ -81,6 +84,8 @@ function AutomotiveArea(){
             
 
 
+        }else{
+            setBusinesses(backup)
         }
 
         
@@ -94,11 +99,11 @@ function AutomotiveArea(){
     return(
         <div className="page">
             <div>
-                <FilterSideBar buttonclick = {handlebuttonclick}/>
+                <FilterSideBar buttonclick = {handlebuttonclick} categoryofroute={categoryofroute}/>
             </div>
 
             <main className="main">
-                <BusinessList  categ={categ} businesses={businesses} loading= {loading} />
+                <BusinessList  categ={categ} businesses={businesses} loading= {loading} categoryofroute={categoryofroute} />
 
             </main>
             

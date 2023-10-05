@@ -42,6 +42,8 @@ function App() {
         <Route path='/reviewform' element= {<ReviewForm/>} />
 
         <Route path='/business/2' element={<BusinessDetail />} />
+        <Route path='/filter' element={<FilterSideBar />} />
+
 
 
       </Routes>
