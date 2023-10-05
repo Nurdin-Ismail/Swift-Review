@@ -405,7 +405,7 @@ class ProductResource(Resource):
     
 class RecentReview(Resource):
     def get(self):
-        reviews = Review.query.order_by(desc(Review.created_at)).limit(30)
+        reviews = Review.query.order_by(desc(Review.created_at)).limit(15)
         reviews_list = []
         for review in reviews:
             review_dict = review.to_dict()
