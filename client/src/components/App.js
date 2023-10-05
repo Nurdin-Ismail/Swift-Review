@@ -9,8 +9,13 @@ import SignUp from './SignUp'
 import FilterSideBar from './FilterSideBar';
 import Businesslist from './Businesslist';
 import CategoryArea from './CategoryPage';
+
+import BusinessDetail from './BusinessDetail';
+
+
 import RestaurantForm from './RestaurantForm';
 import ReviewForm from './ReviewForm';
+
 import '../App.css'
 import RecentActivity from './RecentActivity';
 
@@ -28,6 +33,8 @@ function App() {
         <Route path='/login' element= {<Login/>} />
         <Route path='/signup' element= {<SignUp/>} />
         <Route path='/contactus' element= {<ContactUs/>} />
+        <Route path='/business/2' element={<BusinessDetail />} />
+
       </Routes>
       {/* <Footer /> */}
       <RestaurantForm/>
