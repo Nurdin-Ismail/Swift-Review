@@ -11,7 +11,7 @@ import Businesslist from './Businesslist';
 import RestaurantArea from './RestaurantPage';
 import AutomotiveArea from './AutomotivePage';
 import BusinessDetail from './BusinessDetail';
-
+import ReviewDetail from './ReviewDetail';
 
 import RestaurantForm from './RestaurantForm';
 import ReviewForm from './ReviewForm';
@@ -40,13 +40,11 @@ function App() {
 
         <Route path='/add-business' element= {<RestaurantForm/>} />
         <Route path='/reviewform' element= {<ReviewForm/>} />
-
-
-
         
 
         <Route path='/filter' element={<FilterSideBar />} />
         <Route path="/business/:id" element={<BusinessDetail/>} />
+       
 
 
 
