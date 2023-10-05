@@ -8,9 +8,15 @@ import Login from './Login'
 import SignUp from './SignUp'
 import FilterSideBar from './FilterSideBar';
 import Businesslist from './Businesslist';
-import CategoryArea from './CategoryPage';
+import RestaurantArea from './RestaurantPage';
+import AutomotiveArea from './AutomotivePage';
+
+import BusinessDetail from './BusinessDetail';
+
+
 import RestaurantForm from './RestaurantForm';
 import ReviewForm from './ReviewForm';
+
 import '../App.css'
 import RecentActivity from './RecentActivity';
 
@@ -24,12 +30,20 @@ function App() {
       
         <Route exact path='/' element= {<Home />} />
         
-        <Route exact path='/categ' element= {<CategoryArea/>} />
+        <Route exact path='/restaurants' element= {<RestaurantArea/>} />
+        <Route exact path='/automotives' element= {<AutomotiveArea/>} />
+
+
         <Route path='/login' element= {<Login/>} />
         <Route path='/signup' element= {<SignUp/>} />
         <Route path='/contactus' element= {<ContactUs/>} />
+
         <Route path='/restaurantform' element= {<RestaurantForm/>} />
         <Route path='/reviewform' element= {<ReviewForm/>} />
+
+        <Route path='/business/2' element={<BusinessDetail />} />
+
+
       </Routes>
       {/* <Footer /> */}
       {/*<RestaurantForm/>

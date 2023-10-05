@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import FilterSideBar from "./FilterSideBar";
 import BusinessList from "./Businesslist";
 
-function CategoryArea(){
+function AutomotiveArea(){
 
     // const [indian, setclickedindian] =  useState(false)
     // const [chinese, setclickedchinese] =  useState(false)
@@ -16,7 +16,7 @@ function CategoryArea(){
 
   useEffect(() => {
     
-    const apiUrl = 'http://127.0.0.1:5555/restaurants';
+    const apiUrl = 'http://127.0.0.1:5555/automotives';
 
     // Fetch data from the API using Axios 
     
@@ -107,4 +107,4 @@ function CategoryArea(){
     )
 }
 
-export default CategoryArea;
+export default AutomotiveArea;
