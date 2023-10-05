@@ -1,4 +1,5 @@
 import React from "react";
+import { Link} from 'react-router-dom';
 
 function BusinessCard({business, name, category, sub_category, contact, location, poster,}){
     return(
@@ -14,6 +15,7 @@ function BusinessCard({business, name, category, sub_category, contact, location
             
             <p>Contact: {contact}</p>
             <p>Location: {location}</p>
+            <Link to={`/business/${business.business_id}`}>View Detail</Link>
             </div>
             
             
