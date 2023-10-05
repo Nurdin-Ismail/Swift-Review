@@ -250,13 +250,7 @@ class ReviewById(Resource):
         review = Review.query.filter(Review.id == id).first()
 
         if review:
-            review_dict = {
-                "id": review.id,
-                "user_id": review.user_id,
-                "business_id": review.business_id,
-                "comment": review.comment,
-                "rating": review.rating
-            }
+            review_dict = review.to_dict()
 
             return make_response(jsonify(review_dict), 200)
         else:

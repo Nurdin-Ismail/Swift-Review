@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import '../App.css'
+import ReviewDetail from './ReviewDetail';
 
 function BusinessDetail({ businessId }) {
   const [business, setBusiness] = useState(null);
   const [loading, setLoading] = useState(true);
   const params= useParams ()
-  console.log(params);
+  const [reviews, setreviews] = useState([])
+
 
   // Define the handleReviewClick function to handle the review action
   const handleReviewClick = (businessId) => {
@@ -22,6 +24,7 @@ function BusinessDetail({ businessId }) {
       .then((response) => response.json())
       .then((data) => {
         setBusiness(data);
+        setreviews(data.reviews)
         setLoading(false);
       })
       .catch((error) => {
@@ -37,6 +40,8 @@ function BusinessDetail({ businessId }) {
   if (!business) {
     return <div>Business not found.</div>;
   }
+
+ console.log(business)
 
   return (
     <div>
@@ -80,14 +85,20 @@ function BusinessDetail({ businessId }) {
         <div>
           <h3>Overall Rating: 4.5/5</h3>
           <p>Reviews:</p>
-          <ul>
-            <li>
-              <strong>User1:</strong> Excellent service! Highly recommended.
-            </li>
-            <li>
-              <strong>User2:</strong> Good experience, friendly staff.
-            </li>
-          </ul>
+          {reviews.map((review) => {
+                    return(
+                      <ReviewDetail
+                      username={review.user.username}
+                      rating = {review.rating}
+                      comment={review.comment}
+                      created_at={review.created_at}
+                      
+
+
+                      />
+
+
+                     )})}
         </div>
       </div>
 

@@ -7,7 +7,7 @@
 
   min-height: 40vh;
   min-width: 100vw;
-  background-color: green;
+  
 
 }
 
@@ -77,8 +77,7 @@
   padding: 20px;
   
 
-  
-  
+
   
 
 
@@ -93,7 +92,7 @@
 /* Business card styles */
 .business-cards {
     display: flex;
-    flex-direction: column; /* Arrange cards vertically */
+    flex-direction: column; /* Arranging cards vertically */
     gap: 20px;
     justify-content: center;
     display: flex;
@@ -104,7 +103,7 @@
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     padding: 20px;
-    width: 700px; /* Adjust the width to make the cards slightly longer */
+    width: 700px; /* Adjusting the width to make the cards slightly longer */
     display: flex;
     background-color: #fff;
     text-align: left;
@@ -204,3 +203,54 @@
 
   }
 
+/* ReviewDetail*/
+
+
+.review-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border-bottom: 1px solid;
+  border-radius: 5px;
+  background-color: #fff;
+  /* box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); */
+}
+
+.review-card {
+  padding: 10px;
+}
+
+.user-name, .business-id {
+  font-weight: bold;
+  font-size: 18px;
+  color: #333;
+}
+
+.comment {
+  margin-top: 10px;
+  font-size: 16px;
+}
+
+.rating {
+  margin-top: 5px;
+  font-size: 16px;
+  color: #FFA500; /* Changing the color to your liking (e.g., orange) */
+}
+
+.created-at, .updated-at {
+  margin-top: 5px;
+  font-style: italic;
+  color: #777;
+  font-size: 14px;
+}
+
+/* Add a border and padding to separate reviews */
+.review-card + .review-card {
+  border-left: 1px solid;
+  padding-top: 10px;
+  margin-top: 10px;
+}
+
+.review-container{
+  
+}
