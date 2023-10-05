@@ -1,55 +1,36 @@
 import React, { useEffect, useState } from 'react';
 import '../App.css'
+import BusinessCard from './BusinessCard';
 
 
-function BusinessList() {
-  const [businesses, setBusinesses] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    
-    const apiUrl = 'http://127.0.0.1:5555/businesses';
-
-    // Fetch data from the API using Axios 
-    
-    fetch(apiUrl)
-  .then(response => response.json())
-  .then(data => {
-    console.log(data)
-     setBusinesses(data);
-     setLoading(false);
-  }
+function BusinessList({categ, businesses, loading}) {
   
-  )
-  .catch(error => {
 
-    console.error(error)
-  setLoading(false)
-  }
-    
-    
-  );
-      
-      
-  }, []);
+  // const filtered = businesses.filter((x) => x.sub_category == categ )
+  // console.log(filtered)
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+  // useEffect(() => {
+  //   setBusinesses(filtered)
+
+  // }, [categ])
+  
 
   return (
     <div>
-      <h1>List of Businesses</h1>
+      <h1>List of Restaurants</h1>
       <div className="business-cards">
         {businesses.map((business) => (
-          <div className="business-card" key={business.id}>
-            <h2>{business.name}</h2>
-            <p>Category: {business.category}</p>
-            <p>Subcategory: {business.sub_category}</p>
-            <p>Name:{business.name}</p>
-            <p>Contact:{business.contract}</p>
-            <p>Location:{business.location}</p>
-          </div>
+          <BusinessCard
+          business={business}
+          key = {business.id}
+          name={business.name}
+          category={business.category}
+          sub_category={business.sub_category}
+          contact={business.contacts}
+          location={business.location}
+          poster={business.poster}
+          
+          />
         ))}
       </div>
     </div>

@@ -9,7 +9,7 @@ function NavBar() {
     }
 
     return (
-        <div>
+        <div className='nav1'>
            <nav className="navbar navbar-expand-lg navbar-light bg-light">
                 <div className="container-fluid">
                     <NavLink className="navbar-brand" exact to="/" id='name'>SwiftReviews</NavLink>

@@ -188,10 +188,10 @@ with app.app_context():
 
     # print("🦸‍♀️ Deleting Data from Database...")
 
-    # Business.query.delete()
-    # User.query.delete()
-    # Product.query.delete()
-    # Review.query.delete()
+    Business.query.delete()
+    User.query.delete()
+    Product.query.delete()
+    Review.query.delete()
 
     # print("🦸‍♀️ Default names ...")
     
@@ -253,7 +253,7 @@ with app.app_context():
             category = "Restaurants", #business_category
             sub_category = "Italian",
             owner_id = random.randint(1, 20),
-            poster = 'url',
+            poster = 'https://dummyimage.com/200x200',
             # hours_open = faker.
             contacts = fake.phone_number(),
             location = fake.address(),
