@@ -1,9 +1,19 @@
 import React from "react";
 
-function FilterSideBar({buttonclick}){
+function FilterSideBar({buttonclick, categoryofroute}){
     
     
-    
+    function handle_buttons(){
+        if (categoryofroute == 'Restaurant'){
+            let data = ["Indian", "Italian",];
+            let list = document.getElementById("UnList");
+            var fragList = document.createDocumentFragment();
+            for (i = 0; i < data.length; ++i) {
+               var li = document.createElement('li');
+               li.textContent = data[i];
+               fragList.appendChild(li);
+        }
+    }
     
     return (
         <div >
@@ -73,5 +83,6 @@ function FilterSideBar({buttonclick}){
         </div>
     )
 }
+}
 
-export default FilterSideBar
+export default FilterSideBar;
