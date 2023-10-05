@@ -6,7 +6,7 @@ function RecentActivity(){
 
 
     useEffect(() => {
-        fetch("http://127.0.0.1:5555/reviews")
+        fetch("http://127.0.0.1:5555/reviews/recent_reviews")
         .then (res => res.json())
         .then (data => setAllRecentActivity(data))
     }, [])
