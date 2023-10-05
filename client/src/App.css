@@ -172,6 +172,7 @@
     background-color: #fff;
     text-align: left;
     transition: transform 0.2s ease-in-out;
+    justify-content: space-evenly;
     
   }
   
@@ -194,6 +195,10 @@
   }
   .recent-user-name {
     font-weight: bolder; 
+    align-items: center;
+    display: inline-block; 
+    margin-right: 10px;
+    justify-content: space-evenly;
 
   }
 
