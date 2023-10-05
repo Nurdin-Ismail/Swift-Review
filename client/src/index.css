@@ -30,6 +30,17 @@ code {
   border: 1px solid hsl(0, 0%, 76%);
   justify-content: center;
   align-items: center;
+  transition: transform 0.2s ease-in-out;
+}
+
+.hme_crd:hover{
+  transform: scale(1.05);
+  box-shadow:  9px 9px 15px #e6e6e6,
+  -9px -9px 15px #f4f4f4;
+}
+
+.hme_cntr{
+  margin: 30px;
 }
 
 #name{
