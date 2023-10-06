@@ -20,11 +20,6 @@ function RestaurantForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(restaurantData);
-    setRestaurantData({
-      name: "",
-      category: "",
-      sub_category: "",
-    })
   };
 
   return (

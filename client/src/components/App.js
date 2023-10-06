@@ -24,6 +24,8 @@ import UserProfile from './UserProfile';
 
 function App() {
 
+  const [islogged, setislogged] = useState()
+
   const [dropdowncateg, setdropdowncateg] = useState('')
 
   
@@ -45,13 +47,13 @@ function App() {
       <NavBar handlesub = {handleNavbarSubCategs} dropdowncateg={dropdowncateg}/>
       <Routes>
       
-        <Route exact path='/' element= {<Home />} />
+        <Route exact path='/' element= {<Home logged={islogged}/>} />
         
         <Route exact path='/restaurants' element= {<RestaurantArea dropcateg= {dropdowncateg}/>} />
         <Route exact path='/automotives' element= {<AutomotiveArea dropcateg= {dropdowncateg}/>} />
 
 
-        <Route path='/login' element= {<Login/>} />
+        <Route path='/login' element= {<Login logged ={setislogged}/>} />
         <Route path='/signup' element= {<SignUp/>} />
         <Route path='/contactus' element= {<ContactUs/>} />
 
