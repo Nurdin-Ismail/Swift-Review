@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Route, Routes, } from "react-router-dom";
 import Footer from './Footer';
 import Home from './Home'
@@ -23,15 +23,32 @@ import UserProfile from './UserProfile';
 
 
 function App() {
+
+  const [dropdowncateg, setdropdowncateg] = useState('')
+
+  
+  function handleNavbarSubCategs(sub_categ){
+
+    setdropdowncateg(sub_categ)
+    console.log(dropdowncateg)
+
+
+
+  }
+
+  
+
+
+  
   return (
     <div>
-      <NavBar />
+      <NavBar handlesub = {handleNavbarSubCategs} dropdowncateg={dropdowncateg}/>
       <Routes>
       
         <Route exact path='/' element= {<Home />} />
         
-        <Route exact path='/restaurants' element= {<RestaurantArea/>} />
-        <Route exact path='/automotives' element= {<AutomotiveArea/>} />
+        <Route exact path='/restaurants' element= {<RestaurantArea dropcateg= {dropdowncateg}/>} />
+        <Route exact path='/automotives' element= {<AutomotiveArea dropcateg= {dropdowncateg}/>} />
 
 
         <Route path='/login' element= {<Login/>} />

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import '../App.css'
 import BusinessCard from './BusinessCard';
+import { Link, NavLink } from 'react-router-dom';
 
 
 function BusinessList({categ, businesses, loading, categoryofroute}) {
@@ -13,6 +14,8 @@ function BusinessList({categ, businesses, loading, categoryofroute}) {
   //   setBusinesses(filtered)
 
   // }, [categ])
+
+ 
   
 
   return (
@@ -30,6 +33,8 @@ function BusinessList({categ, businesses, loading, categoryofroute}) {
               contact={business.contacts}
               location={business.location}
               poster={business.poster}
+              
+
               
               />
             ))}

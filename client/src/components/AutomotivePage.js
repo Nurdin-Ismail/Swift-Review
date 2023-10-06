@@ -4,7 +4,7 @@ import BusinessList from "./Businesslist";
 import axios from 'axios';
 
 
-function AutomotiveArea(){
+function AutomotiveArea({dropcateg}){
 
     // const [indian, setclickedindian] =  useState(false)
     // const [chinese, setclickedchinese] =  useState(false)
@@ -14,58 +14,84 @@ function AutomotiveArea(){
     const [clicked, setclicked] = useState(false);
     const [businesses, setBusinesses] = useState([]);
     const [loading, setLoading] = useState(true);
-    const categoryofroute = 'Automotives';
-    const [backup, setBackup] = useState([]);
 
-    useEffect(() => {
-        const apiUrl = 'http://127.0.0.1:5555/automotives';
+    const categoryofroute = 'Automotives'
+    const [backup, setbackup] = useState([])
 
-        axios
-          .get(apiUrl)
-          .then((response) => {
-            console.log(response.data);
-            setBusinesses(response.data);
-            setBackup(response.data);
-            setLoading(false);
-          })
-          .catch((error) => {
-            console.error(error);
-            setLoading(false);
-          });
-      }, [categ]);
+    console.log(dropcateg)
+
+  useEffect(() => {
+    
+    const apiUrl = 'http://127.0.0.1:5555/automotives';
+
+    // Fetch data from the API using Axios 
+    
+    fetch(apiUrl)
+  .then(response => response.json())
+  .then(data => {
+    console.log(data)
+     setBusinesses(data);
+     setbackup(data)
+
+     setLoading(false);
+  }
+  
+  )
+  .catch(error => {
+
+    console.error(error)
+  setLoading(false)
+  }
+    
+    
+  );
+      
+      
+  }, [categ]);
 
 
-     // const [indian, setclickedindian] =  useState(false)
-    // const [chinese, setclickedchinese] =  useState(false)
-    // const [local, setclickedlocal] =  useState(false)
-    // const [italian, setclickeditalian] =  useState(false)
-    function handlebuttonclick(sub_category) {
-        if (sub_category === 'Auto-Repair') {
-            setcateg('Auto-Repair');
-            console.log(categ);
-            let filtered = businesses.filter((x) => x.sub_category === categ);
-            console.log(filtered);
-            setBusinesses(filtered);
-        } else if (sub_category === 'Car Dealers') {
-            setcateg('Car Dealers');
-            console.log(categ);
-            let filtered = businesses.filter((x) => x.sub_category === categ);
-            console.log(filtered);
-            setBusinesses(filtered);
-        } else if (sub_category === 'Parking') {
-            setcateg('Parking');
-            console.log(categ);
-            let filtered = businesses.filter((x) => x.sub_category === categ);
-            console.log(filtered);
-            setBusinesses(filtered);
-        } else if (sub_category === 'Car Wash') {
-            setcateg('Car Wash');
-            console.log(categ);
-            let filtered = businesses.filter((x) => x.sub_category === categ);
-            console.log(filtered);
-            setBusinesses(filtered);
-        } else {
-            setBusinesses(backup);
+
+    function handlebuttonclick(sub_category, dropcateg){
+        if (sub_category == 'Auto-Repair' || dropcateg == 'Auto-Repair' ){
+            setcateg('Auto-Repair')
+            console.log(categ)
+            let filtered = businesses.filter((x) => x.sub_category == categ )
+            console.log(filtered)
+            setBusinesses(filtered)
+            
+
+
+        }else if(sub_category == 'Car Dealers' || dropcateg == 'Car Dealers'){
+            setcateg('Car Dealers')
+            console.log(categ)
+            let filtered = businesses.filter((x) => x.sub_category == categ )
+            console.log(filtered)
+            setBusinesses(filtered)
+            
+            
+
+
+        }else if(sub_category == 'Parking' || dropcateg == 'Parking' ){
+            setcateg('Parking')
+            console.log(categ)
+            let filtered = businesses.filter((x) => x.sub_category == categ )
+            console.log(filtered)
+            setBusinesses(filtered)
+            
+
+        }else if(sub_category == 'Car Wash' || dropcateg == 'Car Wash'){
+            setcateg('Car Wash')
+            console.log(categ)
+            let filtered = businesses.filter((x) => x.sub_category == categ )
+            console.log(filtered)
+            setBusinesses(filtered)
+
+            
+
+
+        }else{
+            setBusinesses(backup)
+
         }
     }
 
