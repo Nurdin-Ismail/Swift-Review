@@ -36,7 +36,7 @@ function RestaurantArea({dropcateg}){
   );
       
       
-  }, [categ]);
+  }, [categ, dropcateg]);
 
 
 
