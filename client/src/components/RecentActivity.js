@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
+import { Link, NavLink, useNavigate} from 'react-router-dom';
 
 
 function RecentActivity(){
     const [allRecentActivity, setAllRecentActivity] = useState([])
-
+    const navigate = useNavigate();
 
     useEffect(() => {
         fetch("http://127.0.0.1:5555/reviews/recent_reviews")
@@ -21,8 +22,19 @@ function RecentActivity(){
 
                 return( 
                     <div className="recent-activity-card" key={activity.id}>
-                        <div className="recent-user-name"><i class="fa-solid fa-user"></i>{activity.user.username}</div>
-                        <div className="recent-bus-name">{activity.business.name}</div>
+                        <div className="recent-user-name" onClick={() => {
+            navigate(`/user/${activity.user.id}`)
+           }
+            }><i class="fa-solid fa-user" ></i>{activity.user.username}</div>
+                        <div  onClick={() => {
+            navigate(`/business/${activity.business.id}`)
+           }
+            }>
+                <p className="recent-bus-name">  
+                    {activity.business.name}
+                </p>
+                
+                </div>
                         <div>{activity.businessposter}</div>
                         <div>Rated: {activity.rating}</div>
                         <p>{activity.comment}</p>

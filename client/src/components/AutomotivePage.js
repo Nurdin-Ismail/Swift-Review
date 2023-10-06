@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import FilterSideBar from "./FilterSideBar";
 import BusinessList from "./Businesslist";
 
-function AutomotiveArea(){
+function AutomotiveArea({dropcateg}){
 
     // const [indian, setclickedindian] =  useState(false)
     // const [chinese, setclickedchinese] =  useState(false)
@@ -14,6 +14,8 @@ function AutomotiveArea(){
     const [loading, setLoading] = useState(true);
     const categoryofroute = 'Automotives'
     const [backup, setbackup] = useState([])
+
+    console.log(dropcateg)
 
   useEffect(() => {
     
@@ -46,8 +48,8 @@ function AutomotiveArea(){
 
 
 
-    function handlebuttonclick(sub_category){
-        if (sub_category == 'Auto-Repair'){
+    function handlebuttonclick(sub_category, dropcateg){
+        if (sub_category == 'Auto-Repair' || dropcateg == 'Auto-Repair' ){
             setcateg('Auto-Repair')
             console.log(categ)
             let filtered = businesses.filter((x) => x.sub_category == categ )
@@ -56,7 +58,7 @@ function AutomotiveArea(){
             
 
 
-        }else if(sub_category == 'Car Dealers'){
+        }else if(sub_category == 'Car Dealers' || dropcateg == 'Car Dealers'){
             setcateg('Car Dealers')
             console.log(categ)
             let filtered = businesses.filter((x) => x.sub_category == categ )
@@ -66,7 +68,7 @@ function AutomotiveArea(){
             
 
 
-        }else if(sub_category == 'Parking'){
+        }else if(sub_category == 'Parking' || dropcateg == 'Parking' ){
             setcateg('Parking')
             console.log(categ)
             let filtered = businesses.filter((x) => x.sub_category == categ )
@@ -74,7 +76,7 @@ function AutomotiveArea(){
             setBusinesses(filtered)
             
 
-        }else if(sub_category == 'Car Wash'){
+        }else if(sub_category == 'Car Wash' || dropcateg == 'Car Wash'){
             setcateg('Car Wash')
             console.log(categ)
             let filtered = businesses.filter((x) => x.sub_category == categ )

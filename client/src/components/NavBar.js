@@ -1,8 +1,10 @@
 import React from 'react';
-import { NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate} from 'react-router-dom';
 
 
-function NavBar() {
+function NavBar({handlesub, dropdowncateg}) {
+
+    const navigate = useNavigate();
 
     function handleClick(e){
         e.preventDefault();
@@ -26,10 +28,23 @@ function NavBar() {
                                     Restaurants
                                 </a>
                                 <ul className="dropdown-menu Nav_ctn">
-                                    <li className='drp_txt'><NavLink className="text-decoration-none drp_txt" to="#">Kenyan</NavLink></li>
-                                    <li className='drp_txt'><NavLink className="text-decoration-none drp_txt" to="#">Italian</NavLink></li>
-                                    <li className='drp_txt'><NavLink className="text-decoration-none drp_txt" to="#">Indian</NavLink></li>
-                                    <li className='drp_txt'><NavLink className="text-decoration-none drp_txt" to="#">Chinese</NavLink></li>
+                                    <li className='drp_txt' onClick={(e) => {
+                                        handlesub(e.target.innerText)
+                                        navigate(`/restaurants`)
+                                    }}>Kenyan</li>
+                                    <li className='drp_txt' onClick={(e) => {
+                                        handlesub(e.target.innerText)
+                                        navigate(`/restaurants`)
+                                    }}>Italian</li>
+                                    <li className='drp_txt' onClick={(e) => {
+                                        handlesub(e.target.innerText)
+                                        navigate(`/restaurants`)
+                                    }}>Indian</li>
+                                    <li className='drp_txt' onClick={(e) => {
+                                        handlesub(e.target.innerText)
+                                        navigate(`/restaurants`)
+                                       
+                                    }}>Chinese</li>
                                 </ul>
                             </li>
                         </ul>
@@ -39,10 +54,23 @@ function NavBar() {
                                     Auto Services
                                 </a>
                                 <ul className="dropdown-menu Nav_ctn">
-                                    <li className='drp_txt'><NavLink className="text-decoration-none drp_txt" to="#">Auto Repair</NavLink></li>
-                                    <li className='drp_txt'><NavLink className="text-decoration-none drp_txt" to="#">Car Wash</NavLink></li>
-                                    <li className='drp_txt'><NavLink className="text-decoration-none drp_txt" to="#">Car Dealers</NavLink></li>
-                                    <li className='drp_txt'><NavLink className="text-decoration-none drp_txt" to="#">Parking</NavLink></li>
+                                    <li className='drp_txt' onClick={(e) => {
+                                        handlesub(e.target.innerText)
+                                        console.log(e.target.innerText)
+                                        navigate(`/automotives`)
+                                    }}>Auto Repair</li>
+                                    <li className='drp_txt' onClick={(e) => {
+                                        handlesub(e.target.innerText)
+                                        navigate(`/automotives`)
+                                    }}>Car Wash</li>
+                                    <li className='drp_txt' onClick={(e) => {
+                                        handlesub(e.target.innerText)
+                                        navigate(`/automotives`)
+                                    }}>Car Dealers</li>
+                                    <li className='drp_txt' onClick={(e) => {
+                                        handlesub(e.target.innerText)
+                                        navigate(`/automotives`)
+                                    }}>Parking</li>
                                 </ul>
                             </li>
                         </ul>

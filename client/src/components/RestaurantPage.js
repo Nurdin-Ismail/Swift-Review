@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import FilterSideBar from "./FilterSideBar";
 import BusinessList from "./Businesslist";
 
-function RestaurantArea(){
+function RestaurantArea({dropcateg}){
 
     
     const [categ, setcateg] = useState()
@@ -40,8 +40,10 @@ function RestaurantArea(){
 
 
 
+
+
     function handlebuttonclick(sub_category){
-        if (sub_category == 'Indian'){
+        if (sub_category == 'Indian' || dropcateg == 'Indian'){
             setcateg('Indian')
             console.log(categ)
             let filtered = businesses.filter((x) => x.sub_category == categ )
@@ -50,7 +52,7 @@ function RestaurantArea(){
             
 
 
-        }else if(sub_category == 'Italian'){
+        }else if(sub_category == 'Italian' || dropcateg == 'Italian'){
             setcateg('Italian')
             console.log(categ)
             let filtered = businesses.filter((x) => x.sub_category == categ )
@@ -60,7 +62,7 @@ function RestaurantArea(){
             
 
 
-        }else if(sub_category == 'Chinese'){
+        }else if(sub_category == 'Chinese' || dropcateg == 'Chinese'){
             setcateg('Chinese')
             console.log(categ)
             let filtered = businesses.filter((x) => x.sub_category == categ )
@@ -68,7 +70,7 @@ function RestaurantArea(){
             setBusinesses(filtered)
             
 
-        }else if(sub_category == 'Local'){
+        }else if(sub_category == 'Local' || dropcateg =='Local'){
             setcateg('Local')
             console.log(categ)
             let filtered = businesses.filter((x) => x.sub_category == categ )
