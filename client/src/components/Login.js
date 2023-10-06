@@ -13,6 +13,10 @@ function Login(){
 
     function handleClick(e){
         e.preventDefault();
+        setFormInputs({
+            username: "",
+            Password: ""
+        })
     }
 
     return(
