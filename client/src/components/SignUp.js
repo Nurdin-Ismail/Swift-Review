@@ -18,7 +18,7 @@ function SignUp(){
     }
 
     return(
-        <div className="review_form">
+        <div className="review_form sgn_pstn">
           <h3 className="text-center text-uppercase">signin</h3>
             <form className="form sgn_frm">
                 {/* <div class="form-floating mb-3">

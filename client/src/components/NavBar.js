@@ -21,7 +21,7 @@ function NavBar({handlesub, dropdowncateg}) {
 
                     <div className="navmargin collapse navbar-collapse" id="navbarNavDropdown">
                         <ul className="navbar-nav">
-                            <li className="nav-item dropdown">
+                            <li className="nav-item dropdown nav_itms">
                                 <a className="ms -5 nav-link dropdown-toggle Navlink" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Restaurants
                                 </a>
@@ -47,7 +47,7 @@ function NavBar({handlesub, dropdowncateg}) {
                             </li>
                         </ul>
                         <ul className="navbar-nav">
-                            <li className="nav-item dropdown">
+                            <li className="nav-item dropdown nav_itms">
                                 <a className="nav-link dropdown-toggle Navlink" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Auto Services
                                 </a>

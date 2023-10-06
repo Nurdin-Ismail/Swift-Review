@@ -16,7 +16,7 @@ function Login(){
     }
 
     return(
-        <div className="review_form">
+        <div className="review_form sgn_pstn">
             <h3 className="text-center text-uppercase">login</h3>
             <form className="form">
                 <div class="form-floating mb-3">

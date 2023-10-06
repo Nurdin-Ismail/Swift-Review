@@ -87,6 +87,10 @@ code {
   color: #fff;
 }
 
+.nav_itms:hover{
+  cursor: pointer;
+}
+
 
 .Navlink{
   /* padding: 15px; */
@@ -147,4 +151,27 @@ code {
   margin: 12px;
   border: none;
   background-color: rgb(7,10,53);
+}
+
+.bsns_dtls{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.bsns_dtls2{
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.bsns_txt{
+  font-size: larger;
+  color: rgb(7,10,53);
+  /* text-decoration: none; */
+}
+
+.sgn_pstn{
+  margin-top: 140px;
 }

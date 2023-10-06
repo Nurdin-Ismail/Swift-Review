@@ -26,7 +26,7 @@ function BusinessCard({business, name, category, sub_category, contact, location
             
             <p>Contact: {contact}</p>
             <p>Location: {location}</p>
-            <Link to={`/business/${business.business_id}`}>View Detail</Link>
+            <Link to={`/business/${business.business_id}`} className="fw-bold bsns_txt">View Detail</Link>
             </div>
 
             

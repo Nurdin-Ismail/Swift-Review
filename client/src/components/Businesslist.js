@@ -21,7 +21,7 @@ function BusinessList({categ, businesses, loading, categoryofroute}) {
   return (
     <div className='bsns_sctn d-flex justify-content-center'>
         <div className='bsns_crtl'>
-          <h1 className='text-center text-uppercase'>List of {categoryofroute}</h1>
+          <h1 className='text-center text-uppercase fw-bold text-decoration-underline'>List of {categoryofroute}</h1>
           <div className="business-cards">
             {businesses.map((business) => (
               <BusinessCard

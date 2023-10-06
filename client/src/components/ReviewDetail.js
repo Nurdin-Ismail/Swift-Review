@@ -12,7 +12,7 @@ function ReviewDetail({username, rating, comment, created_at}) {
       
       <div className="review-card">
 
-        <p className="user-name">{username}</p>
+        <p className="user-name"><i class="fa-solid fa-user" ></i> {username}</p>
         <p className="rating">Rating: {rating}</p>
         <p className="comment">Comment: {comment}</p>
         
