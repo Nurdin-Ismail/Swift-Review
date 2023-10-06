@@ -120,14 +120,7 @@ class UserById(Resource):
         user = User.query.filter(User.id == id).first()
         
         if user:
-            user_dict ={
-                "id": user.id,
-                "username": user.username,
-                "email": user.email,
-                "contacts": user.contacts,
-                "created_at": user.created_at,
-                "password": user.password
-            }
+            user_dict =user.to_dict()
             
             return make_response(jsonify(user_dict), 200)
         else:

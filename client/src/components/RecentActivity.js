@@ -14,7 +14,7 @@ function RecentActivity(){
     }, [])
 
     return( 
-        <>
+        <div>
             <div>
                 <h2 className="text-center text-uppercase fw-bold">Recent Activity</h2>
             </div>
@@ -46,9 +46,9 @@ function RecentActivity(){
                 
 
             </div>
-          ))}
+          
+        
         </div>
-      </>
     );
 }
 

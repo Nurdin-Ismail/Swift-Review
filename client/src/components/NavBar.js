@@ -6,9 +6,7 @@ function NavBar({handlesub, dropdowncateg}) {
 
     const navigate = useNavigate();
 
-    function handleClick(e){
-        e.preventDefault();
-    }
+    
 
     return (
         <div>
@@ -16,10 +14,10 @@ function NavBar({handlesub, dropdowncateg}) {
                 <div className="container-fluid nav_sctn">
                     <NavLink className="navbar-brand Navlink" exact to="/" id='name'>SwiftReviews</NavLink>
 
-                    <form className="d-flex" id='search'>
+                    {/* <form className="d-flex" id='search'>
                         <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
                         <button className="btn btn-outline-success" type="submit" onClick={handleClick}>Search</button>
-                    </form>
+                    </form> */}
 
                     <div className="navmargin collapse navbar-collapse" id="navbarNavDropdown">
                         <ul className="navbar-nav">
