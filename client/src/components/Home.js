@@ -8,7 +8,7 @@ import RecentActivity from './RecentActivity';
 import Footer from './Footer';
 
 
-function Home(){
+function Home({logged}){
     return(
         <div>
             <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
@@ -60,13 +60,13 @@ function Home(){
                 </div>
             </div>
             <section className='section'>
-                <RecentActivity/>
+                <RecentActivity logged={logged}/>
             </section>
             <div class="d-flex justify-content-evenly hme_cntr">
                 <RestaurantCard />
                 <AutomotiveCard />
             </div>
-            <Footer />
+            <Footer  />
         </div>
     )
 }

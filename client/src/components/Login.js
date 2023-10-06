@@ -1,6 +1,9 @@
 import React, { useState } from "react";
+import { Link, NavLink, useNavigate} from 'react-router-dom';
 
-function Login() {
+function Login({logged}) {
+
+  const navigate = useNavigate();
   const [formInputs, setFormInputs] = useState({
     username: "",
     password: ""
@@ -20,7 +23,7 @@ function Login() {
 
     try {
       const response = await fetch(
-        `http://127.0.0.1:5000/users?username=${formInputs.username}&password=${formInputs.password}`,
+        `http://127.0.0.1:5555/users?username=${formInputs.username}&password=${formInputs.password}`,
         {
           method: "GET",
           headers: {
@@ -46,16 +49,20 @@ function Login() {
             user.username === formInputs.username &&
             user.password === formInputs.password
         );
+        let count = 0
 
         if (userFound) {
           // Store the token or user information in local storage
           localStorage.setItem("authToken", userFound.token); 
+          count += 1
+          logged(count)
 
           // Update state to indicate successful login
           setLoginSuccess(true);
           console.log("login success")
 
           // Redirect to a different page or update the UI
+          navigate('/')
 
         } else {
           setError("Invalid username or password");
