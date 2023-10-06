@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
-function ReviewCommentForm() {
+function ReviewCommentForm({ businessId, userId }) {
   const [comment, setComment] = useState('');
-  const [rating, setRating] = useState(1); 
+  const [rating, setRating] = useState(1);
   const [comments, setComments] = useState([]);
 
   const handleCommentChange = (e) => {
@@ -10,21 +11,28 @@ function ReviewCommentForm() {
   };
 
   const handleRatingChange = (e) => {
-    setRating(parseInt(e.target.value)); 
+    setRating(parseInt(e.target.value));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (comment.trim() !== '') {
+      try {
+        const newComment = {
+          text: comment,
+          rating: rating,
+          businessId: businessId,
+          user_id: userId, 
+        };
 
-      const newComment = {
-        text: comment,
-        rating: rating,
-      };
+        const response = await axios.post('http://127.0.0.1:5555/reviews', newComment);
 
-      setComments([...comments, newComment]);
-      setComment('');
-      setRating(1); 
+        setComments([...comments, response.data]);
+        setComment('');
+        setRating(1);
+      } catch (error) {
+        console.error('Error', error);
+      }
     }
   };
 
@@ -41,7 +49,7 @@ function ReviewCommentForm() {
             onChange={handleCommentChange}
             required
           ></textarea>
-          <label for="floatingInput">Comment</label>
+          <label htmlFor="floatingInput">Comment</label>
         </div>
         <div>
           <label>Rating:</label>
