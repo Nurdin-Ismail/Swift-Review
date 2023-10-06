@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import FilterSideBar from "./FilterSideBar";
 import BusinessList from "./Businesslist";
+import axios from 'axios';
+
 
 function AutomotiveArea({dropcateg}){
 
@@ -8,10 +10,11 @@ function AutomotiveArea({dropcateg}){
     // const [chinese, setclickedchinese] =  useState(false)
     // const [local, setclickedlocal] =  useState(false)
     // const [italian, setclickeditalian] =  useState(false)
-    const [categ, setcateg] = useState()
-    const [clicked, setclicked] = useState(false)
+    const [categ, setcateg] = useState();
+    const [clicked, setclicked] = useState(false);
     const [businesses, setBusinesses] = useState([]);
     const [loading, setLoading] = useState(true);
+
     const categoryofroute = 'Automotives'
     const [backup, setbackup] = useState([])
 
@@ -88,28 +91,19 @@ function AutomotiveArea({dropcateg}){
 
         }else{
             setBusinesses(backup)
+
         }
-
-        
-
     }
 
-    
-
-    
-
-    return(
+    return (
         <div className="page">
             <div>
-                <FilterSideBar buttonclick = {handlebuttonclick} categoryofroute= {categoryofroute}/>
+                <FilterSideBar buttonclick={handlebuttonclick} categoryofroute={categoryofroute} />
             </div>
 
             <main className="main">
-                <BusinessList  categ={categ} businesses={businesses} loading= {loading} categoryofroute={categoryofroute} />
-
+                <BusinessList categ={categ} businesses={businesses} loading={loading} categoryofroute={categoryofroute} />
             </main>
-            
-
         </div>
     )
 }

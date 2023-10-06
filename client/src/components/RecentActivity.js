@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+
 import { Link, NavLink, useNavigate} from 'react-router-dom';
 
 
@@ -43,11 +44,12 @@ function RecentActivity(){
                         
             )})}
                 
+
             </div>
-        </>
-        )
-     
+          ))}
+        </div>
+      </>
+    );
 }
 
-export default RecentActivity
-    
+export default RecentActivity; // Export the component with the correct name

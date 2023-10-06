@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import '../App.css'
 import { useParams } from 'react-router-dom';
+import BusinessDetail from './BusinessDetail';
+import ReviewDetail from './ReviewDetail'
 
 function UserProfile({ userId }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const params = useParams()
   console.log(params)
+  const [reviews, setreviews] = useState([])
   
   
 
@@ -24,6 +27,8 @@ function UserProfile({ userId }) {
       .then((response) => response.json())
       .then((data) => {
         setUser(data);
+        setreviews(data.reviews)
+        console.log(reviews)
         setLoading(false);
       })
       .catch((error) => {
@@ -41,16 +46,34 @@ function UserProfile({ userId }) {
   }
 
   return (
-    <div>
-      <h1>{user.name}</h1>
-      <p>Category: {user.email}</p>
-      <p>Contact: {user.contacts}</p>
+      <div className='user-profile-main'>
+        <div className='user-profile-container'>
+          <h1>{user.username}</h1>
+          <p><b>Email:</b> {user.email}</p>
+          <p><b>Phone Number:</b> {user.contacts}</p>
+          <p><b>Membership Date:</b> {user.created_at}</p>
+          
+          {/* Display Ratings and Reviews */}
+          <p>Reviews:</p>
+          {reviews.map((review) => {
+                    return(
+                      <ReviewDetail
+                      username={'You'}
+                      rating = {review.rating}
+                      comment={review.comment}
+                      created_at={review.created_at}
+                      
 
-      {/* Display Ratings and Reviews */}
 
-      {/* Display Business Description */}
-  
-    </div>
+                      />
+
+
+                     )})}
+
+          {/* Display Business Description */}
+      
+        </div>
+      </div>
   );
 }
 
