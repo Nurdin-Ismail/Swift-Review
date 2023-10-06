@@ -97,7 +97,7 @@ class Users(Resource):
             username = data.get('username'),
             email = data.get('email'),
             contacts = data.get('contacts'),
-            created_at = data.get('created_at'),
+            
             password = data.get('password')
         )
         db.session.add(new_user)
@@ -108,7 +108,6 @@ class Users(Resource):
             "username": new_user.username,
             "email": new_user.email,
             "contacts": new_user.contacts,
-            "created_at": new_user.created_at,
             "password": new_user.password
         }
         return make_response(jsonify(new_user_dict), 200)

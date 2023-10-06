@@ -19,8 +19,6 @@ function RestaurantDetail() {
     <div>
       <h2>Restaurant Details</h2>
       <p>Restaurant ID: {restaurantDetails.id}</p>
-      <h3>{restaurantDetails.name}</h3>
-      <p>Description: {restaurantDetails.description}</p>
       <p>Address: {restaurantDetails.address}</p>
       <p>Phone: {restaurantDetails.phone}</p>
       
