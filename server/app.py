@@ -46,18 +46,7 @@ class Restaurants(Resource):
         restaurant_list = []
         for business in Business.query.filter_by(category = "Restaurants").all():
             
-            restaurant_dict = {
-                "id": business.id,
-                "name": business.name,
-                "category": business.category,
-                "sub_category": business.sub_category,
-                "owner_id": business.owner_id,
-                "hours_open": business.hours_open,
-                "contacts": business.contacts,
-                "poster": business.poster,
-                "location": business.location,
-                "created_at": business.created_at
-            }
+            restaurant_dict = business.to_dict()
             restaurant_list.append(restaurant_dict)
         return make_response(jsonify(restaurant_list), 200)
     
@@ -120,14 +109,7 @@ class UserById(Resource):
         user = User.query.filter(User.id == id).first()
         
         if user:
-            user_dict ={
-                "id": user.id,
-                "username": user.username,
-                "email": user.email,
-                "contacts": user.contacts,
-                "created_at": user.created_at,
-                "password": user.password
-            }
+            user_dict =user.to_dict()
             
             return make_response(jsonify(user_dict), 200)
         else:

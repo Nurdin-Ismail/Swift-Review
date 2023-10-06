@@ -2,12 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import '../App.css';
 import ReviewDetail from './ReviewDetail';
-import axios from 'axios';
+import axios from "axios";
+import ReviewForm from './ReviewForm';
 
 function BusinessDetail() {
   const [business, setBusiness] = useState(null);
   const [loading, setLoading] = useState(true);
-  const params = useParams();
+const params = useParams();
+const [reviews, setreviews] = useState([])
+
 
   // Define the handleReviewClick function to handle the review action
   const handleReviewClick = (businessId) => {
@@ -24,6 +27,7 @@ function BusinessDetail() {
       .then((response) => {
         const data = response.data;
         setBusiness(data);
+        setreviews(data.reviews)
         setLoading(false);
       })
       .catch((error) => {
@@ -44,13 +48,13 @@ function BusinessDetail() {
 
   return (
     <div>
-      <section className="section"></section>
-      <h1>{business.name}</h1>
+<section className="section"></section>
+<h1>{business.name}</h1>
       <p>Category: {business.category}</p>
       <p>Subcategory: {business.sub_category}</p>
       <p>Contact: {business.contacts}</p>
 
-      {/* Display Business Description */}
+{/* Display Business Description */}
       <div>
         <h2>Description</h2>
         <p>{business.description}</p>
@@ -74,19 +78,29 @@ function BusinessDetail() {
         </ul>
       </div>
 
+      <div>
+        <ReviewForm/>
+      </div>
+
       {/* Display Ratings and Reviews */}
       <div>
         <h2>Ratings and Reviews</h2>
         <div>
           <h3>Overall Rating: 4.5/5</h3>
           <p>Reviews:</p>
-          {business.reviews.map((review) => (
-            <ReviewDetail username={review.user.username} />
+          {reviews.map((review) => (
+            <ReviewDetail 
+            username={review.user.username}
+            rating= {review.rating}
+            comment={review.comment}
+            created_at={review.created_at}
+            
+            />
           ))}
         </div>
       </div>
 
-      {/* Add a "Review" button */}
+            {/* Add a "Review" button */}
       <div>
         <button onClick={() => handleReviewClick(business.id)}>Review</button>
       </div>

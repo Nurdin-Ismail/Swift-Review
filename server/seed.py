@@ -249,7 +249,7 @@ with app.app_context():
     italians = []   
     for italian_restaurant in business_names_for_restaurants_italian:
         italian = Business(
-            name = local_restaurant,
+            name = italian_restaurant,
             category = "Restaurants", #business_category
             sub_category = "Italian",
             owner_id = random.randint(1, 20),
@@ -297,6 +297,8 @@ with app.app_context():
     db.session.add_all(chineses)
     db.session.commit()
     print("Business successfully populated")
+    
+    # https://dummyimage.com/1850x400
         
      
 
@@ -324,7 +326,7 @@ with app.app_context():
     for review in range(1000):
         new_review = Review(
                 user_id = random.randint(1, 100),
-                business_id = random.randint(1, 10),
+                business_id = random.randint(1, 107),
                 comment = fake.text(),
                 rating = round(random.uniform(1,5), 1)
                 
