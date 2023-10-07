@@ -320,21 +320,13 @@
 
 
 .bsns_dtls{
+  
   display: flex;
-  /* background-color: orange; */
   flex-direction: row;
-  padding: 20px;
-}
-
-.bus-and-reviews{
+  justify-content: space-around;
+  align-items: flex-start;
+  padding-top: 50px;
   
-  margin-top: -208%;
-  margin-right: 250px; 
-}
-
-.review-form-bus{
   
-  margin-top: -225%;
-  margin-left: 50px; 
 }
 
