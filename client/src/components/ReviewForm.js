@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-function ReviewCommentForm({ businessId, userId }) {
+function ReviewCommentForm({ businessId, userId, setrefresh }) {
   const [comment, setComment] = useState('');
   const [rating, setRating] = useState(1);
   const [comments, setComments] = useState([]);
-
+  console.log(userId)
+  const [responso, setresponse] = useState()
   const handleCommentChange = (e) => {
     setComment(e.target.value);
   };
@@ -14,20 +15,30 @@ function ReviewCommentForm({ businessId, userId }) {
     setRating(parseInt(e.target.value));
   };
 
+  useEffect(() => {
+    let count
+    setrefresh(count += 1)
+
+  },[responso])
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (comment.trim() !== '') {
       try {
         const newComment = {
-          text: comment,
+          comment: comment,
           rating: rating,
-          businessId: businessId,
+          business_id: businessId,
           user_id: userId, 
         };
 
         const response = await axios.post('http://127.0.0.1:5555/reviews', newComment);
-
-        setComments([...comments, response.data]);
+        console.log(response.data)
+        setresponse(response)
+        let count
+        setrefresh(count += 1)
+        
+        
         setComment('');
         setRating(1);
       } catch (error) {
@@ -70,14 +81,7 @@ function ReviewCommentForm({ businessId, userId }) {
         </div>
         <button className="btn btn-primary sgn_btn" type="submit">Submit</button>
       </form>
-      <ul>
-        {comments.map((comment, index) => (
-          <li key={index}>
-            <p>Rating: {comment.rating}</p>
-            <p>{comment.text}</p>
-          </li>
-        ))}
-      </ul>
+      
     </div>
   );
 }
