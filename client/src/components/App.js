@@ -25,9 +25,9 @@ import UserProfile from './UserProfile';
 function App() {
 
   const [islogged, setislogged] = useState()
-
+  const [userId, setuserid] = useState()
   const [dropdowncateg, setdropdowncateg] = useState('')
-
+  const [refresh, setrefresh] = useState()
   
   function handleNavbarSubCategs(sub_categ){
 
@@ -37,6 +37,7 @@ function App() {
 
 
   }
+  console.log(userId)
 
   
 
@@ -53,15 +54,15 @@ function App() {
         <Route exact path='/automotives' element= {<AutomotiveArea dropcateg= {dropdowncateg}/>} />
 
 
-        <Route path='/login' element= {<Login logged ={setislogged}/>} />
+        <Route path='/login' element= {<Login logged ={setislogged} setuserid={setuserid}/>} />
         <Route path='/signup' element= {<SignUp/>} />
         <Route path='/contactus' element= {<ContactUs/>} />
 
-        <Route path='/add-business' element= {<RestaurantForm/>} />
+        <Route path='/add-business' element= {<RestaurantForm userId={userId}/>} />
         
 
         <Route path='/filter' element={<FilterSideBar />} />
-        <Route path="/business/:id" element={<BusinessDetail/>} />
+        <Route path="/business/:id" element={<BusinessDetail  userId={userId} refresh={refresh} setrefresh={setrefresh}/>} />
        
 
 

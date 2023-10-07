@@ -1,22 +1,45 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, NavLink, useNavigate} from 'react-router-dom';
-
-function Login({logged}) {
+import axios from "axios";
+function Login({logged, setuserid}) {
 
   const navigate = useNavigate();
+
   const [formInputs, setFormInputs] = useState({
     username: "",
     password: ""
   });
   const [error, setError] = useState(null);
   const [loginSuccess, setLoginSuccess] = useState(false); 
-
   function handleChange(e) {
     setFormInputs({
       ...formInputs,
       [e.target.name]: e.target.value
     });
   }
+
+
+  // useEffect(() => {
+  //   const apiurl = `http://127.0.0.1:5555/username/${userFound.username}`
+
+  //   axios
+  //          .get(apiurl)
+  //          .then((response) => {
+  //            const data = response.data;
+          
+  //            console.log(data)
+  //           })
+  //          .catch((error) => {
+  //              console.error('Error fetching data:', error);
+          
+  //           });
+
+  // }, [userFound])
+
+
+
+
+
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -43,6 +66,8 @@ function Login({logged}) {
       if (contentType && contentType.includes("application/json")) {
         const userData = await response.json();
 
+        console.log(userData)
+
         // Check if the provided username and password match any user in the fetched data
         const userFound = userData.find(
           (user) =>
@@ -56,6 +81,11 @@ function Login({logged}) {
           localStorage.setItem("authToken", userFound.token); 
           count += 1
           logged(count)
+          setuserid(userFound.id)
+          
+          
+
+          
 
           // Update state to indicate successful login
           setLoginSuccess(true);

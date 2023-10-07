@@ -6,7 +6,7 @@ import axios from "axios";
 import ReviewForm from './ReviewForm';
 import Footer from './Footer';
 
-function BusinessDetail() {
+function BusinessDetail({userId, refresh, setrefresh}) {
     const [business, setBusiness] = useState(null);
     const [loading, setLoading] = useState(true);
   const params = useParams();
@@ -35,7 +35,7 @@ function BusinessDetail() {
           console.error('Error fetching data:', error);
           setLoading(false);
         });
-    }, [params]);
+    }, [params, refresh]);
 
     if (loading) {
       return <div>Loading...</div>;
@@ -83,7 +83,7 @@ function BusinessDetail() {
                 </div>
                 {/* Display Ratings and Reviews */}
                   <div>
-                    <ReviewForm/>
+                    <ReviewForm businessId={business.id} userId={userId} setrefresh={setrefresh}/>
                   </div>
                   <div>
                     {reviews.map((review) => (

@@ -440,7 +440,7 @@ class AutomotiveBusinesses(Resource):
         return make_response(jsonify(new_business_dict), 200)
 
 
-        
+
 
 # Add resources to the API
 api.add_resource(RestaurantResource, '/restaurants/<int:restaurant_id>')
