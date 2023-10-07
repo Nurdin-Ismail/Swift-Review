@@ -8,8 +8,10 @@ function RestaurantArea({dropcateg}){
     const [categ, setcateg] = useState()
     const [clicked, setclicked] = useState(false)
     const [businesses, setBusinesses] = useState([]);
+    const [backup, setbackup] = useState()
     const [loading, setLoading] = useState(true);
     const categoryofroute = 'Restaurants'
+    const [checkbus, setcheck] = useState()
 
   useEffect(() => {
     
@@ -23,6 +25,7 @@ function RestaurantArea({dropcateg}){
     console.log(data)
      setBusinesses(data);
      setLoading(false);
+     setbackup(data)
   }
   
   )
@@ -36,50 +39,90 @@ function RestaurantArea({dropcateg}){
   );
       
       
-  }, [categ, dropcateg]);
+  }, [categ]);
 
 
 
-
+    
 
     function handlebuttonclick(sub_category){
-        if (sub_category == 'Indian' || dropcateg == 'Indian'){
-            setcateg('Indian')
-            console.log(categ)
-            let filtered = businesses.filter((x) => x.sub_category == categ )
-            console.log(filtered)
-            setBusinesses(filtered)
+        if (sub_category == 'Indian' ){
+            
+            console.log(sub_category)
+            if(businesses == false){
+
+                let filtered = backup.filter((x) => x.sub_category == sub_category )
+
+                setBusinesses(filtered)
+                console.log(backup)
+                
+            }else{
+                let filtered = backup.filter((x) => x.sub_category == sub_category )
+                console.log(filtered)
+                setBusinesses(filtered)
+                console.log(businesses)
+            }
+            
             
 
 
-        }else if(sub_category == 'Italian' || dropcateg == 'Italian'){
-            setcateg('Italian')
-            console.log(categ)
-            let filtered = businesses.filter((x) => x.sub_category == categ )
-            console.log(filtered)
-            setBusinesses(filtered)
+        }else if(sub_category == 'Italian' ){
+            console.log(sub_category)
+            if(businesses == false){
+
+                let filtered = backup.filter((x) => x.sub_category == sub_category )
+
+                setBusinesses(filtered)
+                console.log(backup)
+                
+            }else{
+                let filtered = backup.filter((x) => x.sub_category == sub_category )
+                console.log(filtered)
+                setBusinesses(filtered)
+                console.log(businesses)
+            }
             
             
 
 
-        }else if(sub_category == 'Chinese' || dropcateg == 'Chinese'){
-            setcateg('Chinese')
-            console.log(categ)
-            let filtered = businesses.filter((x) => x.sub_category == categ )
-            console.log(filtered)
-            setBusinesses(filtered)
+        }else if(sub_category == 'Chinese'){
+            console.log(sub_category)
+            if(businesses == false){
+
+                let filtered = backup.filter((x) => x.sub_category == sub_category )
+
+                setBusinesses(filtered)
+                console.log(backup)
+                
+            }else{
+                let filtered = backup.filter((x) => x.sub_category == sub_category )
+                console.log(filtered)
+                setBusinesses(filtered)
+                console.log(businesses)
+            }
             
 
-        }else if(sub_category == 'Local' || dropcateg =='Local'){
-            setcateg('Local')
-            console.log(categ)
-            let filtered = businesses.filter((x) => x.sub_category == categ )
-            console.log(filtered)
-            setBusinesses(filtered)
+        }else if(sub_category == 'Local' ){
+            console.log(sub_category)
+            if(businesses == false){
+
+                let filtered = backup.filter((x) => x.sub_category == sub_category )
+
+                setBusinesses(filtered)
+                console.log(backup)
+                
+            }else{
+                let filtered = backup.filter((x) => x.sub_category == sub_category )
+                console.log(filtered)
+                setBusinesses(filtered)
+                console.log(businesses)
+            }
 
             
 
 
+        }else{
+            setBusinesses(backup)
         }
 
         
@@ -91,9 +134,9 @@ function RestaurantArea({dropcateg}){
     
 
     return(
-        <div className="page">
+        <div className="page" onClick={() => console.log('page clicked')}>
             <div>
-                <FilterSideBar buttonclick = {handlebuttonclick} categoryofroute= {categoryofroute}/>
+                <FilterSideBar buttonclick = {handlebuttonclick} categoryofroute= {categoryofroute} specificcateg={categ}/>
             </div>
 
             <main className="main">

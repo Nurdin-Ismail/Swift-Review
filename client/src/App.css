@@ -108,13 +108,13 @@
     display: flex;
   }
 
-  /* .bsns_sctn{
+  .bsns_sctn{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 100%;
-  } */
+  }
 
   .bsns_crtl{
     padding: 40px;
