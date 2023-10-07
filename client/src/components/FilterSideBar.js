@@ -1,6 +1,6 @@
 import React from "react";
 
-function FilterSideBar({buttonclick, categoryofroute}){
+function FilterSideBar({buttonclick, categoryofroute, specificcateg}){
     
     
    let subcategory 
@@ -10,7 +10,11 @@ function FilterSideBar({buttonclick, categoryofroute}){
             const categs= ["Indian", "Italian", "Local", "Chinese"]
  
              subcategory = categs.map((categ)=>{
-                   return <button className="sort" onClick={(e) => buttonclick(e.target.innerText)}>{categ}</button>
+                   return <button className="sort" onClick={(e) => {
+                    buttonclick(e.target.innerText)
+                    // console.log(`${categ} was clicked`)
+                    // console.log(specificcateg)
+                }}>{categ}</button>
                  });  
                
         }else if (categoryofroute == "Automotives"){

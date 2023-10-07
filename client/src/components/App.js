@@ -31,13 +31,18 @@ function App() {
   
   function handleNavbarSubCategs(sub_categ){
 
-    setdropdowncateg(sub_categ)
-    console.log(dropdowncateg)
+    setdropdowncateg(sub_categ, () => {
+      console.log(sub_categ)
+    })
+    
+      console.log(dropdowncateg)
+    
+    
 
 
 
   }
-  console.log(userId)
+console.log(userId)
 
   
 

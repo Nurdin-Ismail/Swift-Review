@@ -12,6 +12,7 @@ function AutomotiveArea({dropcateg}){
     // const [italian, setclickeditalian] =  useState(false)
     const [categ, setcateg] = useState();
     const [clicked, setclicked] = useState(false);
+    
     const [businesses, setBusinesses] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -53,39 +54,74 @@ function AutomotiveArea({dropcateg}){
 
     function handlebuttonclick(sub_category, dropcateg){
         if (sub_category == 'Auto-Repair' || dropcateg == 'Auto-Repair' ){
-            setcateg('Auto-Repair')
-            console.log(categ)
-            let filtered = businesses.filter((x) => x.sub_category == categ )
-            console.log(filtered)
-            setBusinesses(filtered)
+            console.log(sub_category)
+            if(businesses == false){
+
+                let filtered = backup.filter((x) => x.sub_category == sub_category )
+
+                setBusinesses(filtered)
+                console.log(backup)
+                
+            }else{
+                let filtered = backup.filter((x) => x.sub_category == sub_category )
+                console.log(filtered)
+                setBusinesses(filtered)
+                console.log(businesses)
+            }
             
 
 
         }else if(sub_category == 'Car Dealers' || dropcateg == 'Car Dealers'){
-            setcateg('Car Dealers')
-            console.log(categ)
-            let filtered = businesses.filter((x) => x.sub_category == categ )
-            console.log(filtered)
-            setBusinesses(filtered)
+            console.log(sub_category)
+            if(businesses == false){
+
+                let filtered = backup.filter((x) => x.sub_category == sub_category )
+
+                setBusinesses(filtered)
+                console.log(backup)
+                
+            }else{
+                let filtered = backup.filter((x) => x.sub_category == sub_category )
+                console.log(filtered)
+                setBusinesses(filtered)
+                console.log(businesses)
+            }
             
             
 
 
         }else if(sub_category == 'Parking' || dropcateg == 'Parking' ){
-            setcateg('Parking')
-            console.log(categ)
-            let filtered = businesses.filter((x) => x.sub_category == categ )
-            console.log(filtered)
-            setBusinesses(filtered)
+            console.log(sub_category)
+            if(businesses == false){
+
+                let filtered = backup.filter((x) => x.sub_category == sub_category )
+
+                setBusinesses(filtered)
+                console.log(backup)
+                
+            }else{
+                let filtered = backup.filter((x) => x.sub_category == sub_category )
+                console.log(filtered)
+                setBusinesses(filtered)
+                console.log(businesses)
+            }
             
 
         }else if(sub_category == 'Car Wash' || dropcateg == 'Car Wash'){
-            setcateg('Car Wash')
-            console.log(categ)
-            let filtered = businesses.filter((x) => x.sub_category == categ )
-            console.log(filtered)
-            setBusinesses(filtered)
+            console.log(sub_category)
+            if(businesses == false){
 
+                let filtered = backup.filter((x) => x.sub_category == sub_category )
+
+                setBusinesses(filtered)
+                console.log(backup)
+                
+            }else{
+                let filtered = backup.filter((x) => x.sub_category == sub_category )
+                console.log(filtered)
+                setBusinesses(filtered)
+                console.log(businesses)
+            }
             
 
 

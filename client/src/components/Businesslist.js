@@ -28,7 +28,7 @@ function BusinessList({categ, businesses, loading, categoryofroute}) {
               business={business}
               key = {business.id}
               name={business.name}
-              category={business.category}
+              category={categoryofroute}
               sub_category={business.sub_category}
               contact={business.contacts}
               location={business.location}
