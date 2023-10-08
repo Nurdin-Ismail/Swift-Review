@@ -20,8 +20,13 @@ api = Api(app)
 CORS(app)
 
 @app.route('/')
-def hello_world():
-    return 'Hello, World!'
+def home():
+    response = {
+        "Message":"Businesses and their Reviews API.",
+        "Business_Endpoint": '/Businesses',
+        "Reviews_Endpoint": '/reviews',
+        }
+    return make_response(response, 200)
 
 # Restaurant Resource
 class RestaurantResource(Resource):
