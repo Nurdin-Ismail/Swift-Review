@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { Route, Routes, } from "react-router-dom";
+import { Route, Routes,} from "react-router-dom";
 import Footer from './Footer';
 import Home from './Home'
 import NavBar from './NavBar'
@@ -21,13 +21,13 @@ import RecentActivity from './RecentActivity';
 import UserProfile from './UserProfile';
 
 
-
 function App() {
 
-  const [islogged, setislogged] = useState()
+  const [isLoggedIn, setIsLoggedIn] = useState(false);  
   const [userId, setuserid] = useState()
   const [dropdowncateg, setdropdowncateg] = useState('')
   const [refresh, setrefresh] = useState()
+
   
   function handleNavbarSubCategs(sub_categ){
 
@@ -50,16 +50,16 @@ console.log(userId)
   
   return (
     <div>
-      <NavBar handlesub = {handleNavbarSubCategs} dropdowncateg={dropdowncateg}/>
+      <NavBar  handlesub = {handleNavbarSubCategs} dropdowncateg={dropdowncateg} isLoggedIn={isLoggedIn} setIsLoggedIn ={setIsLoggedIn}/>
       <Routes>
       
-        <Route exact path='/' element= {<Home logged={islogged}/>} />
+        <Route exact path='/' element= {<Home/>} />
         
         <Route exact path='/restaurants' element= {<RestaurantArea dropcateg= {dropdowncateg}/>} />
         <Route exact path='/automotives' element= {<AutomotiveArea dropcateg= {dropdowncateg}/>} />
 
 
-        <Route path='/login' element= {<Login logged ={setislogged} setuserid={setuserid}/>} />
+        <Route path='/login' element= {<Login setIsLoggedIn ={setIsLoggedIn} setuserid={setuserid}/>} />
         <Route path='/signup' element= {<SignUp/>} />
         <Route path='/contactus' element= {<ContactUs/>} />
 

@@ -2,11 +2,14 @@ import React from 'react';
 import { Link, NavLink, useNavigate} from 'react-router-dom';
 
 
-function NavBar({handlesub, dropdowncateg}) {
+function NavBar({handlesub, dropdowncateg, isLoggedIn, setIsLoggedIn}) {
 
     const navigate = useNavigate();
 
-    
+    const handleLogout = () => {
+        setIsLoggedIn(false);
+        navigate('/login')
+    }
 
     return (
         <div>
@@ -78,12 +81,22 @@ function NavBar({handlesub, dropdowncateg}) {
                     </div>
                     
                     <div className="navbar-nav ms-auto" id='user'>
+                    {isLoggedIn ? (
+                        <NavLink className="nav-link ms-3 Navlink" to="/login" onClick={handleLogout}>
+                        <i className="fas fa-sign-out-alt"></i> Logout
+                        </NavLink>
+                    ) : (
+                        <>
                         <NavLink className="nav-link ms-3 Navlink" to="/login">
-                            <i className="fas fa-sign-in-alt"></i> Login
+                        <i className="fas fa-sign-in-alt"></i> Login
                         </NavLink>
-                        <NavLink className="nav-link ms-3 Navlink" to="/signup">
+                        
+
+                         <NavLink className="nav-link ms-3 Navlink" to="/signup">
                             <i className="fas fa-user-plus"></i> Signup
-                        </NavLink>
+                        </NavLink> 
+                        </>
+                    )}
                     </div>
                 </div>
             </nav>

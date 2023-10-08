@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import Login from "./Login";
 
 function SignUp(){
 
@@ -79,7 +80,7 @@ function SignUp(){
   }
     return(
         <div className="review_form sgn_pstn">
-          <h3 className="text-center text-uppercase">signin</h3>
+          <h3 className="text-center text-uppercase">SIGNUP</h3>
             <form className="form sgn_frm" onSubmit={(e) => handleSubmit(e)}>
                 <div class="form-floating mb-3">
                   <input onChange={handleChange} type="text" value= {username} class="form-control" id="floatingInput" placeholder="Username"/>
@@ -99,6 +100,10 @@ function SignUp(){
                 </div>
                 <button className="btn btn-primary sgn_btn" type="submit">SignUp</button>
             </form>
+            <div>
+              <p>Already Have An account?</p>
+              <a href ='Login'><p>Login</p></a>
+            </div>
         </div>
     )
 }
