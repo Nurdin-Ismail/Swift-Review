@@ -204,7 +204,7 @@ with app.app_context():
             email = fake.email(),
             password = fake.password(),
             contacts = fake.phone_number(),
-            owner = False
+            
         )
         users.append(new_user)
     db.session.add_all(users)

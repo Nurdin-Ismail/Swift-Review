@@ -157,7 +157,8 @@ class Businesses(Resource):
             owner_id = data.get('owner_id'),
             hours_open = data.get('hours_open'),
             contacts = data.get('contacts'),
-            poster = data.get('poster')
+            poster = data.get('poster'),
+            location = data.get('location')
         )
         db.session.add(new_business)
         db.session.commit()

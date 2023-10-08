@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, NavLink, useNavigate} from 'react-router-dom';
 
 
-function NavBar({handlesub, dropdowncateg, isLoggedIn, setIsLoggedIn}) {
+function NavBar({ dropdowncateg, isLoggedIn, setIsLoggedIn}) {
 
     const navigate = useNavigate();
 
@@ -30,19 +30,19 @@ function NavBar({handlesub, dropdowncateg, isLoggedIn, setIsLoggedIn}) {
                                 </a>
                                 <ul className="dropdown-menu Nav_ctn">
                                     <li className='drp_txt' onClick={(e) => {
-                                        handlesub(e.target.innerText)
+                                    
                                         navigate(`/restaurants`)
                                     }}>Kenyan</li>
                                     <li className='drp_txt' onClick={(e) => {
-                                        handlesub(e.target.innerText)
+                                    
                                         navigate(`/restaurants`)
                                     }}>Italian</li>
                                     <li className='drp_txt' onClick={(e) => {
-                                        handlesub(e.target.innerText)
+                                    
                                         navigate(`/restaurants`)
                                     }}>Indian</li>
                                     <li className='drp_txt' onClick={(e) => {
-                                        handlesub(e.target.innerText)
+                                    
                                         navigate(`/restaurants`)
                                        
                                     }}>Chinese</li>
@@ -56,20 +56,20 @@ function NavBar({handlesub, dropdowncateg, isLoggedIn, setIsLoggedIn}) {
                                 </a>
                                 <ul className="dropdown-menu Nav_ctn">
                                     <li className='drp_txt' onClick={(e) => {
-                                        handlesub(e.target.innerText)
+                                    
                                         console.log(e.target.innerText)
                                         navigate(`/automotives`)
                                     }}>Auto Repair</li>
                                     <li className='drp_txt' onClick={(e) => {
-                                        handlesub(e.target.innerText)
+                                    
                                         navigate(`/automotives`)
                                     }}>Car Wash</li>
                                     <li className='drp_txt' onClick={(e) => {
-                                        handlesub(e.target.innerText)
+                                    
                                         navigate(`/automotives`)
                                     }}>Car Dealers</li>
                                     <li className='drp_txt' onClick={(e) => {
-                                        handlesub(e.target.innerText)
+                                    
                                         navigate(`/automotives`)
                                     }}>Parking</li>
                                 </ul>

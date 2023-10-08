@@ -29,19 +29,19 @@ function App() {
   
 
   
-  function handleNavbarSubCategs(sub_categ){
+  // function handleNavbarSubCategs(sub_categ){
 
-    setdropdowncateg(sub_categ, () => {
-      console.log(sub_categ)
-    })
+  //   setdropdowncateg(sub_categ, () => {
+  //     console.log(sub_categ)
+  //   })
     
-      console.log(dropdowncateg)
+  //     console.log(dropdowncateg)
     
     
 
 
 
-  }
+  // }
 console.log(userId)
 
   
@@ -50,7 +50,7 @@ console.log(userId)
   
   return (
     <div>
-      <NavBar  handlesub = {handleNavbarSubCategs} dropdowncateg={dropdowncateg} isLoggedIn={isLoggedIn} setIsLoggedIn ={setIsLoggedIn}/>
+      <NavBar   dropdowncateg={dropdowncateg} isLoggedIn={isLoggedIn} setIsLoggedIn ={setIsLoggedIn}/>
       <Routes>
       
         <Route exact path='/' element= {<Home/>} />

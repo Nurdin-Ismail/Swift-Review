@@ -71,13 +71,15 @@ function SignUp({ setuserid, setIsLoggedIn}){
 
       if (response){
         setusername('')
-      setemail('')
-      setcontacts('')
-      setpassword('')
-      navigate('/')
-      console.log(response)
-      setuserid(response.id)
-      setIsLoggedIn(true)
+        setemail('')
+        setcontacts('')
+        setpassword('')
+       
+        console.log(response)
+        setuserid(response.data.id)
+        setIsLoggedIn(true)
+        console.log(response.data.id)
+        navigate('/')
       }
 
       

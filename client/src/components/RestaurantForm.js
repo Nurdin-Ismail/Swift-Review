@@ -6,6 +6,7 @@ import { Link, NavLink, useNavigate} from 'react-router-dom';
 function RestaurantForm({isLoggedIn, userId}) {
 
   const navigate = useNavigate();
+
   const [restaurantData, setRestaurantData] = useState({
     name: "",
     category: "",
@@ -73,26 +74,23 @@ function RestaurantForm({isLoggedIn, userId}) {
       try {
 
          let business_form ={
-      name: name,
-      category: category,
-      sub_category: subcategory,
-      owner_id : userId,
-      contacts : contacts,
-      poster: poster,
-      location: location
-      }
+             name: name,
+             category: category,
+             sub_category: subcategory,
+             owner_id : userId,
+             contacts : contacts,
+             poster: poster,
+             location: location,
+        }
         const response = await axios.post('http://127.0.0.1:5555/businesses', business_form );
 
-        if (response.ok) {
+        if (response) {
            console.log(response)
            console.log("Business added successfully!");
            setname('')
            setlocation('')
            setcontacts('')
            navigate('/')
-        } else {
-       
-          console.error("Error adding business:", response.status);
         }
       } catch (error) {
            console.error("Error adding business:", error);
