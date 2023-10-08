@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { Link, NavLink, useNavigate} from 'react-router-dom';
+
 
 function RestaurantForm({isLoggedIn, userId}) {
+
+  const navigate = useNavigate();
   const [restaurantData, setRestaurantData] = useState({
     name: "",
     category: "",
@@ -82,11 +86,10 @@ function RestaurantForm({isLoggedIn, userId}) {
         if (response.ok) {
            console.log(response)
            console.log("Business added successfully!");
-           setRestaurantData({
-             name: "",
-             category: "",
-             sub_category: "",
-           });
+           setname('')
+           setlocation('')
+           setcontacts('')
+           navigate('/')
         } else {
        
           console.error("Error adding business:", response.status);
