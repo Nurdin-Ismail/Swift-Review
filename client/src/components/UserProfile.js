@@ -53,7 +53,9 @@ function UserProfile({ userId }) {
       usernamu = user.username
 
     }
-  }
+  }else{
+      usernamu = user.username
+    }
 
   
 
