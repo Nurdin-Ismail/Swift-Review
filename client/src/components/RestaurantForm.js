@@ -65,7 +65,7 @@ function RestaurantForm() {
           />
           <label for="floatingInput">Subcategory</label>
         </div>
-        <button type="submit" className="btn btn-primary sgn_btn">Add Restaurant</button>
+        <button type="submit" className="btn btn-primary sgn_btn">Add Business</button>
       </form>
     </div>
   );

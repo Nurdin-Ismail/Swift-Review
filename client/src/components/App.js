@@ -26,7 +26,7 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);  
   const [userId, setuserid] = useState()
   const [dropdowncateg, setdropdowncateg] = useState('')
-  const [refresh, setrefresh] = useState()
+  
 
   
   function handleNavbarSubCategs(sub_categ){
@@ -67,12 +67,12 @@ console.log(userId)
         
 
         <Route path='/filter' element={<FilterSideBar />} />
-        <Route path="/business/:id" element={<BusinessDetail  userId={userId} refresh={refresh} setrefresh={setrefresh}/>} />
+        <Route path="/business/:id" element={<BusinessDetail  userId={userId} isLoggedIn={isLoggedIn}/>} />
        
 
 
 
-        <Route path='/user/:id' element={<UserProfile />} />
+        <Route path='/user/:id' element={<UserProfile userId={userId} />} />
 
 
       </Routes>
