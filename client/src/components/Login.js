@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Link, NavLink, useNavigate} from 'react-router-dom';
 import axios from "axios";
-function Login({logged, setuserid}) {
+import SignUp from "./SignUp";
+
+function Login({ setuserid, setIsLoggedIn}) {
 
   const navigate = useNavigate();
 
@@ -79,8 +81,7 @@ function Login({logged, setuserid}) {
         if (userFound) {
           // Store the token or user information in local storage
           localStorage.setItem("authToken", userFound.token); 
-          count += 1
-          logged(count)
+          
           setuserid(userFound.id)
           
           
@@ -89,6 +90,7 @@ function Login({logged, setuserid}) {
 
           // Update state to indicate successful login
           setLoginSuccess(true);
+          setIsLoggedIn(true);
           console.log("login success")
 
           // Redirect to a different page or update the UI
@@ -142,6 +144,11 @@ function Login({logged, setuserid}) {
         >
           LOGIN
         </button>
+
+        <div>
+          <p>Don't have an account?</p>
+          <a href = 'SignUp'><p>Sign Up</p> </a>
+        </div>
 
         {error && <p className="error-message">{error}</p>}
         {loginSuccess && <p className="success-message">Login successful!</p>}

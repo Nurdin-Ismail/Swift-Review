@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Link, NavLink, useNavigate} from 'react-router-dom';
 
 
-function RecentActivity({logged}){
+function RecentActivity(){
     const [allRecentActivity, setAllRecentActivity] = useState([])
     const navigate = useNavigate();
 
@@ -11,7 +11,7 @@ function RecentActivity({logged}){
         fetch("http://127.0.0.1:5555/reviews/recent_reviews")
         .then (res => res.json())
         .then (data => setAllRecentActivity(data))
-    }, [logged])
+    })
 
     return( 
         <div>
