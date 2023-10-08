@@ -60,7 +60,7 @@ console.log(userId)
 
 
         <Route path='/login' element= {<Login setIsLoggedIn ={setIsLoggedIn} setuserid={setuserid}/>} />
-        <Route path='/signup' element= {<SignUp/>} />
+        <Route path='/signup' element= {<SignUp setIsLoggedIn ={setIsLoggedIn} setuserid={setuserid}/>} />
         <Route path='/contactus' element= {<ContactUs/>} />
 
         <Route path='/add-business' element= {<RestaurantForm userId={userId}/>} />

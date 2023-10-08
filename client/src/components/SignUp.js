@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Login from "./Login";
+import { Link, NavLink, useNavigate} from 'react-router-dom';
 
-function SignUp(){
+
+function SignUp({ setuserid, setIsLoggedIn}){
+    const navigate = useNavigate();
 
     const [formInputs, setFormInputs] = useState({
         username: "",
@@ -68,6 +71,12 @@ function SignUp(){
       setemail('')
       setcontacts('')
       setpassword('')
+
+      navigate('/')
+      console.log(response)
+      setuserid(response.id)
+      setIsLoggedIn(true)
+
       }
 
       

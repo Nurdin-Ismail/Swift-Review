@@ -23,7 +23,7 @@ function ReviewCommentForm({ businessId, userId, setrefresh, refresh, isLoggedIn
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (comment.trim() !== '') {
+    if (comment.trim() !== '' && isLoggedIn == true) {
       try {
         const newComment = {
           comment: comment,
@@ -45,9 +45,9 @@ function ReviewCommentForm({ businessId, userId, setrefresh, refresh, isLoggedIn
         console.error('Error', error);
       }
 
-      if (isLoggedIn == false){
-        alert("Not logged in")
-      }
+      
+    }else{
+      alert("Not logged in")
     }
   };
 

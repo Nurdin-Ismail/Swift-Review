@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: ab558bdbc4ca
+Revision ID: 42eabfada5f2
 Revises: 
-Create Date: 2023-10-03 20:13:06.609411
+Create Date: 2023-10-08 21:45:18.429729
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'ab558bdbc4ca'
+revision = '42eabfada5f2'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -24,12 +24,10 @@ def upgrade():
     sa.Column('email', sa.String(), nullable=False),
     sa.Column('password', sa.String(), nullable=False),
     sa.Column('contacts', sa.String(), nullable=True),
-    sa.Column('owner', sa.Boolean(), nullable=False),
     sa.Column('created_at', sa.DateTime(), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=True),
     sa.Column('updated_at', sa.DateTime(), nullable=True),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('email'),
-    sa.UniqueConstraint('password'),
     sa.UniqueConstraint('username')
     )
     op.create_table('businesses',
@@ -41,11 +39,11 @@ def upgrade():
     sa.Column('hours_open', sa.String(), nullable=True),
     sa.Column('contacts', sa.String(), nullable=True),
     sa.Column('poster', sa.String(), nullable=True),
+    sa.Column('location', sa.String(), nullable=True),
     sa.Column('created_at', sa.DateTime(), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=True),
     sa.Column('updated_at', sa.DateTime(), nullable=True),
     sa.ForeignKeyConstraint(['owner_id'], ['users.id'], ),
-    sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('name')
+    sa.PrimaryKeyConstraint('id')
     )
     op.create_table('businessimgs',
     sa.Column('id', sa.Integer(), nullable=False),
@@ -73,6 +71,8 @@ def upgrade():
     sa.Column('business_id', sa.Integer(), nullable=False),
     sa.Column('comment', sa.String(), nullable=False),
     sa.Column('rating', sa.Float(), nullable=True),
+    sa.Column('created_at', sa.DateTime(), server_default=sa.text('(CURRENT_TIMESTAMP)'), nullable=True),
+    sa.Column('updated_at', sa.DateTime(), nullable=True),
     sa.ForeignKeyConstraint(['business_id'], ['businesses.id'], ),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
