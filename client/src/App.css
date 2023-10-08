@@ -330,3 +330,33 @@
   
 }
 
+.user-profile-container{
+   margin-top: 20px;
+    border: 1px solid rgb(222, 222, 222);
+    border-radius: 5px;
+    box-shadow: 0 3px 4px rgba(1, 1, 33, 0.1);
+    padding: 20px;
+    background-color: rgb(7,10,53);;
+    text-align: left;
+    transition: transform 0.2s ease-in-out;
+    color:white; 
+  
+}
+
+.reviews-dtls{
+  padding: 20px;
+   display: flex;
+  flex-direction: column;
+  justify-content: left;
+  align-items: center;
+}
+
+.usersection{
+  display: flex;
+  flex-direction: row;
+   justify-content: flex-start;
+  align-items: flex-start;
+  padding-top: 50px;
+  margin-left: 20%;
+  
+}
