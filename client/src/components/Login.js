@@ -48,7 +48,7 @@ function Login({ setuserid, setIsLoggedIn}) {
 
     try {
       const response = await fetch(
-        `http://127.0.0.1:5555/users?username=${formInputs.username}&password=${formInputs.password}`,
+        `https://swift-review-api-5vgv.onrender.com/users?username=${formInputs.username}&password=${formInputs.password}`,
         {
           method: "GET",
           headers: {

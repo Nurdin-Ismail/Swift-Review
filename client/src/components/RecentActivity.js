@@ -8,7 +8,7 @@ function RecentActivity(){
     const navigate = useNavigate();
 
     useEffect(() => {
-        fetch("http://127.0.0.1:5555/reviews/recent_reviews")
+        fetch("https://swift-review-api-5vgv.onrender.com/reviews/recent_reviews")
         .then (res => res.json())
         .then (data => setAllRecentActivity(data))
     }, [])

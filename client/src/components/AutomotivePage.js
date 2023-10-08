@@ -23,7 +23,7 @@ function AutomotiveArea({dropcateg}){
 
   useEffect(() => {
     
-    const apiUrl = 'http://127.0.0.1:5555/automotives';
+    const apiUrl = 'https://swift-review-api-5vgv.onrender.com/automotives';
 
     // Fetch data from the API using Axios 
     

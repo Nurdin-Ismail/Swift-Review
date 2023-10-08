@@ -32,7 +32,7 @@ function ReviewCommentForm({ businessId, userId, setrefresh, refresh, isLoggedIn
           user_id: userId, 
         };
 
-        const response = await axios.post('http://127.0.0.1:5555/reviews', newComment);
+        const response = await axios.post('https://swift-review-api-5vgv.onrender.com/reviews', newComment);
         console.log(response.data)
         setresponse(response)
         let count

@@ -61,7 +61,7 @@ function SignUp({ setuserid, setIsLoggedIn}){
         password: password
   
       }
-      const response = await axios.post('http://127.0.0.1:5555/users', signup_form );
+      const response = await axios.post('https://swift-review-api-5vgv.onrender.com/users', signup_form );
       
 
       console.log(response)

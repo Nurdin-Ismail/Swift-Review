@@ -21,7 +21,7 @@ function BusinessDetail({ userId, isLoggedIn }) {
 
   useEffect(() => {
     // Fetch data for the specific business using the businessId
-    const apiUrl = `http://127.0.0.1:5555/business/${params.id}`; // Replace with the actual URL
+    const apiUrl = `https://swift-review-api-5vgv.onrender.com/business/${params.id}`; // Replace with the actual URL
 
     axios
       .get(apiUrl)
