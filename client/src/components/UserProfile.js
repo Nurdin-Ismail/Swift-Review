@@ -42,6 +42,20 @@ function UserProfile({ userId }) {
   if (!user) {
     return <div>User not found.</div>;
   }
+  console.log(reviews)
+  console.log(userId)
+  let usernamu
+
+  if (userId){
+    if(userId == params.id){
+      usernamu =  "You"  
+    }else{
+      usernamu = user.username
+
+    }
+  }
+
+  
 
   return (
     <div className="user-profile-main">
@@ -63,7 +77,7 @@ function UserProfile({ userId }) {
           {reviews.map((review) => {
             return (
               <ReviewDetail
-                username={"You"}
+                username={usernamu}
                 rating={review.rating}
                 comment={review.comment}
                 created_at={review.created_at}

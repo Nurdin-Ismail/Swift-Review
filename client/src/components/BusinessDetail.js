@@ -6,11 +6,12 @@ import axios from "axios";
 import ReviewForm from "./ReviewForm";
 import Footer from "./Footer";
 
-function BusinessDetail({ userId, refresh, setrefresh }) {
+function BusinessDetail({ userId, isLoggedIn }) {
   const [business, setBusiness] = useState(null);
   const [loading, setLoading] = useState(true);
   const params = useParams();
   const [reviews, setreviews] = useState([]);
+  const [refresh, setrefresh] = useState(false)
 
   // Define the handleReviewClick function to handle the review action
   const handleReviewClick = (businessId) => {
@@ -45,6 +46,7 @@ function BusinessDetail({ userId, refresh, setrefresh }) {
   }
 
   console.log(business);
+  
 
   return (
     <div>
@@ -97,7 +99,9 @@ function BusinessDetail({ userId, refresh, setrefresh }) {
           </div>
           <div className="all-reviews-bus">
             {reviews.map((review) => (
+              
               <ReviewDetail
+                id ={review.user_id}
                 username={review.user.username}
                 rating={review.rating}
                 comment={review.comment}
@@ -112,6 +116,8 @@ function BusinessDetail({ userId, refresh, setrefresh }) {
               businessId={business.id}
               userId={userId}
               setrefresh={setrefresh}
+              refresh={refresh}
+              isLoggedIn={isLoggedIn}
             />
           </div>
         </section>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-function ReviewCommentForm({ businessId, userId, setrefresh }) {
+function ReviewCommentForm({ businessId, userId, setrefresh, refresh, isLoggedIn }) {
   const [comment, setComment] = useState('');
   const [rating, setRating] = useState(1);
   const [comments, setComments] = useState([]);
@@ -15,11 +15,11 @@ function ReviewCommentForm({ businessId, userId, setrefresh }) {
     setRating(parseInt(e.target.value));
   };
 
-  useEffect(() => {
-    let count
-    setrefresh(count += 1)
+  // useEffect(() => {
+  //   let count
+  //   setrefresh(count += 1)
 
-  },[responso])
+  // },[responso])
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -36,13 +36,17 @@ function ReviewCommentForm({ businessId, userId, setrefresh }) {
         console.log(response.data)
         setresponse(response)
         let count
-        setrefresh(count += 1)
+        setrefresh(!refresh)
         
         
         setComment('');
         setRating(1);
       } catch (error) {
         console.error('Error', error);
+      }
+
+      if (isLoggedIn == false){
+        alert("Not logged in")
       }
     }
   };
